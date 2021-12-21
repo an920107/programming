@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build - C++ (Windows)",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g", "${file}", "-o", "${workspaceFolder}\\.vscode\\a.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build - C++ (Linux)",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g", "${file}", "-o", "${workspaceFolder}/.vscode/a.out"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

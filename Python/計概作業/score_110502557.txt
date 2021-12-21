@@ -1,0 +1,6 @@
+Name English PE Science History Average
+John 59 22 37 70 47.0
+CC 50 100 56 85 72.75
+Andy 60 94 96 70 80.0
+Chris 84 93 75 42 73.5
+Nick 95 34 20 37 46.5
