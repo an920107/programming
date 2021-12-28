@@ -2,10 +2,10 @@
 using namespace std;
 
 int main() {
-    int x[3] = {0};
-    for (int i = 0; i < 3; i ++) {
-        x[i] = 0;
-    }
+    int y;
+    string x = "1234";
+    y = stoi(x);
+    cout << (++ y);
     
     return 0;
 }
