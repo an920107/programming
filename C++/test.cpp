@@ -2,10 +2,6 @@
 using namespace std;
 
 int main() {
-    int y;
-    string x = "1234";
-    y = stoi(x);
-    cout << (++ y);
-    
+    cout << "我好帥\n";
     return 0;
 }
