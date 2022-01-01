@@ -11,7 +11,8 @@
 using namespace std;
 
 void solve(string &str) {
-    int n, max = 0;
+    int n, max = 0, len = str.length();
+    long long num_dec, mul;
     vector<int> vec;
     for (auto &ch : str) {
         if (ch <= 57) vec.push_back(ch - 48);
@@ -20,8 +21,7 @@ void solve(string &str) {
     }
     for (auto &num : vec)
         if (num > max) max = num;
-    int len = str.length(), num_dec, mul;
-    for (n = max + 1; n <= 61; n ++) {
+    for (n = max + 1; n <= 62; n ++) {
         mul = 1; num_dec = 0;
         for (int i = len - 1; i >= 0; i --) {
             num_dec += vec[i] * mul;

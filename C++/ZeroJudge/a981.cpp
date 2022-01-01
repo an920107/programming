@@ -40,10 +40,8 @@ void Solve::DFS(int index, long long sum, long long res) {
     if (index < n) DFS(index + 1, sum, res << 1);
     if (index >= n) {
         if (sum == (long long)m) {
-            res >>= 1;
             for (int i = 0; i < n; i ++) {
-                if (res & 1) cout << arr[i] << " ";
-                res >>= 1;
+                if (res & (1 << (n - i))) cout << arr[i] << " ";
             }
             cout << "\n";
         }
