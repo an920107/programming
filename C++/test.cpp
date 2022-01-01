@@ -2,6 +2,8 @@
 using namespace std;
 
 int main() {
-    cout << "我好帥\n";
+    int x = 49;
+    printf("%d\n", x);
+    printf("%c\n", x);
     return 0;
 }
