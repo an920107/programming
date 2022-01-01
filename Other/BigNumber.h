@@ -50,6 +50,10 @@ BigNumber::BigNumber(const std::string& in) {
     for (auto iter = in.rbegin(); iter != in.rend(); iter ++) {
         push(*iter - 48);
     }
+    if (arr[length - 1] == '-' - 48) {
+        negtive = true;
+        pop();
+    }
 }
 
 BigNumber::BigNumber(const char* in) {
@@ -196,6 +200,9 @@ BigNumber BigNumber::operator%(BigNumber obj) {
 
 bool BigNumber::operator>(BigNumber obj) {
     BigNumber tmp = *this;
+    if (!tmp.negtive && obj.negtive) return true;
+    if (tmp.negtive && !obj.negtive) return false;
+    if (tmp.negtive && obj.negtive) swap(tmp, obj);
     while (tmp.length > obj.length) obj.push(0);
     while (tmp.length < obj.length) tmp.push(0);
     for (int i = tmp.length - 1; i >= 0; i --) {
@@ -207,6 +214,9 @@ bool BigNumber::operator>(BigNumber obj) {
 
 bool BigNumber::operator<(BigNumber obj) {
     BigNumber tmp = *this;
+    if (tmp.negtive && !obj.negtive) return true;
+    if (!tmp.negtive && obj.negtive) return false;
+    if (tmp.negtive && obj.negtive) swap(tmp, obj);
     while (tmp.length > obj.length) obj.push(0);
     while (tmp.length < obj.length) tmp.push(0);
     for (int i = tmp.length - 1; i >= 0; i --) {
