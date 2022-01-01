@@ -27,6 +27,7 @@ public:
     BigNumber operator-(BigNumber);
     BigNumber operator*(BigNumber);
     BigNumber operator/(BigNumber);
+    BigNumber operator%(BigNumber);
     bool operator>(BigNumber);
     bool operator<(BigNumber);
     bool operator==(BigNumber);
@@ -172,6 +173,23 @@ BigNumber BigNumber::operator/(BigNumber obj) {
         }
     }
     std::reverse(res.arr, res.arr + res.length);
+    res.stripZero();
+    return res;
+}
+
+BigNumber BigNumber::operator%(BigNumber obj) {
+    BigNumber res = *this, max_div = obj, tmp;
+    while (obj.length < res.length) obj.insert(0, 0);
+    while (res >= max_div) {
+        for (int times = 1; times <= 10; times ++) {
+            if (obj * BigNumber(std::to_string(times)) > res) {
+                tmp.push(-- times);
+                res = res - obj * BigNumber(std::to_string(times));
+                obj.erase(0);
+                break;
+            }
+        }
+    }
     res.stripZero();
     return res;
 }

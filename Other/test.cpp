@@ -3,9 +3,9 @@
 using namespace std;
 
 int main() {
-    
-    BigNumber x = "123156646514646514646514354";
-    BigNumber y = "2873469562983698692836494865293786498596";
+    BigNumber x, y;
+    BigNumber a = "21313246546215464362165694651636";
+    cin >> x >> y;
     cout << x * y << "\n";
     
     return 0;
