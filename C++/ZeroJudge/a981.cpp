@@ -1,35 +1,51 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
+struct Solve {
+    int n, m, arr[40];
+    void sort();
+    bool isPossible();
+    void DFS(int, long long, long long);
+};
+
 int main() {
-    ios_base::sync_with_stdio(false);
-    // cin.tie(0);
-    int n, m, sum, tmp, arr[30], pow_list[30];
-    vector<int> output;
-    for (int i = 0; i < 30; i ++)
-        pow_list[i] = pow(2, i);
-    while (cin >> n >> m) {
-        for (int i = 0; i < n; i ++)
-            cin >> arr[i];
-        sort(arr, arr + n);
-        for (int count = 1; count <= pow(2, n); count ++) {
-            sum = 0;
-            tmp = count;
-            output.clear();
-            for (int i = n - 1; i >= 0; i --) {
-                if (tmp >= pow_list[i]) {
-                    tmp -= pow_list[i];
-                    sum += arr[i];
-                    output.push_back(arr[i]);
-                }
+    Solve sv;
+    cin >> sv.n >> sv.m;
+    for (int i = 0; i < sv.n; i ++) {
+        cin >> sv.arr[i];
+    }
+    if (sv.isPossible()) {
+        sv.sort();
+        sv.DFS(0, 0, 0);
+    }
+    else cout << "-1\n";
+    return 0;
+}
+
+void Solve::sort() {
+    std::sort(arr, arr + n);
+}
+
+bool Solve::isPossible() {
+    long long sum = 0;
+    for (int i = 0; i < n; i ++) {
+        sum += arr[i];
+    }
+    return sum >= m;
+}
+
+void Solve::DFS(int index, long long sum, long long res) {
+    if (sum > (long long)m) return;
+    if (index < n) DFS(index + 1, sum + arr[index], (res + 1) << 1);
+    if (index < n) DFS(index + 1, sum, res << 1);
+    if (index >= n) {
+        if (sum == (long long)m) {
+            res >>= 1;
+            for (int i = 0; i < n; i ++) {
+                if (res & 1) cout << arr[i] << " ";
+                res >>= 1;
             }
-            if (sum == m) {
-                for (int i = output.size() - 1; i > 0; i --)
-                    cout << output[i] << ' ';
-                cout << '\n';
-            }
+            cout << "\n";
         }
     }
-    return 0;
 }
