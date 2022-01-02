@@ -1,11 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int gcd(int x, int y) {
+    if (y == 0) return x;
+    return gcd(y, x % y);
+}
+
 int main() {
-    double x, sum = 0;
-    while (cin >> x) {
-        sum += x;
-    }
-    printf("%.1lf", sum);
+    cout << gcd(16, 0);
     return 0;
 }
