@@ -1,5 +1,5 @@
-#include <iostream>
-#include <cmath>
+#include <bits/stdc++.h>
+using namespace std;
 
 class Fraction {
 private:
@@ -23,6 +23,22 @@ public:
     bool operator<=(Fraction);
     friend std::ostream& operator<<(std::ostream&, Fraction);
 };
+
+int main() {
+    char opt;
+    int p, q, r, s;
+    while (cin >> p >> q >> r >> s >> opt) {
+        switch (opt) {
+            case '+': cout << Fraction(p, q) + Fraction(r, s); break;
+            case '-': cout << Fraction(p, q) - Fraction(r, s); break;
+            case '*': cout << Fraction(p, q) * Fraction(r, s); break;
+            case '/': cout << Fraction(p, q) / Fraction(r, s); break;
+            default: break;
+        }
+        cout << "\n";
+    }
+    return 0;
+}
 
 Fraction::Fraction() {
     *this = Fraction(0, 1);
