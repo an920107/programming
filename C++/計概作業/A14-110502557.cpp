@@ -11,7 +11,7 @@
 using namespace std;
 
 void solve(string &str) {
-    int n, max = 0, len = str.length();
+    int n, max = 1, len = str.length();
     long long num_dec, mul;
     vector<int> vec;
     for (auto &ch : str) {
