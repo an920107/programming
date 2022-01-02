@@ -2,8 +2,10 @@
 using namespace std;
 
 int main() {
-    int x = 49;
-    printf("%d\n", x);
-    printf("%c\n", x);
+    double x, sum = 0;
+    while (cin >> x) {
+        sum += x;
+    }
+    printf("%.1lf", sum);
     return 0;
 }
