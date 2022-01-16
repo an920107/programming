@@ -8,19 +8,26 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string move(int start, int end) {
-    
+FILE *file_r;
+FILE *file_w;
+
+void hanoi(int n, char A, char B, char C) {
+    if (n == 1) {
+        fprintf(file_w, "%c%c\n", A, C);
+    }
+    else {
+        hanoi(n - 1, A, C, B);
+        hanoi(1, A, B, C);
+        hanoi(n - 1, B, A, C);
+    }
 }
 
 int main() {
-    FILE *file = fopen("N.txt", "r");
-    string res = 
+    file_r = fopen("N.txt", "r");
+    file_w = fopen("110502557.txt", "w");
+    string res = "";
     int n;
-    
-    fscanf(file, "%d", &n);
-    fclose(file);
-    if (n == 2) 
-    file = fopen("110502557.txt", "w");
-    fprintf(file, "%s", );
+    fscanf(file_r, "%d", &n);
+    hanoi(n, 'A', 'B', 'C');
     return 0;
 }

@@ -1,0 +1,7 @@
+AC
+AB
+CB
+AC
+BA
+BC
+AC
