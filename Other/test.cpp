@@ -4,9 +4,10 @@
 using namespace std;
 
 int main() {
-    Fraction x = Fraction(1, 2), y = Fraction(2, 3);
-    x = x + y;
-    cout << x.numerator << x.denominator;
+    BigNumber x = "172683546715827354781628536745817628934",
+        y = "987346985629834689512346958234465823945823945238459";
+    cin >> x;
+    cout << x * y << "\n";
     
     return 0;
 }
