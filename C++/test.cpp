@@ -2,6 +2,6 @@
 using namespace std;
 
 int main() {
-    cout << int('-');
+    cout << int('-') << "\n";
     return 0;
 }
