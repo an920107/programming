@@ -10,10 +10,11 @@ using namespace std;
 
 FILE *file_r;
 FILE *file_w;
+string res;
 
 void hanoi(int n, char A, char B, char C) {
     if (n == 1) {
-        fprintf(file_w, "%c%c\n", A, C);
+        res += A + C + "\n";
     }
     else {
         hanoi(n - 1, A, C, B);
@@ -29,5 +30,7 @@ int main() {
     int n;
     fscanf(file_r, "%d", &n);
     hanoi(n, 'A', 'B', 'C');
+    res.pop_back();
+    fprintf(file_w, "%s", res.c_str());
     return 0;
 }
