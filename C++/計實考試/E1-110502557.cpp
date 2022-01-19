@@ -10,7 +10,7 @@ using namespace std;
 
 FILE *file_r;
 FILE *file_w;
-string res;
+string res = "";
 
 void hanoi(int n, char A, char B, char C) {
     if (n == 1) {
