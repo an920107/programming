@@ -1,26 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+stack<int> stk;
+
 int main() {
-    int n, tmp_in, tmp_top, count = 0, round = 0;
-    stack<int> stk;
-    cin >> n;
-    for (int i = 0; i < n; i ++) {
-        cin >> tmp_in;
-        if ((stk.empty() || stk.top() < tmp_in) && i < n - 1) {
-            count ++;
+    int n, res = 0, tmp;
+    cin >> n >> tmp;
+    stk.push(tmp);
+    for (int i = 1; i < n; i ++) {
+        cin >> tmp;
+        if (tmp < stk.top()) {
+            res ++;
         }
         else {
-            tmp_top = tmp_in;
-            while (stk.top() < tmp_top) {
-                stk.pop();
-                tmp_top = stk.top();
-            }
-            round ++;
-            count = 1;
+            stk.pop();
+            stk.push(tmp);
         }
-        stk.push(tmp_in);
     }
-    cout << round << "\n";
+    do {
+        stk.pop();
+        res ++;
+    } while (!stk.empty());
+    cout << res << "\n";
     return 0;
 }
