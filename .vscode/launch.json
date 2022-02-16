@@ -54,7 +54,8 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "build - C++ (Linux)"
+            "preLaunchTask": "build - C++ (Linux)",
+            "console": "integratedTerminal"
         }
     ]
 }
