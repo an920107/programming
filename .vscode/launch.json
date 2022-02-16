@@ -2,19 +2,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
-            "name": "Launch test",
-            "request": "launch",
-            "mainClass": "test",
-            "projectName": "Programming_38f59100"
-        },
-        {
             "name": "Python",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "cwd": "${fileDirname}",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Java",
+            "type": "java",
+            "request": "launch",
+            "mainClass": "Main",
         },
         {
             "name": "GDB - Windows",
