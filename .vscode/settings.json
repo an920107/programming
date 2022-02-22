@@ -82,5 +82,6 @@
         "c:\\Compilers\\Java\\javafx-sdk-17.0.1\\lib\\javafx.swing.jar",
         "c:\\Compilers\\Java\\javafx-sdk-17.0.1\\lib\\javafx.web.jar",
         "c:\\Compilers\\Java\\javafx-sdk-17.0.1\\lib\\javafx-swt.jar"
-    ]
+    ],
+    "java.project.outputPath": ".vscode\\classpath"
 }
