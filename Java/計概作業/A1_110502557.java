@@ -1,12 +1,12 @@
 /**
  * Assignment 1
  * Student Number: 110502557
- * Course: CE1004-A
+ * Course: 2022-CE1002
  */
 
 import java.util.Scanner;
 
-class Main {
+public class A1_110502557 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int x = scanner.nextInt();
