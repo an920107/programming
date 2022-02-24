@@ -1,5 +1,6 @@
-.vscode/a.exe
-.vscode/a.out
+*.exe
+*.out
+*.class
 .vscode/c_cpp_properties.json
 .vscode/c_cpp_properties.json.disable
 .vscode/classpath
