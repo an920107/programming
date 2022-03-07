@@ -1,4 +1,7 @@
-sum = 0
-for i in range(45):
-    sum += i + 1
-print(sum)
+from cmath import log
+import pylab
+
+for i in range(2, 20):
+    print(i, end = "")
+    print("\t", end = "")
+    print(log(i) / i)
