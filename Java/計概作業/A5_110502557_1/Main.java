@@ -67,7 +67,7 @@ public class Main extends Application {
         vBox.setSpacing(50);
 
         HBox hBox = new HBox();
-        hBox.setPadding(new Insets(50, 50, 50, 50));
+        hBox.setPadding(new Insets(50, 100, 50, 100));
         hBox.setSpacing(80);
 
         vBox.getChildren().addAll(titleLabel, checkBox, questionLabel, radioButton1, radioButton2, radioButton3, button);
