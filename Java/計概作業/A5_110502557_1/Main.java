@@ -64,7 +64,7 @@ public class Main extends Application {
         button.setFont(Font.font("UD Digi Kyokasho N-R", 24));
 
         VBox vBox = new VBox();
-        vBox.setSpacing(50);
+        vBox.setSpacing(55);
 
         HBox hBox = new HBox();
         hBox.setPadding(new Insets(50, 100, 50, 100));
