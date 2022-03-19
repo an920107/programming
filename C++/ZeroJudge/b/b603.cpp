@@ -8,27 +8,41 @@ struct Point {
     explicit Point(int _x, int _y): x(_x), y(_y) {}
 };
 
-int bcd(int m, int n) {
-    if (m < n) return bcd(n, m);
-    if (n == 0) return m;
-    return bcd(n, m - n);
+int min(int a, int b, int c, int d) {
+    int arr[4] {a, b, c, d};
+    sort(arr, arr + 4);
+    return arr[0];
 }
 
-Point fraction(int m, int n) {
-    int div = bcd(m, n);
-    return Point(m / div, n / div);
+void bcd(int &a, int &b, int &c, int &d) {
+    int div;
+    int _a(abs(a)), _b(abs(b)), _c(abs(c)), _d(abs(d));
+    while (_a != 0 && _b != 0 && _c != 0 && _d != 0) {
+        div = min(_a, _b, _c, _d);
+        if (_a != div) _a %= div;
+        if (_b != div) _b %= div;
+        if (_c != div) _c %= div;
+        if (_d != div) _d %= div;
+    }
+    a /= div;
+    b /= div;
+    c /= div;
+    d /= div;
 }
 
 int main() {
     int x, y;
-    int a, b, c, d;
+    int a, b, c, d, div;
     while (cin >> x >> y) {
         Point top {x, y};
         cin >> x >> y;
         Point side {x, y};
-        Point frac = fraction(side.y - top.y, (side.x - top.x) * (side.x - top.x));
-        a = frac.x;
-        b = frac.y;
+        a = (side.x - top.x) * (side.x - top.x);
+        b = side.y - top.y;
+        c = - 2 * b * top.x;
+        d = b * top.x * top.x + a * top.y;
+        bcd(a, b, c, d);
+        printf("%dy = %dx^2 + %dx + %d\n", a, b, c, d);
     }
     return 0;
 }
