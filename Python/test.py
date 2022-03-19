@@ -1,9 +1,14 @@
-file_r = open("ans.txt", "r")
-i = 0
-result = ""
-context = file_r.readlines()
-for elm in context:
-    i += 1
-    result += elm.strip("\n")
-    if (i % 5 == 0): result += "\n"
-print(result)
+file = open("info.csv", "a")
+for i in range(10):
+    str = input()
+    while (str.count(":") > 0):
+        str = str.replace(":", "：")
+    while (str.count(" ") > 0):
+        str = str.replace(" ", "")
+    str = str[str.find("：") + 1:].strip("\n")
+    file.write(str + ",")
+file.write(",\n")
+
+# for i in range(10):
+#     file.write(input() + ",")
+# file.write("\n")
