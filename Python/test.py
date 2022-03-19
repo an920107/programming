@@ -1,14 +1,11 @@
-file = open("info.csv", "a")
-for i in range(10):
-    str = input()
-    while (str.count(":") > 0):
-        str = str.replace(":", "：")
-    while (str.count(" ") > 0):
-        str = str.replace(" ", "")
-    str = str[str.find("：") + 1:].strip("\n")
-    file.write(str + ",")
-file.write(",\n")
+def isPrime(n):
+    for i in range(2, n):
+        if (n % i == 0): return False
+    return True
 
-# for i in range(10):
-#     file.write(input() + ",")
-# file.write("\n")
+n = int(input())
+
+for i in range(2, n):
+    if (n % i == 0):
+        if (isPrime(i)):
+            print(i)
