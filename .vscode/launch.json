@@ -13,7 +13,7 @@
             "name": "Java",
             "type": "java",
             "request": "launch",
-            "mainClass": "Main",
+            "mainClass": "Main"
         },
         {
             "name": "GDB - Windows",
