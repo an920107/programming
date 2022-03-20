@@ -13,7 +13,9 @@
             "name": "Java",
             "type": "java",
             "request": "launch",
-            "mainClass": "Main"
+            // "cwd": "${fileDirname}",
+            "mainClass": "${file}",
+            "vmArgs": "--module-path C:\\Compilers\\Java\\javafx-sdk-17.0.2\\lib --add-modules javafx.controls,javafx.fxml"
         },
         {
             "name": "GDB - Windows",
