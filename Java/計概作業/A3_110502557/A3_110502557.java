@@ -4,6 +4,8 @@
  * Course: 2022-CE1002
  */
 
+package A3_110502557;
+
 import java.util.Vector;
 
 public class A3_110502557 {

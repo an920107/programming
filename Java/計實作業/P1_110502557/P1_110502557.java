@@ -4,6 +4,8 @@
  * Course: 2022-CE1004-A
  */
 
+package P1_110502557;
+
 import java.util.Scanner;
 
 public class P1_110502557 {

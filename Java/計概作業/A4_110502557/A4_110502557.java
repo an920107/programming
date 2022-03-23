@@ -4,6 +4,8 @@
  * Course: 2022-CE1002
  */
 
+package A4_110502557;
+
 public class A4_110502557 {
     static public void main(String args[]){
         Archer archer = new Archer("Alex",10,100);

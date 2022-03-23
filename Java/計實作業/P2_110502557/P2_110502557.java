@@ -4,6 +4,8 @@
  * Course: 2022-CE1004-A
  */
 
+package P2_110502557;
+
 public class P2_110502557 {
     public static void main(String[] args) throws Exception {
         final boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("win") >= 0;

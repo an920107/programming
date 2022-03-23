@@ -4,6 +4,8 @@
  * Course: 2022-CE1004-A
  */
 
+package P4_110502557;
+
 public class P4_110502557 {
     public static void main(String[] args) {
         // 以下不要改

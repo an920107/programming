@@ -4,6 +4,8 @@
  * Course: 2022-CE1004-A
  */
 
+package P5_110502557;
+
 import java.util.Scanner;
 
 public class P5_110502557 {
@@ -139,7 +141,13 @@ class Hero extends Character {
         this.weapon = weapon;
     }
 
+    public void setName(String name) { super.setName(name); }
+    public void setHp(int hp) { super.setHp(hp); }
+    public void setAtk(int atk) {super.setAtk(atk); }
     public void setWeapon(Weapon weapon) { this.weapon = weapon; }
+    public String getName() { return super.getName(); }
+    public int getHp() { return super.getHp(); }
+    public int getAtk() { return super.getAtk(); }
     public Weapon getWeapon() { return weapon; }
 }
 
@@ -152,6 +160,12 @@ class Enemy extends Character {
         this.dropItem = dropItem;
     }
 
+    public void setName(String name) { super.setName(name); }
+    public void setHp(int hp) { super.setHp(hp); }
+    public void setAtk(int atk) {super.setAtk(atk); }
     public void setDropItem(String dropItem) { this.dropItem = dropItem; }
+    public String getName() { return super.getName(); }
+    public int getHp() { return super.getHp(); }
+    public int getAtk() { return super.getAtk(); }
     public String getDropItem() { return dropItem; }
 }
