@@ -3,9 +3,9 @@ package A6_110502557;
 import java.util.LinkedList;
 
 public class Transactions extends LinkedList<Transaction> {
-    private int maxNameLength = 0;
-    private int maxIncomeLength = 0;
-    private int maxPayLength = 0;
+    private int maxNameLength = 1;
+    private int maxIncomeLength = 1;
+    private int maxPayLength = 1;
 
     public Transactions() {}
 
