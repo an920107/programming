@@ -19,12 +19,10 @@ public class Main {
             command = scanner.nextInt();
             switch (command) {
                 case 1:
-                    transactions.addLast(new Transaction(scanner.next()));
-                    transactions.setLastIncome(scanner.nextInt());
+                    transactions.addLast(new Transaction(scanner.next(), scanner.nextInt(), 0));
                     break;
                 case 2:
-                    transactions.addLast(new Transaction(scanner.next()));
-                    transactions.setLastPay(scanner.nextInt());
+                    transactions.addLast(new Transaction(scanner.next(), 0, scanner.nextInt()));
                     break;
                 case 3:
                     int total = 0;

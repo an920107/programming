@@ -12,17 +12,9 @@ public class Transactions extends LinkedList<Transaction> {
     @Override
     public void addLast(Transaction transaction) {
         maxNameLength = max(transaction.getName().length(), maxNameLength);
+        maxIncomeLength = max(String.valueOf(transaction.getIncome()).length(), maxIncomeLength);
+        maxPayLength = max(String.valueOf(transaction.getPay()).length(), maxPayLength);
         super.addLast(transaction);
-    }
-
-    public void setLastIncome(int income) {
-        maxIncomeLength = max(String.valueOf(income).length(), maxIncomeLength);
-        super.getLast().setIncome(income);
-    }
-
-    public void setLastPay(int pay) {
-        maxPayLength = max(String.valueOf(pay).length(), maxPayLength);
-        super.getLast().setPay(pay);
     }
 
     public int getMaxNameLength() { return maxNameLength; }
