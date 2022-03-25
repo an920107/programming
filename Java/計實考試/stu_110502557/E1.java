@@ -23,7 +23,7 @@ public class E1 {
                 orders[i] = scanner.nextInt();
             }
             for (int i = 2; i >= 0; i --) {
-                pokemons.add(templatePokemon);
+                pokemons.add(new Pokemon(templatePokemon));
                 pokemons.lastElement().setAttributes(orders[i]);
             }
 
@@ -31,9 +31,9 @@ public class E1 {
             while (true) {
 
                 // ta's turn
-
                 rounds ++;
-
+                printPokemon(enemy, pokemons.lastElement());
+                
                 switch (pokemons.lastElement().getAttributes()) {
                     case Pokemon.Attributes.GRASS:
                         multiply = 1.5f;
@@ -46,11 +46,11 @@ public class E1 {
                         break;
                 }
 
-                pokemons.lastElement().lossHp(enemy.canSpecialAttack() ? enemy.getSpc() : enemy.getAtk() * multiply);
-                enemy.addHp((enemy.canSpecialAttack() ? enemy.getSpc() : enemy.getAtk() * multiply) * 0.2f);
+                pokemons.lastElement().lossHp(enemy.canSpecialAttack() ? enemy.getSpc() * multiply : enemy.getAtk());
+                enemy.addHp((enemy.canSpecialAttack() ? enemy.getSpc() * multiply : enemy.getAtk()) * 0.2f);
                 enemy.addPower(0.25f);
 
-                if (pokemons.lastElement().getHp() <= 0) {
+                if (pokemons.lastElement().getHp() <= 0f) {
                     pokemons.pop();
                     if (pokemons.isEmpty()) break;
                 }
@@ -58,6 +58,7 @@ public class E1 {
                 // my turn
 
                 rounds ++;
+                printPokemon(enemy, pokemons.lastElement());
 
                 switch (pokemons.lastElement().getAttributes()) {
                     case Pokemon.Attributes.GRASS:
@@ -71,10 +72,10 @@ public class E1 {
                         break;
                 }
 
-                enemy.lossHp(pokemons.lastElement().canSpecialAttack() ? pokemons.lastElement().getSpc() : pokemons.lastElement().getAtk() * multiply);
+                enemy.lossHp(pokemons.lastElement().canSpecialAttack() ? pokemons.lastElement().getSpc() * multiply : pokemons.lastElement().getAtk());
                 pokemons.lastElement().addPower(0.25f);
 
-                if (enemy.getHp() <= 0) break;
+                if (enemy.getHp() <= 0f) break;
             }
 
             if (pokemons.isEmpty()) {
@@ -84,6 +85,13 @@ public class E1 {
                 System.out.printf("You Win! Using %d rounds!\n", rounds);
             }
         }
+    }
+
+    private static void printPokemon(Pokemon x, Pokemon y) {
+        x.printInformation();
+        System.out.println("");
+        y.printInformation();
+        System.out.println("\n");
     }
 }
 
@@ -98,12 +106,21 @@ class Pokemon {
     private float atk;
     private float power;
     private float spc;
+    private float originalHp;
     private int attributes;
+
+    public Pokemon(Pokemon pokemon) {
+        this.hp = pokemon.hp;
+        this.atk = pokemon.atk;
+        this.power = pokemon.power;
+        this.originalHp = hp;
+    }
 
     public Pokemon(float hp, float atk, float power) {
         this.hp = hp;
         this.atk = atk;
         this.power = power;
+        this.originalHp = hp;
         spc = 1;
     }
 
@@ -117,17 +134,17 @@ class Pokemon {
         switch (attributes) {
             case Attributes.GRASS:
                 spc = atk;    
-                hp *= 1.2;
+                hp *= 1.2f;
                 break;
             case Attributes.FIRE:
                 spc = atk * 1.1f;
-                hp *= 0.8;
-                atk *= 1.2;
+                hp *= 0.8f;
+                atk *= 1.2f;
                 break;
             case Attributes.WATER:
                 spc *= atk * 1.7f;
-                hp *= 0.9;
-                atk *= 0.9;
+                hp *= 0.9f;
+                atk *= 0.9f;
                 break;
             default: break;
         }
@@ -136,6 +153,7 @@ class Pokemon {
 
     public void addHp(float adding) {
         hp += adding;
+        if (hp > originalHp) hp = originalHp;
     }
 
     public void lossHp(float hurt) {
@@ -143,15 +161,18 @@ class Pokemon {
     }
 
     public void addPower(float acc) {
-        if (power >= 1) {
-            power = 0;
+        if (power >= 1f) {
+            power = 0f;
             return;
         }
         power += acc;
     }
 
     public boolean canSpecialAttack() {
-        return power >= 1;
+        return power >= 1f;
     }
     
+    public void printInformation() {
+        System.out.printf("Hp: %f, Atk: %f, Power: %f\n", hp, atk, power);
+    }
 }
