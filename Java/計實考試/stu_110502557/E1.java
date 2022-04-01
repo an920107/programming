@@ -32,7 +32,6 @@ public class E1 {
 
                 // ta's turn
                 rounds ++;
-                printPokemon(enemy, pokemons.lastElement());
                 
                 switch (pokemons.lastElement().getAttributes()) {
                     case Pokemon.Attributes.GRASS:
@@ -58,7 +57,6 @@ public class E1 {
                 // my turn
 
                 rounds ++;
-                printPokemon(enemy, pokemons.lastElement());
 
                 switch (pokemons.lastElement().getAttributes()) {
                     case Pokemon.Attributes.GRASS:
@@ -85,13 +83,6 @@ public class E1 {
                 System.out.printf("You Win! Using %d rounds!\n", rounds);
             }
         }
-    }
-
-    private static void printPokemon(Pokemon x, Pokemon y) {
-        x.printInformation();
-        System.out.println("");
-        y.printInformation();
-        System.out.println("\n");
     }
 }
 
