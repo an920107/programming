@@ -2,5 +2,6 @@
 using namespace std;
 
 int main() {
-    cout << "" << "\n";
+    cout << "Visual Studio Code !!" << endl;
+    return 0;
 }
