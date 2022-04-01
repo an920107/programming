@@ -4,6 +4,16 @@ import java.util.LinkedList;
 
 public class Formula extends LinkedList<Operand> {
 
+    final private int DECIMAL_LEN = 8;
+
+    private String reverse(String str) {
+        String res = new String();
+        for (int i = str.length() - 1; i >= 0; i --) {
+            res += str.charAt(i);
+        }
+        return res;
+    }
+
     @Override
     public void addLast(Operand operand) {
         if (super.isEmpty()) {
@@ -83,7 +93,10 @@ public class Formula extends LinkedList<Operand> {
                             super.remove(i);
                             break;
                         case Operand.Operator.NEGTIVE:
-                            super.get(i).appendValue(super.get(i + 1).getValue());
+                            super.set(i, new Operand(
+                                Operand.Type.NUMBER,
+                                "-" + super.get(i + 1).getValue()
+                            ));
                             super.remove(i + 1);
                             break;
                         case Operand.Operator.POWER:
@@ -142,11 +155,21 @@ public class Formula extends LinkedList<Operand> {
             priority ++;
         }
 
+        // deal with the decimal: 1.999 -> 2; 1.000 -> 1
         String[] valArr = super.getFirst().getValue().split("\\.");
         String valInt = valArr[0];
         String valDec = valArr[1];
         super.clear();
         super.addLast(new Operand(Operand.Type.NUMBER, valInt));
+        if (valDec.length() > DECIMAL_LEN) {
+            valDec = valDec.substring(0, DECIMAL_LEN + 1);
+            valDec = String.valueOf(Math.round(Double.parseDouble(valDec) / 10d));
+            if (valDec.length() > DECIMAL_LEN) {
+                valDec = valDec.substring(1, DECIMAL_LEN + 1);
+                super.getFirst().setValue(String.valueOf(Integer.parseInt(valInt) + 1));
+            }
+        }
+        valDec = reverse(String.valueOf(Integer.parseInt(reverse(valDec))));
         if (!valDec.equals("0")) {
             super.addLast(new Operand(Operand.Type.POINT, "."));
             super.addLast(new Operand(Operand.Type.NUMBER, valDec));
