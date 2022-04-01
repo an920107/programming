@@ -156,7 +156,6 @@ public class Formula extends LinkedList<Operand> {
     public String toString() {
         String str = new String();
         for (Operand operand : this) {
-            System.out.println(str);
             str += operand.getValue();
         }
         return str;
