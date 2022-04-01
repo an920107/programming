@@ -129,7 +129,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="equalButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="＝" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <Button fx:id="equalButton" mnemonicParsing="false" onAction="#onEqualButton" prefHeight="100.0" prefWidth="100.0" text="＝" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <font>
                   <Font size="18.0" />
                </font>

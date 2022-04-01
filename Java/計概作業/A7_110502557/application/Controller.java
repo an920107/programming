@@ -75,6 +75,7 @@ public class Controller{
     }
 
     public void onEqualButton(ActionEvent event) {
-        
+        formula.count();
+        textField.setText(formula.toString());
     }
 }

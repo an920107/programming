@@ -10,58 +10,36 @@ public class Operand {
     }
 
     public static class Operator {
-        final public static int POWER = 0;
-        final public static int MULTIPLY = 1;
-        final public static int DIVIDE = 2;
-        final public static int MOD = 3;
-        final public static int PLUS = 4;
-        final public static int MINUS = 5;
+        // priority: point -> negtive -> power -> multiply/divide/mod -> plus/minus
+        final public static int POINT = 10;
+        final public static int NEGTIVE = 20;
+        final public static int POWER = 30;
+        final public static int MULTIPLY = 40;
+        final public static int DIVIDE = 41;
+        final public static int MOD = 42;
+        final public static int PLUS = 50;
+        final public static int MINUS = 51;
     }
 
     private int type;
     private String value;
-    private boolean negtive;
-    private int priority;
     private int operator;
 
     public Operand(int type, String value) {
         this.type = type;
         this.value = value;
-        negtive = false;
 
-        // priority: point -> negtive -> power -> multiply/divide/mod -> plus/minus
-        if (type == Type.POINT) priority = 0;
-        else if (type == Type.NEGTIVE) priority = 1;
+        if (type == Type.POINT) operator = Operator.POINT;
+        else if (type == Type.NEGTIVE) operator = Operator.NEGTIVE;
         else if (type == Type.OPERATOR) {
-            if (value.equals("^")) {
-                priority = 2;
-                operator = Operator.POWER;
-            }
-            else if (value.equals("×")) {
-                priority = 3;
-                operator = Operator.MULTIPLY;
-            }
-            else if (value.equals("÷")) {
-                priority = 3;
-                operator = Operator.DIVIDE;
-            }
-            else if (value.equals("%")) {
-                priority = 3;
-                operator = Operator.MOD;
-            }
-            else if (value.equals("+")) {
-                priority = 4;
-                operator = Operator.PLUS;
-            }
-            else if (value.equals("-")) {
-                priority = 4;
-                operator = Operator.MINUS;
-            }
+            if (value.equals("^")) operator = Operator.POWER;
+            else if (value.equals("×")) operator = Operator.MULTIPLY;
+            else if (value.equals("÷")) operator = Operator.DIVIDE;
+            else if (value.equals("%")) operator = Operator.MOD;
+            else if (value.equals("+")) operator = Operator.PLUS;
+            else if (value.equals("-")) operator = Operator.MINUS;
         }
-        else {
-            priority = -1;
-            operator = -1;
-        }
+        else operator = 0;
     }
 
     public void setType(int type) { this.type = type; }
@@ -69,7 +47,9 @@ public class Operand {
 
     public int getType() { return type; }
     public String getValue() { return value; }
-    public boolean isNegtive() { return negtive; }
-    public int getPriority() { return priority; }
     public int getOperator() {return operator; }
+
+    public void appendValue(String append) {
+        this.value += append;
+    }
 }
