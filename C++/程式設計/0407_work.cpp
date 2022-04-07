@@ -6,11 +6,13 @@ struct Node{
     struct Node *next; //鏈結成員，存放下一節點的指標 
 }; //typedef struct node Node; //將struct node 定義為Node型態 
 
+Node* add(Node*, Node*);
+
 int main(int argc, char** argv) {
     //宣告三個固定、不連續的位置給a、b、c 
     //node a,b,c;   //宣告a,b,c為node型態的變數 
     //node *ptr=&a; //宣告ptr，並將它指向節點a 
-    struct Node a, b, c, d;  
+    struct Node a, b, c, d; 
     struct Node *ptr = &a;
     
     a.data = 12;  //設定節點a的data成員為12 
@@ -18,9 +20,9 @@ int main(int argc, char** argv) {
     b.data = 30;
     b.next = &c;
     c.data = 64;
-    c.next = &d;
+    
+    add(&c, &d);
     d.data = 24;
-    d.next = NULL;
     
     cout << endl;
     while(ptr != NULL) {                          //當ptr不是NULL時，則執行下列敘述 
@@ -35,6 +37,7 @@ int main(int argc, char** argv) {
 }
 
 Node* add(Node *ptr, Node *d) {
-     
+    ptr->next = d;
+    d->next = NULL;
     return ptr;
 }
