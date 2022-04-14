@@ -14,9 +14,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../resources/Main.fxml"));
-            Parent root = loader.load();
+            Parent root = FXMLLoader.load(getClass().getResource("../resources/Main.fxml"));
             Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("../resources/Style.css").toExternalForm());
             stage.setTitle("匯率轉換器");
             stage.setResizable(false);
             stage.setScene(scene);

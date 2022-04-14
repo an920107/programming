@@ -1,0 +1,4 @@
+.choice-box .menu-item {
+    -fx-mark-color: transparent;
+    -fx-focused-mark-color: transparent;
+}
