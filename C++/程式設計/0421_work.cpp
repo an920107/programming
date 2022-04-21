@@ -67,16 +67,22 @@ void freeList(Node *first) {
 
 Node *insert(Node *first, int data) {
 	Node *current, *previous;
-	Node *newnode;
+	Node *newnode = (Node *)malloc(sizeof(Node));
+    newnode->data = data;
+    if (data < first->data) {
+        newnode->next = first;
+        return newnode;
+    }
 	current = first;
     while (current->next != NULL) {
         previous = current;
         current = current->next;
         if (data > current->data) continue;
-        newnode = (Node *)malloc(sizeof(Node));
         previous->next = newnode;
-        newnode->data = data;
         newnode->next = current;
+        return first;
     }
+    current->next = newnode;
+    newnode->next = NULL;
     return first;
 }
