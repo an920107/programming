@@ -22,6 +22,7 @@ int main(int argc, char** argv) {
 	first = insert(first, data);
 	printList(first);
 	freeList(first);
+    system("pause");
 	return 0;
 }
 
