@@ -20,7 +20,7 @@ public:
 int main() {
     LinkedList llist;
     const int arr[] = {12, 43, 56, 34, 98, 76, 43, 23};
-    for (int x : arr) {
+    for (const int x : arr) {
         llist.addLast(x);
     }
     cout << llist << "\n";
@@ -28,6 +28,7 @@ int main() {
     llist.remove(34);
     llist.remove(24);
     cout << llist << "\n";
+    system("pause");
     return 0;
 }
 
