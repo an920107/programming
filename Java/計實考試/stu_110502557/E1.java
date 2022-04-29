@@ -8,7 +8,7 @@ public class E1 {
     public static void main(String[] args) {
         String command, name;
         int amount, price, id;
-        Good[] cart = new Good[9];
+        Good[] goodsCart = new Good[9];
         while (true) {
             System.out.println("選擇一指令：");
             System.out.println("[add]\t添加商品");
@@ -26,23 +26,25 @@ public class E1 {
                 price = scanner.nextInt();
                 System.out.println("請輸入商品數量：");
                 amount = scanner.nextInt();
-                cart[id - 1] = new Good(name, price, amount);
+                goodsCart[id - 1] = new Good(name, price, amount);
                 System.out.println("您的商品 " + name + "已添加到購物車");
             }
-            else if (command.equals("query")) {
-                query(cart);
-            }
+            else if (command.equals("query"))
+                query(goodsCart);
             else if (command.equals("update")) {
                 System.out.println("請輸入需要修改的商品編號：");
                 id = scanner.nextInt();
-                System.out.println("請輸入商品 " + cart[id - 1].getName() + " 的修改數量：");
+                if (goodsCart[id - 1] == null) {
+                    System.out.println("無此商品");
+                    continue;
+                }
+                System.out.println("請輸入商品 " + goodsCart[id - 1].getName() + " 的修改數量：");
                 amount = scanner.nextInt();
-                cart[id - 1].setAmount(amount);
+                goodsCart[id - 1].setAmount(amount);
                 System.out.println("修改完成");
             }
-            else if (command.equals("pay")) {
-                System.out.printf("訂單總金額 %d\n", query(cart));
-            }
+            else if (command.equals("pay"))
+                System.out.println("訂單總金額 " + query(goodsCart));
             else if (command.equals("exit"))
                 break;
             else System.out.println("沒有該功能：");
@@ -55,12 +57,7 @@ public class E1 {
         System.out.printf("%-6s%-10s%-6s%-6s\n", "編號", "名稱", "價格", "數量");
         for (int i = 0; i < 9; i ++) {
             if (cart[i] == null) continue;
-            System.out.printf("%-8d%-12s%-8d%-8d\n",
-                i + 1,
-                cart[i].getName(),
-                cart[i].getPrice(),
-                cart[i].getAmount()
-            );
+            System.out.printf("%-8d%-12s%-8d%-8d\n", i + 1, cart[i].getName(), cart[i].getPrice(), cart[i].getAmount());
             sum += cart[i].getPrice() * cart[i].getAmount();
         }
         return sum;
