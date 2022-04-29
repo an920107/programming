@@ -1,169 +1,87 @@
 package stu_110502557;
 
 import java.util.Scanner;
-import java.util.Stack;
 
 public class E1 {
-    static Scanner scanner = new Scanner(System.in);
-
+    private static Scanner scanner = new Scanner(System.in);
+    
     public static void main(String[] args) {
-        int command;
-        float multiply;
+        String command, name;
+        int amount, price, id;
+        Good[] cart = new Good[9];
         while (true) {
-            command = scanner.nextInt();
-            if (command != 1) break;
-
-            Pokemon enemy = new Pokemon(scanner.nextFloat(), scanner.nextFloat(), scanner.nextFloat());
-            enemy.setAttributes(Pokemon.Attributes.FIRE);
-
-            Pokemon templatePokemon = new Pokemon(scanner.nextFloat(), scanner.nextFloat(), scanner.nextFloat());
-            Stack<Pokemon> pokemons = new Stack<>();
-            int[] orders = new int[3];
-            for (int i = 0; i < 3; i ++) {
-                orders[i] = scanner.nextInt();
+            System.out.println("選擇一指令：");
+            System.out.println("[add]\t添加商品");
+            System.out.println("[query]\t查詢購物車商品");
+            System.out.println("[update]修改商品數量");
+            System.out.println("[pay]\t結算金額");
+            System.out.println("[exit]\t離開");
+            command = scanner.next();
+            if (command.equals("add")) {
+                System.out.println("請輸入商品編號：");
+                id = scanner.nextInt();
+                System.out.println("請輸入商品名稱：");
+                name = scanner.next();
+                System.out.println("請輸入商品價格：");
+                price = scanner.nextInt();
+                System.out.println("請輸入商品數量：");
+                amount = scanner.nextInt();
+                cart[id - 1] = new Good(name, price, amount);
+                System.out.println("您的商品 " + name + "已添加到購物車");
             }
-            for (int i = 2; i >= 0; i --) {
-                pokemons.add(new Pokemon(templatePokemon));
-                pokemons.lastElement().setAttributes(orders[i]);
+            else if (command.equals("query")) {
+                query(cart);
             }
-
-            int rounds = 0;
-            while (true) {
-
-                // ta's turn
-                rounds ++;
-                
-                switch (pokemons.lastElement().getAttributes()) {
-                    case Pokemon.Attributes.GRASS:
-                        multiply = 1.5f;
-                        break;
-                    case Pokemon.Attributes.WATER:
-                        multiply = 0.5f;
-                        break;
-                    default:
-                        multiply = 1;
-                        break;
-                }
-
-                pokemons.lastElement().lossHp(enemy.canSpecialAttack() ? enemy.getSpc() * multiply : enemy.getAtk());
-                enemy.addHp((enemy.canSpecialAttack() ? enemy.getSpc() * multiply : enemy.getAtk()) * 0.2f);
-                enemy.addPower(0.25f);
-
-                if (pokemons.lastElement().getHp() <= 0f) {
-                    pokemons.pop();
-                    if (pokemons.isEmpty()) break;
-                }
-
-                // my turn
-
-                rounds ++;
-
-                switch (pokemons.lastElement().getAttributes()) {
-                    case Pokemon.Attributes.GRASS:
-                        multiply = 0.5f;
-                        break;
-                    case Pokemon.Attributes.WATER:
-                        multiply = 1.5f;
-                        break;
-                    default:
-                        multiply = 1;
-                        break;
-                }
-
-                enemy.lossHp(pokemons.lastElement().canSpecialAttack() ? pokemons.lastElement().getSpc() * multiply : pokemons.lastElement().getAtk());
-                pokemons.lastElement().addPower(0.25f);
-
-                if (enemy.getHp() <= 0f) break;
+            else if (command.equals("update")) {
+                System.out.println("請輸入需要修改的商品編號：");
+                id = scanner.nextInt();
+                System.out.println("請輸入商品 " + cart[id - 1].getName() + " 的修改數量：");
+                amount = scanner.nextInt();
+                cart[id - 1].setAmount(amount);
+                System.out.println("修改完成");
             }
-
-            if (pokemons.isEmpty()) {
-                System.out.printf("You Lose! Using %d rounds!\n", rounds);
+            else if (command.equals("pay")) {
+                System.out.printf("訂單總金額 %d\n", query(cart));
             }
-            else {
-                System.out.printf("You Win! Using %d rounds!\n", rounds);
-            }
+            else if (command.equals("exit"))
+                break;
+            else System.out.println("沒有該功能：");
         }
+    }
+
+    private static int query(Good[] cart) {
+        int sum = 0;
+        System.out.println("==============購物車內容如下==============");
+        System.out.printf("%-6s%-10s%-6s%-6s\n", "編號", "名稱", "價格", "數量");
+        for (int i = 0; i < 9; i ++) {
+            if (cart[i] == null) continue;
+            System.out.printf("%-8d%-12s%-8d%-8d\n",
+                i + 1,
+                cart[i].getName(),
+                cart[i].getPrice(),
+                cart[i].getAmount()
+            );
+            sum += cart[i].getPrice() * cart[i].getAmount();
+        }
+        return sum;
     }
 }
 
-class Pokemon {
-    public static class Attributes {
-        final public static int GRASS = 1;
-        final public static int FIRE = 2;
-        final public static int WATER = 3;
-    }
+class Good {
+    
+    private String name;
+    private int price;
+    private int amount;
 
-    private float hp;
-    private float atk;
-    private float power;
-    private float spc;
-    private float originalHp;
-    private int attributes;
-
-    public Pokemon(Pokemon pokemon) {
-        this.hp = pokemon.hp;
-        this.atk = pokemon.atk;
-        this.power = pokemon.power;
-        this.originalHp = hp;
-    }
-
-    public Pokemon(float hp, float atk, float power) {
-        this.hp = hp;
-        this.atk = atk;
-        this.power = power;
-        this.originalHp = hp;
-        spc = 1;
-    }
-
-    public float getHp() { return hp; }
-    public float getAtk() { return atk; }
-    public float getPower() { return power; }
-    public float getSpc() { return spc; }
-    public int getAttributes() { return attributes; }
-
-    public void setAttributes(int attributes) {
-        switch (attributes) {
-            case Attributes.GRASS:
-                spc = atk;    
-                hp *= 1.2f;
-                break;
-            case Attributes.FIRE:
-                spc = atk * 1.1f;
-                hp *= 0.8f;
-                atk *= 1.2f;
-                break;
-            case Attributes.WATER:
-                spc *= atk * 1.7f;
-                hp *= 0.9f;
-                atk *= 0.9f;
-                break;
-            default: break;
-        }
-        this.attributes = attributes;
-    }
-
-    public void addHp(float adding) {
-        hp += adding;
-        if (hp > originalHp) hp = originalHp;
-    }
-
-    public void lossHp(float hurt) {
-        hp -= hurt;
-    }
-
-    public void addPower(float acc) {
-        if (power >= 1f) {
-            power = 0f;
-            return;
-        }
-        power += acc;
-    }
-
-    public boolean canSpecialAttack() {
-        return power >= 1f;
+    public Good(String name, int price, int amount) {
+        this.name = name;
+        this.price = price;
+        this.amount = amount;
     }
     
-    public void printInformation() {
-        System.out.printf("Hp: %f, Atk: %f, Power: %f\n", hp, atk, power);
-    }
+    public String getName() { return name; }
+    public int getPrice() { return price; }
+    public int getAmount() { return amount; }
+    public void setAmount(int amount) { this.amount = amount; }
+    
 }
