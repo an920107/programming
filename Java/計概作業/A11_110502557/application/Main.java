@@ -20,7 +20,7 @@ public class Main extends Application {
             stage.setTitle("Greedy Snake");
             stage.setResizable(false);
 
-            try (SceneController sc = new SceneController(SceneController.FXMLFiles.TITLE_SCREEN)) {
+            try (SceneController sc = new SceneController(FXMLFiles.TITLE_SCREEN)) {
                 sc.show(stage);
             } catch (Exception exception) {
                 exception.printStackTrace();

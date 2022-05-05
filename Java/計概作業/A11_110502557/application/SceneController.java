@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 public class SceneController implements AutoCloseable {
     
+    private FXMLLoader loader;
     private String fxmlPath;
     private Scene scene;
     private Parent root;
@@ -25,7 +26,8 @@ public class SceneController implements AutoCloseable {
     }
 
     public void show(Stage stage) throws IOException {
-        root = FXMLLoader.load(getClass().getResource(fxmlPath));
+        loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        root = loader.load();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
@@ -33,22 +35,19 @@ public class SceneController implements AutoCloseable {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-               
+                if (fxmlPath.equals(FXMLFiles.SIMPLE_PLAY)) {
+                    SimplePlayController controller = loader.getController();
+                    controller.keyPressed(event);
+                }
+                else if (fxmlPath.equals(FXMLFiles.ADVANCED_PLAY)) {
+                    AdvancedPlayController controller = loader.getController();
+                    controller.keyPressed(event);
+                }
             }
         });
     }
 
     public void show(ActionEvent event) throws IOException {
         show((Stage)((Node)event.getSource()).getScene().getWindow());
-    }
-
-
-    final public class FXMLFiles {
-        
-        final private static String PREFIX = "../resources/";
-
-        final public static String TITLE_SCREEN = PREFIX + "TitleScreen.fxml";
-        final public static String SIMPLE_PLAY = PREFIX + "SimplePlay.fxml";
-        final public static String ADVANCED_PLAY = PREFIX + "AdvancedPlay.fxml";
     }
 }

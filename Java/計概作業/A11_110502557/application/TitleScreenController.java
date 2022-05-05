@@ -11,7 +11,7 @@ public class TitleScreenController {
     @FXML private Button exitButton;
 
     @FXML private void onStartButton(ActionEvent event) {
-        try (SceneController sc = new SceneController(SceneController.FXMLFiles.SIMPLE_PLAY)) {
+        try (SceneController sc = new SceneController(FXMLFiles.SIMPLE_PLAY)) {
             sc.show(event);
         } catch (Exception exception) {
             exception.printStackTrace();
