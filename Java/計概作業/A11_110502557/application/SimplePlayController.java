@@ -73,10 +73,7 @@ public class SimplePlayController{
     }
 
     public void keyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.SPACE) {
-            reset();
-            return;
-        }
+        if (event.getCode() == KeyCode.SPACE) reset();
         if (!isPlayable) return;
         switch (event.getCode()) {
             case W: case UP:

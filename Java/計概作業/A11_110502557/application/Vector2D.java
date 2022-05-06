@@ -22,6 +22,10 @@ public class Vector2D {
         return new Vector2D(x - v.x, y - v.y);
     }
 
+    public Vector2D multiply(int m) {
+        return new Vector2D(x * m, y * m);
+    }
+
     public boolean equals(Vector2D v) {
         return x == v.x && y == v.y;
     }

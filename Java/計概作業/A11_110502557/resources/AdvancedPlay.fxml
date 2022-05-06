@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <GridPane alignment="CENTER" gridLinesVisible="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="A11_110502557.application.AdvancedPlayController">
@@ -59,11 +58,7 @@
       </GridPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Pane fx:id="gamePane" layoutX="380.0" layoutY="260.0" style="-fx-background-color: LightGray;" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="110.0">
-               <children>
-                  <Rectangle fx:id="head" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="240.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-               </children>
-            </Pane>
+            <Pane fx:id="gamePane" layoutX="380.0" layoutY="260.0" style="-fx-background-color: LightGray;" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="110.0" />
          </children>
       </AnchorPane>
    </children>
