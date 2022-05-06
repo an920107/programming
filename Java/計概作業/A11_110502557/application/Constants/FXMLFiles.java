@@ -1,4 +1,4 @@
-package A11_110502557.application;
+package A11_110502557.application.Constants;
 
 public class FXMLFiles {
         

@@ -1,26 +1,19 @@
-package A11_110502557.application.Controllers;
+package P11_110502557.application;
 
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class SceneController implements AutoCloseable {
     
-    private FXMLLoader loader;
     private String fxmlPath;
+    private FXMLLoader loader;
     private Scene scene;
-
-    @Override
-    public void close() throws Exception {
-        System.gc();
-    }
 
     public SceneController(String fxmlPath) {
         this.fxmlPath = fxmlPath;
@@ -32,17 +25,19 @@ public class SceneController implements AutoCloseable {
         stage.setScene(scene);
         stage.show();
 
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                Object controller = loader.getController();
-                if (controller instanceof KeyPressed)
-                    ((KeyPressed)controller).keyPressed(event);
-            }
+        scene.setOnKeyPressed(keyEvent -> {
+            Object controller = loader.getController();
+            if (controller instanceof KeyPressed)
+                ((KeyPressed)controller).keyPressed(keyEvent);
         });
     }
 
     public void show(ActionEvent event) throws IOException {
         show((Stage)((Node)event.getSource()).getScene().getWindow());
+    }
+
+    @Override
+    public void close() throws Exception {
+        System.gc();
     }
 }

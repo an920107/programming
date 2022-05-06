@@ -2,7 +2,8 @@ package A11_110502557.application.Controllers;
 
 import java.util.LinkedList;
 
-import A11_110502557.application.FXMLFiles;
+import A11_110502557.application.Constants.FXMLFiles;
+import A11_110502557.application.Constants.Status;
 import A11_110502557.application.Functions.Food;
 import A11_110502557.application.Functions.SnakeBody;
 import A11_110502557.application.Functions.Vector2D;
@@ -16,7 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
-public class AdvancedPlayController {
+public class AdvancedPlayController implements KeyPressed {
 
     final private int PANE_SIZE = 500;
     final private int RECT_SIZE = 25;
@@ -48,7 +49,7 @@ public class AdvancedPlayController {
             new Vector2D(PANE_SIZE / RECT_SIZE, PANE_SIZE / RECT_SIZE),
             gamePane
         );
-        statusLabel.setText("遊戲中");
+        statusLabel.setText(Status.PLAYING);
     }
 
     private void reset() {
@@ -91,6 +92,7 @@ public class AdvancedPlayController {
         return false;
     }
 
+    @Override
     public void keyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.SPACE) {
             reset();
@@ -133,11 +135,11 @@ public class AdvancedPlayController {
                 Vector2D newLocation = snake.getFirst().getLocation().add(direction.multiply(RECT_SIZE));
                 
                 if (bumpIntoBody(snake)
-                        || newLocation.getX() < 0 || newLocation.getX() > PANE_SIZE
-                        || newLocation.getY() < 0 || newLocation.getY() > PANE_SIZE) {
+                        || newLocation.getX() < 0 || newLocation.getX() >= PANE_SIZE
+                        || newLocation.getY() < 0 || newLocation.getY() >= PANE_SIZE) {
                     isPlayable = false;
                     isPlaying = false;
-                    statusLabel.setText("你死了");
+                    statusLabel.setText(Status.DIED);
                     timer.stop();
                     return;
                 }
@@ -150,11 +152,17 @@ public class AdvancedPlayController {
 
                 if (snake.getFirst().getLocation().equals(food.getLocation())) {
                     gamePane.getChildren().remove(food.getRectangle());
-                    food = new Food(
-                        new Rectangle(RECT_SIZE, RECT_SIZE),
-                        new Vector2D(PANE_SIZE / RECT_SIZE, PANE_SIZE / RECT_SIZE),
-                        gamePane
-                    );
+                    while (true) {
+                        food = new Food(
+                            new Rectangle(RECT_SIZE, RECT_SIZE),
+                            new Vector2D(PANE_SIZE / RECT_SIZE, PANE_SIZE / RECT_SIZE),
+                            gamePane
+                        );
+                        for (SnakeBody body : snake)
+                            if (food.getLocation().equals(body.getLocation()))
+                                continue;
+                        break;
+                    }
                 }
                 else {
                     gamePane.getChildren().remove(snake.getLast().getRectangle());

@@ -1,6 +1,6 @@
 package A11_110502557.application.Controllers;
 
-import A11_110502557.application.FXMLFiles;
+import A11_110502557.application.Constants.FXMLFiles;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

@@ -1,6 +1,7 @@
 package A11_110502557.application.Controllers;
 
-import A11_110502557.application.FXMLFiles;
+import A11_110502557.application.Constants.FXMLFiles;
+import A11_110502557.application.Constants.Status;
 import A11_110502557.application.Functions.Vector2D;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-public class SimplePlayController{
+public class SimplePlayController implements KeyPressed{
     
     @FXML private Label statusLabel = new Label();
     @FXML private Button returnButton;
@@ -64,7 +65,7 @@ public class SimplePlayController{
         lastDirection = new Vector2D(0, 0);
         headLocation = new Vector2D(0, 0);
         tailLocation = new Vector2D(0, 0);
-        statusLabel.setText("遊玩中");
+        statusLabel.setText(Status.PLAYING);
         for (int i = 0; i < gridPane.getColumnCount(); i ++) {
             for (int j = 0; j < gridPane.getRowCount(); j ++) {
                 gridsBackground[i][j].setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -74,6 +75,7 @@ public class SimplePlayController{
         gridsBackground[4][4].setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
+    @Override
     public void keyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.SPACE) reset();
         if (!isPlayable) return;
@@ -102,7 +104,7 @@ public class SimplePlayController{
         }
         if (headLocation.getX() < 0 || headLocation.getX() >= gridPane.getColumnCount()
                 || headLocation.getY() < 0 || headLocation.getY() >= gridPane.getRowCount()) {
-            statusLabel.setText("你死了");
+            statusLabel.setText(Status.DIED);
             isPlayable = false;
             return;
         }
@@ -117,7 +119,7 @@ public class SimplePlayController{
             new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY))
         );
         if (headLocation.equals(new Vector2D(4, 4))) {
-            statusLabel.setText("你贏了");
+            statusLabel.setText(Status.WINNED);
             isPlayable = false;
             return;
         }
