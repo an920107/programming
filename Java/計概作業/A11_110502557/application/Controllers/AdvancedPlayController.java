@@ -1,7 +1,11 @@
-package A11_110502557.application;
+package A11_110502557.application.Controllers;
 
 import java.util.LinkedList;
 
+import A11_110502557.application.FXMLFiles;
+import A11_110502557.application.Functions.Food;
+import A11_110502557.application.Functions.SnakeBody;
+import A11_110502557.application.Functions.Vector2D;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,5 +1,7 @@
-package A11_110502557.application;
+package A11_110502557.application.Controllers;
 
+import A11_110502557.application.FXMLFiles;
+import A11_110502557.application.Functions.Vector2D;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;

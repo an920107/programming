@@ -1,7 +1,8 @@
-package A11_110502557.application;
+package A11_110502557.application.Controllers;
 
 import java.io.IOException;
 
+import A11_110502557.application.FXMLFiles;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;

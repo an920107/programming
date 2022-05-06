@@ -1,4 +1,4 @@
-package A11_110502557.application;
+package A11_110502557.application.Functions;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;

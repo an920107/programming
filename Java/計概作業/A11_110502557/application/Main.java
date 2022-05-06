@@ -6,6 +6,7 @@
 
 package A11_110502557.application;
 
+import A11_110502557.application.Controllers.SceneController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
