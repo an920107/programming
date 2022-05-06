@@ -87,6 +87,7 @@
     "java.project.sourcePaths": [
         "Java\\計實作業",
         "Java\\計實考試",
-        "Java\\計概作業"
+        "Java\\計概作業",
+        "Java\\BoundingBall"
     ]
 }
