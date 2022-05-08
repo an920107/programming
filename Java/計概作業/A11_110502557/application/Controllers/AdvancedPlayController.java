@@ -31,6 +31,7 @@ public class AdvancedPlayController implements KeyPressed {
     private boolean isPlayable;
     
     @FXML private Label statusLabel = new Label();
+    @FXML private Label scoreLabel = new Label();
     @FXML private Button returnButton;
     @FXML private Pane gamePane;
     
@@ -50,6 +51,7 @@ public class AdvancedPlayController implements KeyPressed {
             gamePane
         );
         statusLabel.setText(Status.PLAYING);
+        scoreLabel.setText("");
     }
 
     private void reset() {
@@ -151,23 +153,30 @@ public class AdvancedPlayController implements KeyPressed {
                 ));
 
                 if (snake.getFirst().getLocation().equals(food.getLocation())) {
-                    gamePane.getChildren().remove(food.getRectangle());
-                    while (true) {
+                    boolean flag = true;
+                    while (flag) {
+                        gamePane.getChildren().remove(food.getRectangle());
                         food = new Food(
                             new Rectangle(RECT_SIZE, RECT_SIZE),
                             new Vector2D(PANE_SIZE / RECT_SIZE, PANE_SIZE / RECT_SIZE),
                             gamePane
                         );
-                        for (SnakeBody body : snake)
-                            if (food.getLocation().equals(body.getLocation()))
-                                continue;
-                        break;
+                        flag = false;
+                        for (SnakeBody body : snake) {
+                            if (food.getLocation().equals(body.getLocation())) {
+                                System.out.println("X");
+                                flag = true;
+                                break;
+                            }
+                        }
                     }
                 }
                 else {
                     gamePane.getChildren().remove(snake.getLast().getRectangle());
                     snake.removeLast();
                 }
+
+                scoreLabel.setText(Status.SCORE + snake.size());
                 
                 // System.out.println((double)(now - last) / PER_SEC);
                 last = now;

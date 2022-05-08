@@ -41,17 +41,26 @@
                   <Insets bottom="100.0" />
                </padding>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
                <padding>
                   <Insets top="100.0" />
                </padding>
                <children>
-                  <Label fx:id="statusLabel" text="遊戲中">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label text="上下左右/WASD：移動&#10;空白鍵：重置" textAlignment="CENTER" />
+                  <VBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Label fx:id="statusLabel" text="遊戲中" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="scoreLabel" focusTraversable="false" textAlignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Label focusTraversable="false" text="上下左右/WASD：移動&#10;空白鍵：重置" textAlignment="CENTER" />
                </children>
             </VBox>
          </children>
