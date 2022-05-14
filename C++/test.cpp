@@ -1,11 +1,9 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
 int main() {
-    int x = 3, y = 0;
-    int *ptr = &x;
-    printf("[%x] %x -> %d\n", &ptr, ptr, *ptr);
-    ptr = &y;
-    printf("[%x] %x -> %d\n", &ptr, ptr, *ptr);
+    for (int i = 0; i < 10; i ++) {
+        cout << i << "\n";
+    }
     return 0;
 }
