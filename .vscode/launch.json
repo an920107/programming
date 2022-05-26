@@ -58,7 +58,6 @@
                 }
             ],
             "preLaunchTask": "build - C++ (Linux)",
-            "console": "integratedTerminal"
         }
     ]
 }

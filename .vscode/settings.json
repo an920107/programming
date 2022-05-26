@@ -81,7 +81,9 @@
         "c:\\Compilers\\Java\\javafx-sdk-17.0.2\\lib\\javafx.media.jar",
         "c:\\Compilers\\Java\\javafx-sdk-17.0.2\\lib\\javafx.swing.jar",
         "c:\\Compilers\\Java\\javafx-sdk-17.0.2\\lib\\javafx.web.jar",
-        "c:\\Compilers\\Java\\javafx-sdk-17.0.2\\lib\\javafx-swt.jar"
+        "c:\\Compilers\\Java\\javafx-sdk-17.0.2\\lib\\javafx-swt.jar",
+        "c:\\Compilers\\Java\\classpath\\jsoup-1.15.1.jar",
+        "c:\\Compilers\\Java\\classpath\\jsoup-1.15.1-sources.jar"
     ],
     "java.project.outputPath": ".vscode\\classpath",
     "java.project.sourcePaths": [
