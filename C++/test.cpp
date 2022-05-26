@@ -1,9 +1,13 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
+    int *ptr;
     for (int i = 0; i < 10; i ++) {
-        cout << i << "\n";
+        *(ptr) = i;
     }
-    return 0;
+
+    for (int i = 0; i < 10; i ++) {
+        cout << ptr[i];
+    }
 }
