@@ -68,7 +68,7 @@ class TitleComparator implements Comparator<Title> {
             return -1;
         else if (o1.getDate().after(o2.getDate()))
             return 1;
-        else return 0;
+        else return o1.getText().compareTo(o2.getText());
     }
 }
 
