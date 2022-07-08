@@ -30,16 +30,18 @@ int main(int argc, char** argv) {
 }
 
 void createQ() {
-	Front = Rear = (Node *)malloc(sizeof(Node));
-    Front->next = Rear->next = NULL;
+	Front = new Node;
+    Rear = new Node;
+	Rear->next = Front;
+    Front->next = NULL;
 }
 
 void addQ(int item) {
-	Node *newnode = (Node *)malloc(sizeof(Node));
+	Node *newnode = new Node;
 	newnode->data = item;
     newnode->next = NULL;
-    Front->next = newnode;
-    Rear = newnode;
+    Rear->next->next = newnode;
+    Rear->next = newnode;
 }
 
 void deleteQ() {

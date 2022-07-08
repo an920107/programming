@@ -19,10 +19,10 @@ import javafx.scene.shape.Rectangle;
 
 public class AdvancedPlayController implements KeyPressed {
 
-    final private int PANE_SIZE = 500;
-    final private int RECT_SIZE = 25;
-    final private long PER_SEC = (long)1E9;
-    final private long COOL_TIME = (long)(0.25 * PER_SEC); // 1 sec
+    final private int PANE_SIZE = 600;
+    final private int RECT_SIZE = 60;
+    final private long PER_SEC = (long)1E6; // 0.001 sec
+    final private long COOL_TIME = (long)(200 * PER_SEC);
     
     private LinkedList<SnakeBody> snake = new LinkedList<>();
     private Vector2D direction;

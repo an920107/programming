@@ -67,7 +67,7 @@
       </GridPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Pane fx:id="gamePane" layoutX="380.0" layoutY="260.0" style="-fx-background-color: LightGray;" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="110.0" />
+            <Pane fx:id="gamePane" layoutX="380.0" layoutY="260.0" style="-fx-background-color: LightGray;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="60.0" />
          </children>
       </AnchorPane>
    </children>
