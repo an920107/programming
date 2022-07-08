@@ -28,7 +28,7 @@
             "cwd": "${workspaceFolder}",
             "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "C:/Compilers/MinGW/bin/gdb.exe",
+            "miDebuggerPath": "C:/Compilers/mingw64/bin/gdb.exe",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
@@ -58,7 +58,6 @@
                 }
             ],
             "preLaunchTask": "build - C++ (Linux)",
-            "console": "integratedTerminal"
         }
     ]
 }

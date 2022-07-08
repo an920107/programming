@@ -1,5 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <iostream>
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 struct node{
