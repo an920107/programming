@@ -2,23 +2,43 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "type": "cppbuild",
             "label": "build - C++ (Windows)",
-            "type": "shell",
             "command": "g++",
             "args": [
-                "-g", "${file}", "-o", "${workspaceFolder}\\.vscode\\a.exe"
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${workspaceFolder}\\.vscode\\a.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
             ],
             "group": {
                 "kind": "build",
-                "isDefault": true
+                "isDefault": false
             }
         },
         {
+            "type": "cppbuild",
             "label": "build - C++ (Linux)",
-            "type": "shell",
-            "command": "g++",
+            "command": "/usr/bin/g++",
             "args": [
-                "-g", "${file}", "-o", "${workspaceFolder}/.vscode/a.out"
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${workspaceFolder}/.vscode/a.out"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
             ],
             "group": {
                 "kind": "build",
