@@ -12,7 +12,7 @@ struct ListNode {
 class Solution {
 private:
 
-	void moveList(ListNode* list, ListNode* target) {
+	void moveList(ListNode*& list, ListNode*& target) {
 		target->val = list->val;
 		target->next = new ListNode();
 		target = target->next;
@@ -38,14 +38,36 @@ public:
 		while (list2 != nullptr) {
 			moveList(list2, cur);
 		}
-		cur = nullptr;
+		if (ans->next == nullptr)
+			return nullptr;
+		cur = ans;
+		while (true) {
+			if (cur->next->next == nullptr) {
+				cur->next = nullptr;
+				break;
+			}
+			cur = cur->next;
+		}
 		return ans;
     }
 };
 
 int main() {
 
+	ListNode* list1 = nullptr;
+	ListNode* list2 = nullptr;
+	// list1 = new ListNode(4, nullptr);
+	// list1 = new ListNode(2, list1);
+	// list1 = new ListNode(1, list1);
+	// list2 = new ListNode(3, nullptr);
+	// list2 = new ListNode(1, list2);
+	// list2 = new ListNode(1, list2);
 	Solution sol;
+	ListNode* ans = sol.mergeTwoLists(list1, list2);
+	while (ans != nullptr) {
+		cout << ans->val << endl;
+		ans = ans->next;
+	}
 	
 
 	return 0;
