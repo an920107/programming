@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class Client implements AutoCloseable {
 
-    final private int TIMEOUT = 500;
+    final private int TIMEOUT = 2000;
     
     private InputStreamReader inputStreamReader;
     private OutputStreamWriter outputStreamWriter;
@@ -33,6 +33,10 @@ public class Client implements AutoCloseable {
         bufferedWriter.write(message);
         bufferedWriter.newLine();
         bufferedWriter.flush();
+        return this.receive();
+    }
+
+    public String receive() throws Exception {
         String response = bufferedReader.readLine();
         System.out.println("[SERVER] " + response);
         return response;

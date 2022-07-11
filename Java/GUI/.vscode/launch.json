@@ -1,0 +1,22 @@
+{
+    // 使用 IntelliSense 以得知可用的屬性。
+    // 暫留以檢視現有屬性的描述。
+    // 如需詳細資訊，請瀏覽: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "vmArgs": "--module-path C:\\Compilers\\Java\\javafx-sdk-17.0.2\\lib --add-modules=javafx.controls,javafx.web,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "ncu_project.crypto_analysis_gui.MainController",
+            "vmArgs": "--module-path C:\\Compilers\\Java\\javafx-sdk-17.0.2\\lib --add-modules=javafx.controls,javafx.web,javafx.fxml"
+        }
+    ]
+}

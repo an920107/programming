@@ -1,8 +1,12 @@
 #include <iostream>
+using namespace std;
 
 int main() {
-    for (int i = 0; i < 10; i ++)  {
-        std::cout << "Hello " << i << std::endl;
-    }
+    
+    int numA = 2;
+    int numB = 1;
+
+    cout << (numA & numB) << endl;
+
     return 0;
 }

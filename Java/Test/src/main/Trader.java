@@ -9,19 +9,19 @@ public class Trader {
     private String name;
     private double profit;
     private File photo;
-    private ArrayList<TradingData> data;
+    private ArrayList<String> pairs;
 
-    public Trader(long id, String name, double profit, File photo, ArrayList<TradingData> data) {
+    public Trader(long id, String name, double profit, File photo) {
         this.id = id;
         this.name = name;
         this.profit = profit;
         this.photo = photo;
-        this.data = data;
+        this.pairs = new ArrayList<>();
     }
 
     public long getID() { return id; }
     public String getName() { return name; }
     public double getProfit() { return profit; }
     public File getPhoto() { return photo; }
-    public ArrayList<TradingData> getData() { return data; }
+    public ArrayList<String> getPairs() { return pairs; }
 }

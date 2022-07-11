@@ -1,0 +1,1 @@
+java --module-path C:\Compilers\Java\javafx-sdk-17.0.2\lib --add-modules=javafx.controls,javafx.fxml,javafx.web -jar .\GUI.jar

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="MainFrame" prefHeight="578.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ncu_project.crypto_analysis_gui.MenuController">
+   <children>
+      <AnchorPane layoutX="51.0" layoutY="95.0" prefHeight="471.0" prefWidth="497.0" style="-fx-background-color: #303030; -fx-background-radius: 20;">
+         <children>
+            <ScrollPane layoutX="21.0" layoutY="39.0" prefHeight="434.0" prefWidth="468.0" style="-fx-background-color: #303030; -fx-border-color: #303030;" stylesheets="@ScrollPane.css">
+               <content>
+                  <ListView fx:id="traders" editable="true" fixedCellSize="60.0" prefHeight="480.0" prefWidth="449.0" style="-fx-background-color: #303030; -fx-border-color: #303030;" stylesheets="@MenuListview.css">
+                     <opaqueInsets>
+                        <Insets bottom="5.0" />
+                     </opaqueInsets></ListView>
+               </content>
+            </ScrollPane>
+            <Label fx:id="l_name" alignment="CENTER" layoutX="149.0" layoutY="14.0" opacity="0.5" prefHeight="21.0" prefWidth="45.0" text="名稱" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="l_pnl" alignment="CENTER" layoutX="270.0" layoutY="14.0" opacity="0.5" prefHeight="21.0" prefWidth="67.0" text="收益率" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+      <Button fx:id="current" layoutX="159.0" layoutY="61.0" mnemonicParsing="false" onAction="#setCurrent" stylesheets="@MenuButton.css" text="當前最佳">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Button fx:id="history" layoutX="358.0" layoutY="61.0" mnemonicParsing="false" onAction="#setHistory" opacity="0.5" stylesheets="@MenuButton.css" text="歷史上榜">
+         <font>
+            <Font size="16.0" />
+         </font></Button>
+      <Line fx:id="current_line" endX="-36.5" fill="WHITE" layoutX="270.0" layoutY="90.0" startX="-100.0" stroke="#317a81" strokeWidth="3.0" />
+      <Line fx:id="history_line" endX="-36.5" layoutX="469.0" layoutY="90.0" startX="-100.0" stroke="#317a81" strokeWidth="3.0" visible="false" />
+      <TextField fx:id="search_bar" focusTraversable="false" layoutX="206.0" layoutY="24.0" onAction="#getSearchName" prefHeight="24.0" prefWidth="193.0" promptText="搜尋交易員" stylesheets="@serchbar.css" />
+      <Rectangle fx:id="block" arcHeight="5.0" arcWidth="5.0" height="578.0" layoutX="2.0" layoutY="-2.0" opacity="0.55" stroke="BLACK" strokeType="INSIDE" visible="false" width="601.0" />
+      <AnchorPane fx:id="settingpane" layoutX="13.0" layoutY="5.0" prefHeight="564.0" prefWidth="257.0" styleClass="pane" stylesheets="@MenuSettingPane.css" visible="false">
+         <children>
+            <Label fx:id="l_aboutus_info" alignment="TOP_CENTER" layoutX="38.0" layoutY="103.0" prefHeight="88.0" prefWidth="184.0" style="-fx-text-fill: white;" text="info" />
+            <ChoiceBox fx:id="language" layoutX="53.0" layoutY="251.0" onAction="#changeLanguage" prefWidth="150.0" />
+            <Label fx:id="l_language" alignment="CENTER" layoutX="57.0" layoutY="207.0" prefHeight="38.0" prefWidth="141.0" text="語言">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="l_theme" alignment="CENTER" layoutX="59.0" layoutY="292.0" prefHeight="38.0" prefWidth="141.0" text="主題">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="theme" layoutX="55.0" layoutY="337.0" prefWidth="150.0" />
+            <Label fx:id="aboutus" layoutX="73.0" layoutY="58.0" text="關於我們">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="l_chart_doc" alignment="CENTER" layoutX="59.0" layoutY="381.0" prefHeight="16.0" prefWidth="141.0" text="圖表文件">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="l_chart_info" alignment="TOP_CENTER" layoutX="38.0" layoutY="426.0" prefHeight="88.0" prefWidth="184.0" text="tips" textFill="WHITE" />
+         </children></AnchorPane>
+      <Button fx:id="settingbutton" layoutX="28.0" layoutY="17.0" mnemonicParsing="false" onAction="#setting_list" style="-fx-background-color: #317a81;" text="三" textFill="WHITE">
+         <font>
+            <Font name="System Bold Italic" size="19.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
