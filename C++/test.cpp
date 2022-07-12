@@ -1,9 +1,10 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cmath>
 using namespace std;
 
 int main() {
-	int a;
-	cout << " Hi ! " << endl;
-	cin >> a; 
-	return 0;
+
+	cout << acos(0) * 2;
+    
+    return 0;
 }
