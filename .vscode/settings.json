@@ -70,7 +70,8 @@
         "thread": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "variant": "cpp"
     },
     // "java.jdt.ls.java.home": "C:\\Compilers\\Java\\jdk-17.0.2",
     "java.project.referencedLibraries": [
