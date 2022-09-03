@@ -26,7 +26,7 @@
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
-            "externalConsole": true,
+            "externalConsole": false,
             "MIMode": "gdb",
             "miDebuggerPath": "C:/Compilers/mingw64/bin/gdb.exe",
             "setupCommands": [
