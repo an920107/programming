@@ -10,11 +10,19 @@ struct ListNode {
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        
+        if (head == NULL) return false;
+        ListNode* fast = head;
+        ListNode* slow = head;
+        while (fast->next != NULL) {
+            slow = slow->next;
+            fast = fast->next;
+            if (fast->next == NULL) break;
+            fast = fast->next;
+            if (fast == slow) return true;
+        }
+        return false;
     }
 };
 
-
-int main() {
-    
-}
+// fast 一次兩步；slow 一次一步。
+// 若會相遇表示有循環
