@@ -1,38 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void solve(int t) {
+void solve(const int &t) {
 
-    set<string> st;
-    vector<set<char>> vec;
-    set<char> st_i, st_o;
+    map<char, int> mp;
     string str;
-    bool flag;
-    
-    vec.clear();
+    int index = 0;
+
+    getline(cin, str);
+    mp.insert(make_pair(str[0], index ++));
     while (getline(cin, str)) {
         if (str == "") break;
-        st.insert(str);
-    }
-    for (auto &s : st) {
-        st_i.clear();
-        flag = false;
-        for (auto &ch : s)
-            st_i.insert(ch);
-        for (auto &elm : vec) {
-            st_o.clear();
-            set_intersection(st_i.begin(), st_i.end(), elm.begin(), elm.end(), inserter(st_o, st_o.begin()));
-            if (!st_o.empty()) {
-                for (auto &ch : st_i)
-                    elm.insert(ch);
-                flag = true;
-                break;
+        for (auto &ch : str) {
+            if (mp.find(ch) == mp.end()) {
+                mp.insert(make_pair(ch, index ++));
             }
+            else 
         }
-        if (!flag)
-            vec.emplace_back(st_i);
     }
-    cout << vec.size() << "\n\n";
+
+}
+
+void dfs(int &n, int r, int l) {
 
 }
 
