@@ -7,8 +7,6 @@ void dfs(int start, int range, vector<int> graph[26], bool visited[26]) {
     auto iter = graph[start].begin();
     auto iterEnd = graph[start].end();
 
-    if (start > range) return;
-
     while (true) {
         if (!visited[*iter])
             dfs(*iter, range, graph, visited);
