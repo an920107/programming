@@ -1,28 +1,47 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+void dfs(int start, int range, vector<int> graph[26], bool visited[26]) {
+
+    visited[start] = true;
+    auto iter = graph[start].begin();
+    auto iterEnd = graph[start].end();
+
+    if (start > range) return;
+
+    while (true) {
+        if (!visited[*iter])
+            dfs(*iter, range, graph, visited);
+        if ((++ iter) == iterEnd)
+            break;
+    }
+}
+
 void solve(const int &t) {
 
-    map<char, int> mp;
     string str;
-    int index = 0;
+    vector<int> graph[26];
+    int result = 0;
+    bool visited[26]{false};
 
     getline(cin, str);
-    mp.insert(make_pair(str[0], index ++));
+    int maxChar = str[0] - 'A';
+    for (int i = 0; i <= maxChar; i ++)
+        graph[i].emplace_back(i);
     while (getline(cin, str)) {
         if (str == "") break;
-        for (auto &ch : str) {
-            if (mp.find(ch) == mp.end()) {
-                mp.insert(make_pair(ch, index ++));
-            }
-            else 
+        pair<int, int> pr{str[0] - 'A', str[1] - 'A'};
+        graph[pr.first].emplace_back(pr.second);
+        graph[pr.second].emplace_back(pr.first);
+    }
+    for (int i = 0; i <= maxChar; i ++) {
+        if (!visited[i]) {
+            result ++;
+            dfs(i, maxChar, graph, visited);
         }
     }
 
-}
-
-void dfs(int &n, int r, int l) {
-
+    cout << result << (t > 0 ? "\n\n" : "\n");
 }
 
 int main() {
