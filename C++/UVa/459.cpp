@@ -1,41 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void dfs(int start, int range, vector<int> graph[26], bool visited[26]) {
+vector<int> graph[26];
+bool visited[26];
+
+void dfs(const int &start) {
 
     visited[start] = true;
-    auto iter = graph[start].begin();
-    auto iterEnd = graph[start].end();
-
-    while (true) {
-        if (!visited[*iter])
-            dfs(*iter, range, graph, visited);
-        if ((++ iter) == iterEnd)
-            break;
-    }
+    for (int point : graph[start])
+        if (!visited[point])
+            dfs(point);
 }
 
 void solve(const int &t) {
 
     string str;
-    vector<int> graph[26];
     int result = 0;
-    bool visited[26]{false};
 
     getline(cin, str);
     int maxChar = str[0] - 'A';
-    for (int i = 0; i <= maxChar; i ++)
-        graph[i].emplace_back(i);
     while (getline(cin, str)) {
         if (str == "") break;
-        pair<int, int> pr{str[0] - 'A', str[1] - 'A'};
-        graph[pr.first].emplace_back(pr.second);
-        graph[pr.second].emplace_back(pr.first);
+        const int u = str[0] - 'A', v = str[1] - 'A';
+        graph[u].emplace_back(v);
+        graph[v].emplace_back(u);
     }
     for (int i = 0; i <= maxChar; i ++) {
         if (!visited[i]) {
             result ++;
-            dfs(i, maxChar, graph, visited);
+            dfs(i);
         }
     }
 
