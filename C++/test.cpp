@@ -18,7 +18,5 @@ int main() {
         cout << *iter << endl;
     }
 
-
-
     return 0;
 }
