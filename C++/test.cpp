@@ -2,21 +2,13 @@
 using namespace std;
 
 int main() {
-    
-    vector<int> vec;
-    vec.emplace_back(0);
-    vec.emplace_back(1);
-    vec.emplace_back(2);
-    vec.emplace_back(3);
-
-    auto iter = vec.begin();
-    auto iterEnd = vec.end();
-
-    while (true) {
-
-        if ((++iter) == iterEnd) break;
-        cout << *iter << endl;
+    srand(time(NULL));
+    vector<int> vec{1, 4, 3};
+    while (!vec.empty()) {
+        int rnd = rand() % vec.size();
+        cout << vec[rnd] << '\n';
+        vec.erase(vec.begin() + rnd);
     }
-
+    
     return 0;
 }
