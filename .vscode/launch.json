@@ -58,6 +58,14 @@
                 }
             ],
             "preLaunchTask": "build - C++ (Linux)",
+        },
+        {
+            "name": "Assembly32",
+            "type": "gdb",
+            "request": "launch",
+            "program": "${workspaceFolder}/.vscode/a.out",
+            "stopOnEntry": false,
+            "preLaunchTask": "ASM32"
         }
     ]
 }
