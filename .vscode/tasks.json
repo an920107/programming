@@ -44,6 +44,22 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "type": "shell",
+            "label": "ASM32",
+            "command": "vscodeFolder=${workspaceFolder}/.vscode; nasm -F dwarf -g -f elf32 -i ${fileDirname} -o $vscodeFolder/a.o ${file}; ld -m elf_i386 -o $vscodeFolder/a.so $vscodeFolder/a.o;",
+            "problemMatcher": {
+                "pattern": {
+                  "regexp": "error"
+                }
+              },
+            "presentation": {
+                "focus": true,
+                "panel": "dedicated",
+                "reveal": "silent",
+                "clear": true
+            }
         }
     ]
 }
