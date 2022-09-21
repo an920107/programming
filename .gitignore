@@ -1,6 +1,7 @@
 *.exe
 *.out
 *.o
+*.so
 *.class
 *.dll
 .vscode/c_cpp_properties.json

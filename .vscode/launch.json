@@ -63,7 +63,7 @@
             "name": "Assembly32",
             "type": "gdb",
             "request": "launch",
-            "program": "${workspaceFolder}/.vscode/a.out",
+            "program": "${workspaceFolder}/.vscode/a.so",
             "stopOnEntry": false,
             "preLaunchTask": "ASM32"
         }
