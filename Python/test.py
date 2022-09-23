@@ -1,9 +1,7 @@
-#%%
+score = int(input())
 
-dct = dict()
-
-# %%
-
-print(int(float("1.2")))
-
-# %%
+if score < 60:
+    print("failed")
+else:
+    print("pass")
+    
