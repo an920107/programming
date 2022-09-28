@@ -7,14 +7,14 @@ def randfloat() -> float:
 
 def solve(score:float) -> str:
     score = round(score)
-    if score > 90: return "A+"
-    if score > 85: return "A"
-    if score > 80: return "A-"
-    if score > 77: return "B+"
-    if score > 70: return "B-"
-    if score > 67: return "C+"
-    if score > 63: return "C"
-    if score > 60: return "C-"
+    if score >= 90: return "A+"
+    if score >= 85: return "A"
+    if score >= 80: return "A-"
+    if score >= 77: return "B+"
+    if score >= 70: return "B-"
+    if score >= 67: return "C+"
+    if score >= 63: return "C"
+    if score >= 60: return "C-"
     return "F"
 
 for f in range(1, 41):
