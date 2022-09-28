@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int price[24];
-
 typedef struct time {
     int month, day, hour, minute;
     time() {}
@@ -13,11 +11,10 @@ typedef struct time {
         ss >> month >> tmp >> day >> tmp >> hour >> tmp >> minute;
     }
     friend bool operator<(const time &x, const time &y) {
-        if (x.month < y.month) return true;
-        if (x.day < y.day) return true;
-        if (x.hour < y.hour) return true;
-        if (x.minute < y.minute) return true;
-        return false;
+        if (x.month != y.month) return x.month < y.month;
+        if (x.day != y.day) return x.day < y.day;
+        if (x.hour != y.hour) return x.hour < y.hour;
+        return x.minute < y.minute;
     }
 } Time;
 
@@ -40,17 +37,16 @@ typedef struct record {
 } Record;
 
 auto recordCmp = [](const Record &x, const Record &y) {
-    if (x.license < y.license) return true;
-    if (x.time < y.time) return true;
-    return false;
+    if (x.license == y.license) return x.time < y.time;
+    return x.license < y.license;
 };
 
-void solve() {
+void solve(const int &t) {
+    int price[24];
     string line;
     stringstream ss;
     vector<Record> data;
     map<string, int> result;
-    getline(cin, line);
     getline(cin, line);
     ss << line;
     for (int i = 0; i < 24; i ++)
@@ -62,13 +58,11 @@ void solve() {
     sort(data.begin(), data.end(), recordCmp);
     for (auto iter = data.begin(); iter != data.end(); ++ iter) {
         auto last = iter ++;
-        if (last == data.end()) break;
-        if ((*iter).license != (*last).license) {
+        if (iter == data.end()) break;
+        if ((*last).license != (*iter).license || (*last).inOut >= (*iter).inOut) {
             -- iter;
             continue;
         }
-        if ((*iter).inOut == (*last).inOut)
-            continue;
         auto fd = result.find((*iter).license);
         int cost = price[(*last).time.hour] * abs((*iter).loc - (*last).loc) + 100;
         if (fd == result.end())
@@ -76,15 +70,22 @@ void solve() {
         else (*fd).second += cost;
     }
     for (auto &p : result)
-        cout << p.first << " $" << p.second / 100 << '.' << p.second % 100 << '\n';
-    cout << '\n';
+        cout << p.first << " $" << p.second / 100 << '.'
+            << setw(2) << setfill('0') << p.second % 100 << '\n';
+    if (t) cout << '\n';
 }
 
 int main() {
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+
     int t;
+    string tmp;
     cin >> t;
-    cin.ignore();
+    getline(cin, tmp);
+    getline(cin, tmp);
     while (t --)
-        solve();
+        solve(t);
     return 0;
 }
