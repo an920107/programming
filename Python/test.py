@@ -1,9 +1,10 @@
 #%%
 
-dct = dict()
+import math
 
-# %%
+math.radians(90)
+math.sin(math.radians(90))
 
-print(int(float("1.2")))
+
 
 # %%
