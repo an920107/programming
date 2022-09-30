@@ -15,7 +15,7 @@
 #define 偽 false
 #define 戻る return
 #define 使う using
-#define 終わる ;
+#define っ ;
 #define と ,
 #define は =
 #define 足す +
@@ -58,13 +58,13 @@
 #define 自動タイプ auto
 
 #include <bits/stdc++.h> 
-使う namespace std 終わる 
+使う namespace std っ
  
 整数 main ( ) から 
-    整数 n 終わる 
-    入力 右に動く n 終わる 
+    整数 n っ
+    入力 右に動く n っ
     繰り返す ( n 減る ) 
-        出力 左に動く '*' 終わる 
-    出力 左に動く '\n' 終わる 
-    戻る 0 終わる 
+        出力 左に動く '*' っ
+    出力 左に動く '\n' っ
+    戻る 0 っ
 まで 
