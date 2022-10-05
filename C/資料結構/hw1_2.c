@@ -18,10 +18,6 @@ stack *s_pop(stack *s) {
     return new_s;
 }
 
-queue *q_push(queue *q, char c) {
-    
-}
-
 int priority(char c) {
     switch (c) {
         case '*':
@@ -39,8 +35,6 @@ int main() {
     stack *stk = (stack*)malloc(sizeof(stack));
     stk->next = NULL;
     stk->data = '\0';
-
-    queue *que = (queue*)malloc(sizeof(queue));
     
 
     char input;
