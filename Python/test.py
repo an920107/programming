@@ -1,29 +1,22 @@
-import string
+def solve(s: str, n: int, u: int, l: int) -> str:
+    new_s = ""
+    for ch in s:
+        ch_ord = ord(ch)
+        if 48 <= ch_ord <= 57:
+            ch_ord += n
+            if ch_ord < 48: ch_ord += 10
+            elif ch_ord > 57: ch_ord -= 10
+        elif 65 <= ch_ord <= 90:
+            ch_ord += u
+            if ch_ord < 65: ch_ord += 26
+            elif ch_ord > 90: ch_ord -= 26
+        elif 97 <= ch_ord <= 122:
+            ch_ord += l
+            if ch_ord < 97: ch_ord += 26
+            elif ch_ord > 122: ch_ord -= 26
+        new_s += chr(ch_ord)
+    return new_s
 
-def strip_n(s : str) -> str:
-    return s.strip("\n")
-
-emoji_list = map(strip_n, open("emoji_list.txt", "r"))
-
-context = open("in.cpp", "r").readlines()
-file_out = open("out.cpp", "w")
-
-ALPHAS = string.ascii_letters + string.digits + "_\"\'\\"
-SPECIAL = "()[]}{"
-for line in context:
-    if line[0] == "#":
-        file_out.write(line)
-        continue
-    ch_type = 0
-    for ch in line:
-        if ch == " " or ch == "\t" or ch == "\n":
-            ch_type = 0
-        elif ch in ALPHAS:
-            if ch_type == 2:
-                file_out.write(" ")
-            ch_type = 1
-        else:
-            if ch_type == 1:
-                file_out.write(" ")
-            ch_type = 2
-        file_out.write(ch)
+s = input()
+lst = list(map(int, input().split(" ")))
+print(solve(s, lst[0], lst[1], lst[2]))
