@@ -1,9 +1,11 @@
 *.exe
+*.in
 *.out
 *.o
 *.so
 *.class
 *.dll
+*.ts
 .vscode/c_cpp_properties.json
 .vscode/c_cpp_properties.json.disable
 .vscode/classpath
@@ -13,3 +15,4 @@ Java/Tetris
 Other/MarkdownBlog
 Python/TensorFlow/venv
 Pyhton/AniGamerDownloader
+Python/AniGamer
