@@ -2,30 +2,40 @@ from random import randint
 
 DIR = "OJ/tmp/"
 
-def randfloat() -> float:
-    return randint(0, 1000000) / 10000
+class problem:
+    n: int
+    s: str
+    def __init__(self, n: int, s: str) -> None:
+        self.n = n
+        self.s = s
 
-def solve(score:list, credit:list) -> tuple:
-    sum = 0
-    weigh_sum = 0
-    credit_sum = 0
-    for (s, c) in zip(score, credit):
-        sum += s
-        weigh_sum += s * c
-        credit_sum += c
-    return (round(sum / len(score), 1), round(weigh_sum / credit_sum, 1))
+def solve(n: int, s: str) -> str:
+    if (len(s) <= n):
+        return s
+    return s[:2] + str(len(s) - 3) + s[-1]
 
-for f in range(1, 24):
-    score = []
-    credit = []
-    for i in range(5):
-        score.append(randint(0, 100) if f < 15 else randfloat())
-    for i in range(5):
-        credit.append(randint(1, 20))
-    open(DIR + str(f) + ".in", "w").write("\n".join(map(str, score + credit)))
-    open(DIR + str(f) + ".out", "w").write("\n".join(map(str, solve(score, credit))))
+def gen_str(length: int) -> str:
+    s = ""
+    for _ in range(length):
+        s += chr(randint(65, 90))
+    return s
 
-open(DIR + "24.in", "w").write("\n".join(map(str, (100, 100, 100, 100, 100, 1, 1, 1, 1, 1))))
-open(DIR + "24.out", "w").write("\n".join(map(str, (100.0, 100.0))))
-open(DIR + "25.in", "w").write("\n".join(map(str, (0, 0, 0, 0, 0, 1, 1, 1, 1, 1))))
-open(DIR + "25.out", "w").write("\n".join(map(str, (0.0, 0.0))))
+def gen_problem() -> problem:
+    length = randint(1, 100)
+    n = randint(5, 100)
+    s = gen_str(length)
+    return problem(n, s)
+
+for i in range(1, 23):
+    p = gen_problem()
+    open(DIR + str(i) + ".in", "w").write(str(p.n) + "\n" + p.s)
+    open(DIR + str(i) + ".out", "w").write(solve(p.n, p.s))
+
+open(DIR + "23.in", "w").write("5\n" + "A" * 100)
+open(DIR + "23.out", "w").write("AA97A")
+
+open(DIR + "24.in", "w").write("5\nA")
+open(DIR + "24.out", "w").write("A")
+
+open(DIR + "25.in", "w").write("5\nAAAAA")
+open(DIR + "25.out", "w").write("AAAAA")
