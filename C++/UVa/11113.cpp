@@ -78,21 +78,36 @@ void solve(int128 &p, int128 &q) {
     //     cout << str << '\n';
     // }
 
-    vector<int> len_prefix;
+    vector<int> len_pre;
     vector<string> vec_str;
-    len_prefix.emplace_back(0);
-    for (auto &num : vec) {
+    len_pre.emplace_back(0);
+    for (auto &num : vec)
         vec_str.emplace_back(intToStr(num));
-        len_prefix.emplace_back(vec_str.back().length() + len_prefix.back());
-    }
-    reverse(len_prefix.begin(), len_prefix.end());
+    reverse(vec_str.begin(), vec_str.end());
+    for (auto &str : vec_str)
+        len_pre.emplace_back(str.length() + len_pre.back());
+    reverse(vec_str.begin(), vec_str.end());
+    reverse(len_pre.begin(), len_pre.end());
+    int width = len_pre[0] + 1 + vec_str.size() * 3;
     for (int i = 0; i < vec_str.size(); i ++) {
-        int128 
-        for (int128 k = 0; k < ; k ++)
+        int line_width = len_pre[i + 1] + 1 + (vec_str.size() - i - 1) * 3;
+        int back_width = line_width / 2;
+        for (int k = 0; k < width - back_width - 1; k ++)
             cout << '.';
         cout << '1';
-
+        for (int k = 0; k < back_width; k ++)
+            cout << '.';
+        cout << '\n';
+        for (int k = 0; k < width - line_width - 3 - (len_pre[i] - len_pre[i + 1]); k ++)
+            cout << '.';
+        cout << vec_str[i] << ".+.";
+        for (int k = 0; k < line_width; k ++)
+            cout << '-';
+        cout << '\n';
     }
+    for (int k = 0; k < width - 1; k ++)
+        cout << '.';
+    cout << "1\n";
 }
 
 int128 readInt128() {
