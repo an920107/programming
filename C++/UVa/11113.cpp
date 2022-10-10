@@ -24,6 +24,7 @@ public:
 int128 readInt128();
 void printInt128(const int128&);
 string intToStrAndReverse(int128);
+string intToStr(int128);
 void solve(int128&, int128&);
 
 int main() {
@@ -52,28 +53,45 @@ void solve(int128 &p, int128 &q) {
         frac.reciprocal();
     }
     vec.emplace_back(frac.getNumerator() - 1);
-    vector<string> result;
-    result.emplace_back("1");
-    reverse(vec.begin(), vec.end());
-    for (int i = 0; i < vec.size(); i ++) {
-        result.emplace_back("-");
-        while (result.back().length() < result[0].length())
-            result.back() += '-';
-        result.back() += ".+." + intToStrAndReverse(vec[i]);
-        result.emplace_back("");
-        for (int j = result[0].length() / 2; j > 0; j --)
-            result.back() += '.';
-        result.back() += '1';
-        for (int j = 0; j < i * 2 + 1; j ++)
-            while (result[j].length() < result[i * 2 + 1].length())
-                result[j] += '.';
+
+    // vector<string> result;
+    // result.emplace_back("1");
+    // reverse(vec.begin(), vec.end());
+    // for (int i = 0; i < vec.size(); i ++) {
+    //     result.emplace_back("-");
+    //     while (result.back().length() < result[0].length())
+    //         result.back() += '-';
+    //     result.back() += ".+." + intToStrAndReverse(vec[i]);
+    //     result.emplace_back("");
+    //     for (int j = result[0].length() / 2; j > 0; j --)
+    //         result.back() += '.';
+    //     result.back() += '1';
+    //     for (int j = 0; j < i * 2 + 1; j ++)
+    //         while (result[j].length() < result[i * 2 + 1].length())
+    //             result[j] += '.';
+    // }
+    // while (result.back().length() < result[0].length())
+    //     result.back() += '.';
+    // reverse(result.begin(), result.end());
+    // for (auto &str : result) {
+    //     reverse(str.begin(), str.end());
+    //     cout << str << '\n';
+    // }
+
+    vector<int> len_prefix;
+    vector<string> vec_str;
+    len_prefix.emplace_back(0);
+    for (auto &num : vec) {
+        vec_str.emplace_back(intToStr(num));
+        len_prefix.emplace_back(vec_str.back().length() + len_prefix.back());
     }
-    while (result.back().length() < result[0].length())
-        result.back() += '.';
-    reverse(result.begin(), result.end());
-    for (auto &str : result) {
-        reverse(str.begin(), str.end());
-        cout << str << '\n';
+    reverse(len_prefix.begin(), len_prefix.end());
+    for (int i = 0; i < vec_str.size(); i ++) {
+        int128 
+        for (int128 k = 0; k < ; k ++)
+            cout << '.';
+        cout << '1';
+
     }
 }
 
@@ -100,6 +118,12 @@ string intToStrAndReverse(int128 num) {
         str += (char)(num % 10 + '0');
         num /= 10;
     }
+    return str;
+}
+
+string intToStr(int128 num) {
+    string str = intToStrAndReverse(num);
+    reverse(str.begin(), str.end());
     return str;
 }
 
