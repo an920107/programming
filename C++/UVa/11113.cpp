@@ -78,12 +78,7 @@ void solve(int128 &p, int128 &q) {
     //     cout << str << '\n';
     // }
 
-<<<<<<< HEAD
-    vec.emplace_back(1);
-    vector<int> len_prefix;
-=======
     vector<int> len_pre;
->>>>>>> 3f5a18db6e055107ec85a99c9c31f4b587325bad
     vector<string> vec_str;
     len_pre.emplace_back(0);
     for (auto &num : vec)
@@ -95,14 +90,9 @@ void solve(int128 &p, int128 &q) {
     reverse(len_pre.begin(), len_pre.end());
     int width = len_pre[0] + 1 + vec_str.size() * 3;
     for (int i = 0; i < vec_str.size(); i ++) {
-<<<<<<< HEAD
-        int128 len = 
-        for (int128 k = 0; k < ; k ++)
-=======
         int line_width = len_pre[i + 1] + 1 + (vec_str.size() - i - 1) * 3;
         int back_width = line_width / 2;
         for (int k = 0; k < width - back_width - 1; k ++)
->>>>>>> 3f5a18db6e055107ec85a99c9c31f4b587325bad
             cout << '.';
         cout << '1';
         for (int k = 0; k < back_width; k ++)
