@@ -78,6 +78,7 @@ void solve(int128 &p, int128 &q) {
     //     cout << str << '\n';
     // }
 
+    vec.emplace_back(1);
     vector<int> len_prefix;
     vector<string> vec_str;
     len_prefix.emplace_back(0);
@@ -87,7 +88,7 @@ void solve(int128 &p, int128 &q) {
     }
     reverse(len_prefix.begin(), len_prefix.end());
     for (int i = 0; i < vec_str.size(); i ++) {
-        int128 
+        int128 len = 
         for (int128 k = 0; k < ; k ++)
             cout << '.';
         cout << '1';
