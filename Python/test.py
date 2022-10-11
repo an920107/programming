@@ -1,8 +1,9 @@
-def foo(x, y, t):
-    if x > 1E20:
-        return
-    print("%2d: %-20d" % (t, x))
-    foo(y, x + y, t + 1)
+st = set()
+st.add(3)
+st.add(1)
+st.add(5)
+st.add(-2)
+st.add(0)
 
-foo(1, 1, 1)
-
+for elm in st:
+    print(elm)
