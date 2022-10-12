@@ -1,42 +1,76 @@
 from random import randint
-import string
 
 DIR = "OJ/tmp/"
-CH_COLLECTION = string.ascii_letters + string.digits + " "
 
-def solve(s: str, n: int, u: int, l: int) -> str:
-    new_s = ""
-    for ch in s:
-        ch_ord = ord(ch)
-        if 48 <= ch_ord <= 57:
-            ch_ord += n
-            if ch_ord < 48: ch_ord += 10
-            elif ch_ord > 57: ch_ord -= 10
-        elif 65 <= ch_ord <= 90:
-            ch_ord += u
-            if ch_ord < 65: ch_ord += 26
-            elif ch_ord > 90: ch_ord -= 26
-        elif 97 <= ch_ord <= 122:
-            ch_ord += l
-            if ch_ord < 97: ch_ord += 26
-            elif ch_ord > 122: ch_ord -= 26
-        new_s += chr(ch_ord)
-    return new_s
+def solve(l: list) -> list:
+    s = str(l[0])
+    result = []
+    dic = {}
+    lst = s.split(" ")
+    for elm in lst:
+        elm = elm.strip(".")
+        elm = elm.strip(",")
+        elm = elm.lower()
+        if elm in dic.keys():
+            dic[elm] += 1
+        else:
+            dic[elm] = 1
+    for elm in l[2:]:
+        if elm not in dic.keys():
+            result.append("0")
+        else:
+            result.append(str(dic[elm]))
+    return result
+
+def chance(percent: int) -> bool:
+    if percent >= 100: return True
+    if percent <= 0: return False
+    chance_list = [True for _ in range(percent)] + [False for _ in range(100 - percent)]
+    return chance_list[randint(0, 99)]
 
 def gen_str() -> str:
-    length = randint(1, 10000)
     s = ""
-    for _ in range(length):
-        s += CH_COLLECTION[randint(0, len(CH_COLLECTION) - 1)]
+    for _ in range(randint(1, 10)):
+        s += chr(randint(97, 122))
     return s
 
-for i in range(1, 50):
-    s = gen_str()
-    n = randint(-10, 10)
-    u = randint(-26, 26)
-    l = randint(-26, 26)
-    open(DIR + str(i) + ".in", "w").write("%s\n%d %d %d" % (s, n, u, l))
-    open(DIR + str(i) + ".out", "w").write(solve(s, n, u, l))
+def gen() -> list:
+    str_list = list({chr(randint(97, 122)) for _ in range(randint(1, 20))})
+    for n in range(randint(1, len(str_list) ** 2)):
+        new_str = ""
+        n += 1
+        i = 0
+        while n > 0:
+            if n % 2 == 1:
+                new_str += str_list[i]
+            n //= 2
+            i += 1
+        if new_str not in str_list:
+            str_list.append(new_str)
+    output_list = []
+    total_len = 0
+    while total_len < 900:
+        new_str = str_list[randint(0, len(str_list) - 1)] + ("," if chance(10) else ("." if chance(10) else ""))
+        output_list.append(new_str)
+        total_len += len(new_str) + 1
+    result = ""
+    for ch in " ".join(output_list):
+        if 97 <= ord(ch) <= 122 and chance(10):
+            result += chr(ord(ch) - 32)
+        else:
+            result += ch
+    result = [result + " " + str_list[randint(0, len(str_list) - 1)] + "."]
+    for _ in range(randint(1, 20)):
+        result.append(str_list[randint(0, len(str_list) - 1)] if chance(70) else gen_str())
+    return result
 
-open(DIR + "50.in", "w").write(" \n0 0 0")
-open(DIR + "50.out", "w").write(" ")
+for i in range(1, 50):
+    lst = gen()
+    lst.insert(1, str(len(lst) - 1))
+    open(DIR + str(i) + ".in", "w").write("\n".join(lst))
+    open(DIR + str(i) + ".out", "w").write("\n".join(solve(lst)))
+
+# lst = [input(), int(input())]
+# for _ in range(lst[1]):
+#     lst.append(input())
+# print("\n".join(solve(lst)))

@@ -34,12 +34,13 @@ void push(queue *que, queue_T val) {
 
 bool pop(queue *que) {
     if (empty(que)) return false;
-    node *ori_node = que->front->next;
-    que->front->next = que->front->next->next;
+    node *ori_node = que->front;
+    que->front = que->front->next;
+    que->front->data = NULL;
     free(ori_node);
     return true;
 }
 
 queue_T peep(queue *que) {
-    return que->front->data;
+    return que->front->next->data;
 }

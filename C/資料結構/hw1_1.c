@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct _stack {
-    struct _stack *next;
+typedef struct stack {
+    struct stack *next;
     float data;
 } stack;
 
