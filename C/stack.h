@@ -13,7 +13,7 @@ typedef struct stack {
     node *bot, *top;
 } stack;
 
-stack *init() {
+stack *init_s() {
     stack *stk = (stack*)malloc(sizeof(stack));
     stk->bot = (node*)malloc(sizeof(node));
     stk->bot->prev = NULL;
@@ -21,34 +21,34 @@ stack *init() {
     return stk;
 }
 
-bool empty(stack *stk) {
+bool empty_s(stack *stk) {
     return stk->top == stk->bot;
 }
 
-void push(stack *stk, stack_T val) {
+void push_s(stack *stk, stack_T val) {
     node *new_node = (node*)malloc(sizeof(node));
     new_node->prev = stk->top;
     new_node->data = val;
     stk->top = new_node;
 }
 
-bool pop(stack *stk) {
-    if (empty(stk)) return false;
+bool pop_s(stack *stk) {
+    if (empty_s(stk)) return false;
     node *ori_node = stk->top;
     stk->top = ori_node->prev;
     free(ori_node);
     return true;
 }
 
-stack_T peep(stack *stk) {
+stack_T peep_s(stack *stk) {
     return stk->top->data;
 }
 
-void clear(stack *stk) {
-    while (pop(stk));
+void clear_s(stack *stk) {
+    while (pop_s(stk));
 }
 
-void dump(stack *to, stack *from) {
-    for (; !empty(from); pop(from))
-        push(to, peep(from));
+void dump_s(stack *to, stack *from) {
+    for (; !empty_s(from); pop_s(from))
+        push_s(to, peep_s(from));
 }
