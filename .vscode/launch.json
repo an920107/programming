@@ -61,11 +61,22 @@
         },
         {
             "name": "Assembly32",
-            "type": "gdb",
+            "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/.vscode/a.so",
-            "stopOnEntry": false,
-            "preLaunchTask": "ASM32"
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "ASM32",
         }
     ]
 }
