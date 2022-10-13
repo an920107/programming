@@ -1,47 +1,48 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define AC 0
-#define WA 1
-#define ERROR -1
+typedef struct node {
+    int data;
+} node;
 
-char tmp[10001];
-map<string, int> mp;
+node *n;
 
-int spj(FILE *input, FILE *user_output){
-    while (fscanf(input, "%s", tmp) != EOF) {
-        string str(tmp);
-        if (*str.rbegin() == '.' || *str.rbegin() == ',')
-            str = str.substr(0, str.length() - 1);
-        for (int i = 0 ; i < str.length(); i ++)
-            if ('A' <= str[i] && str[i] <= 'Z')
-                str[i] += 32;
-        auto iter = mp.find(str);
-        if (iter == mp.end())
-            mp.insert(make_pair(str, 1));
-        else
-            iter->second ++;
-    }
-    int last_count = INT_MAX;
-    while (fscanf(user_output, "%s", tmp) != EOF) {
-        string str(tmp);
+void foo1(int &num) {
+    n->data = num;
+}
 
-        if (fscanf(user_output, "%s", tmp) == EOF) return WA;
-        stringstream ss;
-        ss << string(tmp);
-        int count;
-        ss >> count;
-        if (last_count < count) return WA;
-        last_count = count;
-        auto iter = mp.find(str);
-        if (iter->second != count) return WA;
-        mp.erase(iter);
-    }
-    if (!mp.empty()) return WA;
-    return AC;
+void foo2(int &num) {
+    (*n).data = num;
 }
 
 int main() {
-    cout << spj(fopen("C++/in", "r"), fopen("C++/out", "r"));
+
+    auto start = clock();
+    auto end = clock();
+    int avg;
+    n = (node*)malloc(sizeof(node));
+
+    avg = 0;
+    for (int t = 1; t <= 10; ++ t) {
+        start = clock();
+        for (int i = 0; i < 1E9; ++ i)
+            foo1(i);
+        end = clock();
+        cout << t << "\t" << end - start << "\n";
+        avg += end - start;
+    }
+    cout << "avg:\t" << avg / 10.0 << "\n\n";
+
+    avg = 0;
+    for (int t = 1; t <= 10; ++ t) {
+        start = clock();
+        for (int i = 0; i < 1E9; ++ i)
+            foo2(i);
+        end = clock();
+        cout << t << "\t" << end - start << "\n";
+        avg += end - start;
+    }
+    cout << "avg:\t" << avg / 10.0 << "\n\n";
+
     return 0;
 }
