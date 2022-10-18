@@ -41,6 +41,10 @@ bool pop_q(queue *que) {
     return true;
 }
 
+void clear_q(queue *que) {
+    while (pop_q(que));
+}
+
 queue_T peep_q(queue *que) {
     return que->front->next->data;
 }
