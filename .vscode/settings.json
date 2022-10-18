@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.ejs": "html",
         "iostream": "cpp",
         "sstream": "cpp",
         "regex": "cpp",
@@ -73,7 +74,9 @@
         "valarray": "cpp",
         "variant": "cpp",
         "any": "cpp",
-        "bit": "cpp"
+        "bit": "cpp",
+        "stdlib.h": "c",
+        "stdio.h": "c"
     },
     // "java.jdt.ls.java.home": "C:\\Compilers\\Java\\jdk-17.0.2",
     "java.project.referencedLibraries": [
