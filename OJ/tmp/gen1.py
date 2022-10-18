@@ -53,9 +53,9 @@ def gen() -> str:
     return result
     
 
-for i in range(1, 50):
-    open(DIR + str(i) + ".in", "w").write(gen())
+# for i in range(1, 50):
+#     open(DIR + str(i) + ".in", "w").write(gen())
 
-open(DIR + str(50) + ".in", "w").write("a.")
+# open(DIR + str(50) + ".in", "w").write("a.")
 
-# solve(open(DIR + "1.in", "r").readline())
+print(gen())
