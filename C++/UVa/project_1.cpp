@@ -30,6 +30,19 @@ auto pointCmp = [](Point &a, Point &b) {
     return a.coordinate[dimension - 1] < b.coordinate[dimension - 1];
 };
 
+auto pointReverseCmp = [](Point &b, Point &a) {
+    int dimension = a.dimension;
+    for (int i = 0; i < dimension; i ++) {
+        if (a.coordinate[i] != b.coordinate[i])
+            return a.coordinate[i] < b.coordinate[i];
+    }
+    return a.coordinate[dimension - 1] < b.coordinate[dimension - 1];
+};
+
+auto pointXReverseCmp = [](Point &b, Point &a) {
+    return a.coordinate[0] < b.coordinate[0];
+};
+
 vector<Point> points;
 
 /** 
@@ -61,29 +74,44 @@ auto solve_force = [](void) {
         if (!flag) result.emplace_back(points[i]);
     }
     sort(result.begin(), result.end(), pointCmp);
-    // int dimension = result[0].dimension;
-    // for (int i = result.size() - 1; i >= 0; i --)
-    //     for (int c = 0; c < dimension; c ++)
-    //         printf("%d ", result[i].coordinate[c]);
+    int dimension = result[0].dimension;
+    for (int i = result.size() - 1; i >= 0; i --) {
+        for (int c = 0; c < dimension; c ++)
+            printf("%12d ", result[i].coordinate[c]);
+        putchar('\n');
+    }
 };
 
-auto solve_sorted_force = [](void) {
-    bool flag = false;
-    vector<Point> result;
-    sort(points.begin(), points.end(), pointCmp);
-    for (int i = 0; i < points.size(); i ++, flag = false) {
-        for (int j = i + 1; j < points.size(); j ++) {
-            if (points[j].dominate(points[i])) {
-                flag = true;
-                break;
-            }
+void solve_3d() {
+    bool *isMax = (bool*)malloc(points.size() * sizeof(bool));
+    memset(isMax, 0, points.size() * sizeof(bool));
+    vector<Point> projection;
+    int maxZ = INT32_MIN;
+    sort(points.begin(), points.end(), pointXReverseCmp);
+    for (int i = 0; i < points.size(); i ++) {
+        bool flag = false;
+        for (auto &p : projection) {
+            if 
         }
-        if (!flag) result.emplace_back(points[i]);
+        if (!flag) {
+            projection.emplace_back(Point(2));
+            projection.back().coordinate[0] = points[i].coordinate[1];
+            projection.back().coordinate[1] = points[i].coordinate[2];
+            isMax[i] = true;
+        }
     }
-    // int dimension = result[0].dimension;
-    // for (int i = result.size() - 1; i >= 0; i --)
-    //     for (int c = 0; c < dimension; c ++)
-    //         printf("%d ", result[i].coordinate[c]);
+    for (int i = 0; i < points.size(); i ++) {
+        if (isMax[i]) {
+            for (int c = 0; c < 3; c ++)
+                printf("%12d ", points[i].coordinate[c]);
+            putchar('\n');
+        }
+    }
+}
+
+auto solve_wise = [](void) {
+    if (points[0].dimension == 3)
+        solve_3d();
 };
 
 /**
@@ -93,29 +121,28 @@ auto solve_sorted_force = [](void) {
 int main() {
 
     srand(time(NULL));
-    int t = 1E4, dimension = 100;
-    Point p(dimension);
+    int t = 20, dimension = 3;
     vector<Point> points_copy;
+
+    // cin >> t;
+    // for (int i = 0; i < t; i ++) {
+    //     points_copy.emplace_back(Point(dimension));
+    //     for (int j = 0; j < dimension; j ++)
+    //         cin >> points_copy[i].coordinate[j];
+    // }
+
     printf("generating %d cases with %d dimensions...\n", t, dimension);
     for (int i = 0; i < t; i ++) {
         points_copy.emplace_back(Point(dimension));
         for (int c = 0; c < dimension; c ++)
             points_copy[i].coordinate[c] = rand() % INT_MAX * -(rand() % 2 ? 1 : -1);
-        // printf("%6.2f %%\n", (float)i / t * 100);
     }
-    // freopen("OJ/tmp/out.txt", "r", stdin);
-    // int t;
-    // cin >> t;
-    // vector<Point> points_copy(t);
-    // for (int i = 0; i < t; i ++)
-    //     cin >> points_copy[i].x >> points_copy[i].y >> points_copy[i].z;
-    // putchar('\n');
 
     printf("running solve_force...\n");
     points = points_copy;
     printf("solve_force: %.4lf s\n", run_time(solve_force));
-    printf("running solve_sorted_force...\n");
+    printf("running solve_wise...\n");
     points = points_copy;
-    printf("solve_sorted_force: %.4lf s\n", run_time(solve_sorted_force));
+    printf("solve_wise: %.4lf s\n", run_time(solve_wise));
     return 0;
 }
