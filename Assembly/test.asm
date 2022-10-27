@@ -1,32 +1,32 @@
 section .bss
-    char resb 1
+        char resb 1
 
 section .text
-    global _start
+        global _start
 	
 _start:
-    mov ecx, 9
+        mov ecx, 9
 
-L2:
-    mov al, 10
-    sub al, cl
-    mov bl, 1
-    push ecx
-    mov ecx, 9
+    L2:
+        mov al, 10
+        sub al, cl
+        mov bl, 1
+        push ecx
+        mov ecx, 9
 
-L1:
-    push eax
-    mul bl
-    call printIntByte
-    mov al, 32
-    call print
-    pop eax
-    inc bl
-    loop L1
+    L1:
+        push eax
+        mul bl
+        call printIntByte
+        mov al, 32
+        call print
+        pop eax
+        inc bl
+        loop L1
 
-    call newLine
-    pop ecx
-    loop L2
+        call newLine
+        pop ecx
+        loop L2
 
 
 exit:
