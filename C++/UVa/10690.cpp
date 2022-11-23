@@ -2,16 +2,26 @@
 using namespace std;
 
 #define MAX_N_COUNT 100
+#define MAX_SUM 10000
 
-void solve(int n, int m, vector<int> &nums) {
-    bool dp[MAX_N_COUNT][MAX_N_COUNT * MAX_N_COUNT]{false};
-    dp[0][0] = true;
+void solve(int sideMax, vector<int> &nums) {
     int maxProduct = INT_MIN;
     int minProduct = INT_MAX;
     int sum = 0;
-    for (auto &num : nums)
-        sum += num;
-    
+    for (int i = 0; i < nums.size(); i ++) {
+        sum += nums[i];
+        nums[i] += 50;
+    }
+    bool available[MAX_N_COUNT + 1][MAX_SUM + 1]{false};
+    int status[MAX_N_COUNT + 1][MAX_SUM + 1]{0};
+    available[0][0] = true;
+    for (int i = 0; i < nums.size(); i ++) {
+        for (int n = 0; n <= sum; n ++) {
+            if (available[i][n] && status[i][n] < sideMax) {
+                available[i + 1][n] = 
+            }
+        }
+    }
 }
 
 int main() {
@@ -26,7 +36,7 @@ int main() {
             cin >> tmp;
             nums.emplace_back(tmp);
         }
-        solve(n, m, nums);
+        solve(n, nums);
     }
     return 0;
 }

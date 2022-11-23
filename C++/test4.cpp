@@ -1,124 +1,125 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define MAXQUEUE 5
+class BigNumber {
+private:
+    string num;
 
-struct guest
-{
-    char name;
-    int number;
-};
-struct Queue 
-{
-    int front;
-    int rear;
-    struct guest items[MAXQUEUE];
-};
+public:
+    BigNumber() : num("0") {}
+    BigNumber(string &_num) : num(_num) {}
 
-int lengthOfQ(struct Queue *q){
-    if(q -> front > q -> rear){
-       return q -> rear + 1 + MAXQUEUE - q ->front;
+    inline string &toString() { return num; }
+
+    inline int length() { return num.length(); }
+
+    BigNumber square() {
+        vector<int> vec(num.length() * 2);
+        for (int i = num.length() - 1; i >= 0; i --)
+            for (int j = num.length() - 1; j >= 0; j --)
+                vec[i + j + 1] += (num[i] - '0') * (num[j] - '0');
+        for (int i = vec.size() - 1; i > 0; i --) {
+            vec[i - 1] += vec[i] / 10;
+            vec[i] %= 10;
+        }
+        string str = "";
+        for (int i = 0, firstZero = true; i < vec.size(); i ++) {
+            if (firstZero && vec[i] == 0) continue;
+            firstZero = false;
+            str += (char)(vec[i] + '0');
+        }
+        return BigNumber(str);
     }
-    else{
-        return q -> rear - q -> front;
+
+    friend BigNumber operator+(BigNumber &x, BigNumber &y) {
+        int maxLen = max(x.num.length(), y.num.length());
+        int xNum, yNum;
+        vector<int> vec(maxLen + 1);
+        for (int i = 0; i < maxLen; i ++) {
+            if (x.num.length() <= i)
+                xNum = 0;
+            else xNum = x.num[x.num.length() - i - 1] - '0';
+            if (y.num.length() <= i)
+                yNum = 0;
+            else yNum = y.num[y.num.length() - i - 1] - '0';
+            vec[vec.size() - i - 1] = xNum + yNum;
+        }
+        for (int i = vec.size() - 1; i > 0; i --) {
+            vec[i - 1] += vec[i] / 10;
+            vec[i] %= 10;
+        }
+        string str = "";
+        for (int i = 0, firstZero = true; i < vec.size(); i ++) {
+            if (firstZero && vec[i] == 0) continue;
+            firstZero = false;
+            str += (char)(vec[i] + '0');
+        }
+        return BigNumber(str);
     }
-}
+    
+    void operator/=(int n) {
+        for (int i = 0; i < num.length() - 1; i ++) {
+            int k = num[i] - '0';
+            num[i + 1] += k % n * 10;
+            num[i] = k / n + '0';
+        }
+        num[num.length() - 1] = (num[num.length() - 1] - '0') / n + '0';
+        if (num[0] == '0') num = num.substr(1, num.length() - 1);
+    }
 
-bool isEmpty(struct Queue *q) 
-{
-    return (q -> front == q -> rear);
-}
+    friend bool operator==(BigNumber &x, BigNumber &y) {
+        return x.num == y.num;
+    }
 
-bool isFull(struct Queue *q)
-{
-    return lengthOfQ(q) == MAXQUEUE;
-}
+    friend bool operator<(BigNumber &x, BigNumber &y) {
+        if (x.num.length() != y.num.length())
+            return x.num.length() < y.num.length();
+        for (int i = 0; i < x.num.length(); i ++)
+            if (x.num[i] != y.num[i])
+                return x.num[i] < y.num[i];
+        return false;
+    }
+};
 
-void addQ(struct Queue *q, struct guest *g)
-{
-    if(isFull(q)){
+void solve(string &str) {
+    if (str == "1") {
+        cout << "1\n\n";
         return;
     }
-    else{
-        q -> rear = (q -> rear + 1) % MAXQUEUE;
-        q -> items[q -> rear] = *g;
+    BigNumber ori(str);
+    BigNumber num(str);
+    BigNumber lower;
+    BigNumber upper(str);
+
+    while (upper.length() * 2 - 1 > ori.length()) {
+        upper /= 8;
     }
-}
 
-void deleteQ(struct Queue *q)
-{
-    q -> front = (q -> front + 1) % MAXQUEUE;
-}
+    while (true) {
+        num = upper + lower;
+        num /= 2;
 
-
-int sumOfGuest(struct Queue *q)
-{
-    int sum = 0;
-    int i;
-    if(!isEmpty(q)){
-        for(i = 0; i < lengthOfQ(q); i ++){
-            sum += q -> items[(i + q -> front + 1) % MAXQUEUE].number;
-        }
+        BigNumber numSquare = num.square();
+        if (numSquare == ori)
+            break;
+        else if (numSquare < ori)
+            lower = num;
+        else
+            upper = num;
     }
-    return sum;
-}
-void sameGuest(struct Queue *q, struct guest *g){
-    int i;
-    bool isSame = false;
-    for(i = 0; i < lengthOfQ(q); i ++){
-        if(q ->items[(i + q -> front + 1) % MAXQUEUE].name == g -> name){
-            isSame = true;
-        }
-    }
-    if(!isSame){
-        addQ(q, g);
-    }
-}
-void behavior(struct Queue *q, struct guest *g){
-    while(1){
-        int n;
-        scanf("%d", &n);
-
-        if(n == -1) break;
-
-        switch (n) {
-            case 1:
-                scanf(" %c %d", &(g -> name), &(g -> number));
-                sameGuest(q,g);
-                break;
-            case 2:
-                cout << sumOfGuest(q) << '\n';
-                break;
-            case 3:
-                cout << q -> items[(q -> front + 1) % MAXQUEUE].name << '\n';
-                break;
-            case 4:
-                deleteQ(q);
-                break;
-            default:
-                cout << "error\n";
-                break;
-        }
-    } 
+    cout << num.toString() << "\n\n";
 }
 
-
-int main()
-{
-    // struct Queue *myQueue;
-    // myQueue->front = -1;
-    // myQueue->rear = -1;
-    // struct guest *myGuest;
-    
-    // behavior(myQueue, myGuest);
-
+int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
 
-    struct Queue myQueue;
-    myQueue.front = -1;
-    myQueue.rear = -1;
-    struct guest myGuest;
-    
-    behavior(&myQueue, &myGuest);
+    int t;
+    string str;
+    cin >> t;
+    while (t --) {
+        cin >> str;
+        solve(str);
+    }
+    return 0;
 }
