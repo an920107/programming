@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-import socket
-
-connected_addr = []
-
-server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server.bind(("0.0.0.0", 11111))
-server.listen(5)
-
-while True:
-    conn, addr = server.accept()
-    conn.settimeout(1000)
-    print(f"[SERVER] New connection from {str(addr)}")
-    connected_addr.append(addr)
-    data = conn.recv(1024)
-    print(data.decode())
-    conn.send("connect".encode())
-    conn.close()
-=======
 from datetime import datetime
 from socket import socket, AF_INET, SOCK_STREAM
 import threading
@@ -64,4 +45,3 @@ while True:
     (conn, addr) = server.accept()
     print(f"[SERVER] New connection from {str(addr)}")
     threading.Thread(target= connection, args= (conn, addr)).start()
->>>>>>> 1a197e9ccd16a1a8eb8aca10c3ef491b6940a5b4
