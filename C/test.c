@@ -2,6 +2,6 @@
 #include <stdlib.h>
 
 int main() {
-    FILE *file = fopen("filename", "r");
+    printf("Hi\n");
     return 0;
 }
