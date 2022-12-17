@@ -1,47 +1,13 @@
-from datetime import datetime
-from socket import socket, AF_INET, SOCK_STREAM
-import threading
-import json
+import random
+import os
 
-connection_list = []
+os.system("clear")
 
-def send_all(name, type, message):
-    global connection_list
-    time = datetime.now().strftime("%H:%M:%S")
-    tosend = f'{{"name":{name},"type":{type},"time":"{time}","message":"{message}"}}\n'
-    print(f'[{name}] {message} ({time})')
-    for conn in connection_list:
-        conn.send(tosend.encode())
+students = []
+with open("Python/students.txt", "r") as file:
+    for line in file.readlines():
+        students.append(line.strip("\n"))
 
-def connection(conn: socket, addr):
-    global connection_list
-    connection_list.append(conn)
-    conn.settimeout(10)
-    first_flag = True
-    try:
-        while True:
-            data = json.loads(conn.recv(1024).decode())
-            online = data["online"]
-            if (online == -1):
-                break
-            elif (online == 1):
-                send_all(data["name"], 1, data["message"])
-            elif (online == 0):
-                if (first_flag):
-                    send_all(data["name"], 0, "Joined the chatting room.")
-                    first_flag = False
-    except:
-        pass
-    send_all(data["name"], 0, "Left the chatting room.")
-    connection_list.remove(conn)
-    conn.close()
-    print(f"[SERVER] Disconnected from {str(addr)}")
-
-server = socket(AF_INET, SOCK_STREAM)
-server.bind(("0.0.0.0", 22222))
-server.listen(5)
-
-while True:
-    (conn, addr) = server.accept()
-    print(f"[SERVER] New connection from {str(addr)}")
-    threading.Thread(target= connection, args= (conn, addr)).start()
+for i in range(2):
+    rnd = random.randint(0, len(students) - 1)
+    print(students.pop(rnd))

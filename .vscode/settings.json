@@ -76,7 +76,8 @@
         "any": "cpp",
         "bit": "cpp",
         "stdlib.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "string.h": "c"
     },
     // "java.jdt.ls.java.home": "C:\\Compilers\\Java\\jdk-17.0.2",
     "java.project.referencedLibraries": [
@@ -97,5 +98,6 @@
         "Java\\計實考試",
         "Java\\計概作業",
         "Java\\BoundingBall"
-    ]
+    ],
+    "python.analysis.typeCheckingMode": "basic"
 }
