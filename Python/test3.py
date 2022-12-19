@@ -3,13 +3,10 @@ import os
 
 os.system("clear")
 
-students = []
-with open("students.txt", "r") as file:
-    for line in file.readlines():
-        students.append(line.strip("\n"))
+lines = open("students.txt", "r").readlines()
+students = [x.strip("\n") for x in lines]
 
-print("蔡宜縈")
 students.remove("蔡宜縈")
-
-rnd = random.randint(0, len(students) - 1)
-print(students.pop(rnd))
+random.shuffle(students)
+students.insert(0, "蔡宜縈")
+print(students[:2])

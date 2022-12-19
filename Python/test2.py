@@ -3,11 +3,8 @@ import os
 
 os.system("clear")
 
-students = []
-with open("Python/students.txt", "r") as file:
-    for line in file.readlines():
-        students.append(line.strip("\n"))
+lines = open("Python/students.txt", "r").readlines()
+students = [x.strip("\n") for x in lines]
 
-for i in range(2):
-    rnd = random.randint(0, len(students) - 1)
-    print(students.pop(rnd))
+random.shuffle(students)
+print(students[:2])
