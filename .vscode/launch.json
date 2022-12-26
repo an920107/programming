@@ -10,14 +10,6 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "Python_",
-            "type": "python",
-            "request": "launch",
-            "program": "${fileDirname}/test3.py",
-            "cwd": "${fileDirname}",
-            "console": "integratedTerminal"
-        },
-        {
             "name": "Java",
             "type": "java",
             "request": "launch",
