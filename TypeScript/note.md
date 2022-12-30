@@ -91,7 +91,9 @@
   
 ## 語法
 
-### 基本型別
+### 型別
+
+#### 基本型別
 
 TypeScript 有三種基本型別：
 
@@ -99,7 +101,7 @@ TypeScript 有三種基本型別：
 - `string` 字串：可用 `""` 或 `''` 包住字串
 - `boolean` 布林：小寫的 `true` 或 `false`
 
-### 基本宣告
+#### 基本宣告
 
 分為 `let` 與 `const` 兩種狀態（我不太清楚這專有名詞，反正看底下就知道那概念了）。
 
@@ -127,7 +129,7 @@ let message: (number|string) = "Hello"
 let input: any
 ```
 
-### Array
+#### Array
 
 > 官方給的名詞是 Array，但我覺得這也很難說是 Array 或 List 哪個，但應該比較偏向 List 吧（？
 
@@ -151,3 +153,104 @@ let myList: (number|boolean)[] = []
 let anyList: any[] = []
 ```
 
+#### Function
+
+使用 `function` 宣告定義函數，如同前面一樣可以指定參數、回傳型別。
+
+```typescript
+function circularArea(r: number): number {
+    return r * r * Math.PI;
+}
+
+console.log(circularArea(20));
+```
+
+TypeScript 的函數也可以像 Python 一樣，透過設定初始值，或是再參數變數後輸入 `?`，使呼叫函數時，不一定需要輸入該參數。
+
+```typescript
+// With ? (question mark)
+function print(message: string, name?: string): void {
+    console.log(name + ": " + message);
+}
+
+// With initial value
+function print(message: string, name: string = "None"): void {
+    console.log(name + ": " + message);
+}
+```
+
+另外，也有 Lamda 的用法，將函數存入一個變數（或是常數），此時變數的型別為 `Function`。
+
+```typescript
+// 宣告 `min` 是一個函數
+let min: Function;
+
+// 宣告 `min` 是一個函數，且帶有兩個 number 參數、回傳型別為 number
+let min: (x: number, y: number) => number;
+
+// 直接宣告並定義 min 函數
+const min = (x: number, y: number): number => {
+    if (x <= y) return x;
+    else return y;
+};
+```
+
+#### Type / Interface
+
+> 基本上跟 C typedef (type)、C struct (interface) 是一樣的功能
+
+透過 `type` 或是 `interface` 可定義一種新的類別，其中可包含不同的屬性資料。
+
+```typescript
+interface Student {
+    name: string;
+    id: number;
+}
+
+function printStudent(stu: Student) {
+    console.log(stu.name);
+    console.log(stu.id)
+}
+
+let student: Student = {
+    name: "Squid", id: 110502000
+};
+
+printStudent(student);
+```
+
+### 輸出入
+
+#### 輸出
+
+使用 `console.log(any)` 輸出至 console，可輸出基本型別、Array、Object、或其他。
+
+```typescript
+console.log("Hello!")
+```
+
+#### 輸入
+
+
+
+### 流程控制
+
+#### If
+
+```typescript
+if (condition: boolean) {
+    [statement]
+}
+else if (condition: boolean) {
+    [statement]
+}
+else {
+    [statement]
+}
+```
+
+#### For Loop
+
+```typescript
+
+```
