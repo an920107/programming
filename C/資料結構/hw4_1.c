@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define INF __INT16_MAX__
+#define INF __INT32_MAX__
 
 typedef struct {
     int** matrix;
@@ -57,30 +57,43 @@ void unionSet(int* set, int x, int y) {
  * main functoins
 */
 
-int prim(AdjacencyMatrix* adjMatrix) {
-    int result = 0, count = adjMatrix->size - 1 , start = 0, i, min, minPoint;
+int prim(const AdjacencyMatrix* adjMatrix) {
+    int result = 0, count = adjMatrix->size - 1 , i, minKey, minKeyPoint;
     bool* visited = (bool*)malloc(adjMatrix->size * sizeof(bool));
     memset(visited, false, adjMatrix->size * sizeof(bool));
+    int* parent = (int*)malloc(adjMatrix->size * sizeof(int));
+    memset(parent, -1, adjMatrix->size * sizeof(bool));
+    int* key = (int*)malloc(adjMatrix->size * sizeof(int));
+    for (i = 0; i < adjMatrix->size; i ++)
+        key[i] = INF;
+    key[0] = 0;
     while (count --) {
-        visited[start] = true;
-        min = INF;
-        for (i = 0; i < adjMatrix->size; i ++) {
-            if (visited[i]) continue;
-            if (adjMatrix->matrix[start][i] <= min) {
-                min = adjMatrix->matrix[start][i];
-                minPoint = i;
+        for (i = 0, minKey = INF; i < adjMatrix->size; i ++) {
+            if (!visited[i] && key[i] < minKey) {
+                minKey = key[i];
+                minKeyPoint = i;
             }
         }
-        if (min < INF) {
-            result += min;
-            start = minPoint;
+        visited[minKeyPoint] = true;
+        for (i = 0; i < adjMatrix->size; i ++) {
+            int weigh = adjMatrix->matrix[minKeyPoint][i];
+            if (weigh == INF || visited[i])
+                continue;
+            if (weigh < key[i]) {
+                parent[i] = minKeyPoint;
+                key[i] = weigh;
+            }
         }
     }
+    for (i = 0; i < adjMatrix->size; i ++)
+        result += key[i];
     free(visited);
+    free(parent);
+    free(key);
     return result;
 }
 
-int kruskal(AdjacencyMatrix* adjMatrix) {
+int kruskal(const AdjacencyMatrix* adjMatrix) {
     int result = 0, count = adjMatrix->size - 1, i, j, index = 0;
     int* subset = (int*)malloc(count * (count + 1) / 2 * sizeof(int));
     memset(subset, -1, adjMatrix->size * sizeof(int));
