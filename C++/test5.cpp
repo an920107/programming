@@ -1,86 +1,80 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
-// Define the dimensions of the maze
-#define MAZE_ROWS 10
-#define MAZE_COLS 10
+string ltrim(const string &);
+string rtrim(const string &);
 
-// Define the maze as a two-dimensional array of characters
-char maze[MAZE_ROWS][MAZE_COLS];
 
-// Define the possible directions for the algorithm to move in
-int dx[] = {-1, 0, 1, 0};
-int dy[] = {0, -1, 0, 1};
 
-// Use a depth-first search algorithm to create a path through the maze
-void dfs(int x, int y, int visited[MAZE_ROWS][MAZE_COLS]) {
-    // Mark the current cell as visited
-    visited[x][y] = 1;
+/*
+ * Complete the 'palindromeIndex' function below.
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts STRING s as parameter.
+ */
 
-    // Loop through each possible direction
-    for (int i = 0; i < 4; i++) {
-        // Calculate the coordinates of the cell in the current direction
-        int a = x + dx[i];
-        int b = y + dy[i];
-
-        // Check if the coordinates are within the bounds of the maze
-        if (a >= 0 && a < MAZE_ROWS && b >= 0 && b < MAZE_COLS) {
-            // Check if the cell has not been visited
-            if (visited[a][b] == 0) {
-                // Create a path to the cell by removing the wall between them
-                maze[x][y] = ' ';
-                maze[a][b] = ' ';
-
-                // Recursively search for a path from the cell
-                dfs(a, b, visited);
-            }
-        }
-    }
+bool isPalindrome(const string& s) {
+    int len = s.length();
+    for (int i = 0; i < len; i ++)
+        if (s[i] != s[len - i - 1])
+            return false;
+    return true;
 }
 
-
-// Generate the maze by filling it with walls ('#') and empty spaces (' ')
-void generateMaze() {
-    // Initialize the maze with walls
-    for (int row = 0; row < MAZE_ROWS; row++) {
-        for (int col = 0; col < MAZE_COLS; col++) {
-            maze[row][col] = '#';
-        }
+int palindromeIndex(string s) {
+    if (isPalindrome(s))
+        return -1;
+    for (int i = 0; i < s.length(); i ++) {
+        string newStr = s;
+        newStr.erase(newStr.begin() + i);
+        if (isPalindrome(newStr))
+            return i;
     }
-
-    // Seed the random number generator
-    srand(time(NULL));
-
-    // Choose a random starting cell
-    int x = rand() % MAZE_ROWS;
-    int y = rand() % MAZE_COLS;
-
-    // Keep track of the cells that have been visited
-    int visited[MAZE_ROWS][MAZE_COLS];
-    for (int row = 0; row < MAZE_ROWS; row++) {
-        for (int col = 0; col < MAZE_COLS; col++) {
-            visited[row][col] = 0;
-        }
-    }
-
-    // Use a depth-first search algorithm to create a path through the maze
-    dfs(x, y, visited);
+    return -1;
 }
 
+int main()
+{
+    // ofstream fout(getenv("OUTPUT_PATH"));
 
+    string q_temp;
+    getline(cin, q_temp);
 
-// Print the maze to the console
-void printMaze() {
-    // Loop through each row of the maze
-    for (int row = 0; row < MAZE_ROWS; row ++) {
-        for (int col = 0; col < MAZE_COLS; col ++)
-            cout << maze[row][col];
-        cout << endl;
+    int q = stoi(ltrim(rtrim(q_temp)));
+
+    for (int q_itr = 0; q_itr < q; q_itr++) {
+        string s;
+        getline(cin, s);
+
+        int result = palindromeIndex(s);
+
+        cout << result << "\n";
     }
-}
 
-int main() {
-    generateMaze();
-    printMaze();
+    // fout.close();
+
     return 0;
+}
+
+string ltrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        s.begin(),
+        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+    );
+
+    return s;
+}
+
+string rtrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
+        s.end()
+    );
+
+    return s;
 }
