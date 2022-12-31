@@ -66,7 +66,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>TypeScript</title>
     </head>
-
+    
+    <script>var exports = {};</script>
     <script src="script.js"></script>
 </html>
 ```

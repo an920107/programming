@@ -24,7 +24,7 @@ int edgeCmp(const void* _x, const void* _y) {
 
 void** malloc2DArray(size_t size, int row, int col) {
     int i;
-    void** arr = (void**)malloc(row * size);
+    void** arr = (void**)malloc(row * sizeof(void*));
     for (i = 0; i < row; i ++)
         arr[i] = (void*)malloc(col * size);
     return arr;

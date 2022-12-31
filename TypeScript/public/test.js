@@ -1,28 +1,34 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const str = "Input something......";
-console.log(str);
-const input = document.querySelectorAll("input");
-input.forEach(text => {
-    console.log(text);
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
 });
-let message = "Hello";
-let nums = [1, 1, 2, 3, 5];
-const func = (x) => {
-    return x * x;
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
-console.log(func(12));
-const min = (x, y) => {
-    if (x <= y)
-        return x;
-    else
-        return y;
-};
-function printStudent(stu) {
-    console.log(stu.name);
-    console.log(stu.id);
-}
-let student = {
-    name: "Squid", id: 110502000
-};
-printStudent(student);
+Object.defineProperty(exports, "__esModule", { value: true });
+const readline = __importStar(require("readline"));
+const process_1 = require("process");
+const reader = readline.createInterface({
+    input: process_1.stdin,
+    output: process_1.stdout
+});
+reader.question("Input something...", (str) => {
+    console.log(str);
+});
