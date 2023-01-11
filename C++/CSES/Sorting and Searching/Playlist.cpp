@@ -2,19 +2,24 @@
 using namespace std;
 
 int solve(vector<int> &nums) {
-    map<int, int> lastAppear;
-    int result = 0, count = 0;
-    for (int i = 0; i < nums.size(); i ++) {
-        // nums[i] has appeared
-        if (lastAppear.find(nums[i]) != lastAppear.end()) {
-            int distance = i - lastAppear[nums[i]];
-            if (distance > count);
-                count = distance;
+    const int len = nums.size();
+    int result = 0;
+    set<int> appeared;
+
+    int left = 0, right = 0;
+    while (left < len && right < len) {
+        // nums[right] hasn't appeared.
+        while (right < len && appeared.count(nums[right]) == 0) {
+            appeared.insert(nums[right]);
+            result = max(result, right - left + 1);
+            right ++;
         }
-        else count ++;
-        if (count > result)
-            result = count;
-        lastAppear[nums[i]] = i;
+        
+        // nums[right] has appeared.
+        while (right < len && appeared.count(nums[right]) > 0) {
+            appeared.erase(nums[left]);
+            left ++;
+        }
     }
     return result;
 }
