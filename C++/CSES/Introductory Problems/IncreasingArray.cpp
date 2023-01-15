@@ -1,10 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int arr[200000];
+int arr[200005];
 
 int main() {
-	int n, count = 0;
+	int n;
+    long long count = 0;
 	cin >> n >> arr[0];
 	for (int i = 1; i < n; i ++) {
 		cin >> arr[i];
