@@ -6,7 +6,7 @@ using namespace std;
 void solve(const llong &x, const llong &y) {
     const llong xyMin = min(x, y);
     const llong xyAbs = abs(x - y);
-    if (xyMin - xyAbs >= 0 && (xyMin - xyAbs) % 3 == 0)
+    if (xyMin >= xyAbs && (xyMin - xyAbs) % 3 == 0)
         cout << "YES\n";
     else cout << "NO\n";
 }

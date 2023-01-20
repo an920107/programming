@@ -15,7 +15,7 @@ struct Solve {
         // g++: -std=c++17
         // vscode: cppstandard = 17
         for (auto &[price, page] : books)
-            // 從後面網前避免重複計算
+            // 從後面往前避免重複計算
             for (int i = MAX_PRICE; i >= price; i --)
                 // 取 新的可能 與 原本的 較大者
                 dp[i] = max(dp[i - price] + page, dp[i]);

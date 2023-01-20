@@ -21,7 +21,7 @@ int main () {
         }
         letter[i] /= 2;
         for (int j = 0; j < letter[i]; j ++)
-            result += char(i + 65);
+            result.push_back(char(i + 65));
     }
     cout << result;
     if (odd) cout << char(odd_i + 65);
