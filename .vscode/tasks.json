@@ -30,7 +30,6 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-std=c++17",
-                "-Ofast",
                 "-g",
                 "${file}",
                 "-o",

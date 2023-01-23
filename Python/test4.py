@@ -1,5 +1,3 @@
-import os
-import openai
+import math
 
-openai.api_key = "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"
-print(openai.Model.list())
+print(math.log2(1E9))

@@ -3,7 +3,7 @@ using namespace std;
 
 struct Solve {
 
-    const int MAX_PRICE = 1E5; // , INF = 0x3f3f3f3f;
+    const int MAX_PRICE = 1E5;
     int budget; // 預算
     vector<int> dp; // dp[i]: 價錢 i 時買得到的頁數，初始化為 0
     vector<pair<int, int>> books; // [price, page]
