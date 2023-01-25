@@ -2,10 +2,18 @@
 using namespace std;
 
 int main() {
-    char tmp[1000];
-    FILE *file = fopen("哈.txt", "r");
-    while (fscanf(file, "%s", tmp) != EOF) {
-        cout << tmp << '\n';
+    int n, count = 0;
+    cin >> n;
+    while (n > 0) {
+        int maxDigit = 0;
+        for (char &ch : to_string(n)) {
+            const int digit = ch - '0';
+            if (digit > maxDigit)
+                maxDigit = digit;
+        }
+        n -= maxDigit;
+        count ++;
     }
+    cout << count << '\n';
     return 0;
 }

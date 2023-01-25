@@ -12,14 +12,14 @@ void solve(int n) {
     auto iter = children.begin();
     // n * log(n)
     while (!children.empty()) { // n
-        if (iter == children.end())
-            iter = children.begin();
         if (++ iter == children.end())
             iter = children.begin();
         // 輸出被刪掉的人
         cout << *iter << ' ';
         // erase 會回傳原本 iter 的下個位置
         iter = children.erase(iter); // log(n)
+        if (iter == children.end())
+            iter = children.begin();
     }
     cout << '\n';
 }

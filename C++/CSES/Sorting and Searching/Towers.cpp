@@ -4,22 +4,15 @@ using namespace std;
 int solve(vector<int> &cubes) {
     map<int, int> topCube;
     for (int i = 0; i < cubes.size(); i ++) {
-        for (auto &p : topCube) {
-            if (p.second > 0 && cubes[i] < p.first) {
-                p.second --;
-                break;
-            }
-        }
-        try {
-            topCube[cubes[i]] ++;
-        } catch (const exception &e) {
-            topCube[cubes[i]] = 0;
-        }
+        auto iter = topCube.lower_bound(cubes[i] + 1);
+        if (iter != topCube.end() && (-- iter->second) == 0)
+            topCube.erase(iter);
+        topCube[cubes[i]] ++;
     }
 
     int result = 0;
-    for (auto &p : topCube)
-        result += p.second;
+    for (auto &[cubeSize, count] : topCube)
+        result += count;
     return result;
 }
 
