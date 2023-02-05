@@ -9,13 +9,9 @@ protected:
 
     struct Point {
         int row, col;
-        Point *parent;
 
         Point() {}
-        Point(int _row, int _col)
-            : row(_row), col(_col), parent(nullptr) {}
-        Point(int _row, int _col, Point *_parent)
-            : row(_row), col(_col), parent(_parent) {}
+        Point(int _row, int _col) : row(_row), col(_col) {}
     };
 
 private:
@@ -43,14 +39,15 @@ public:
             que.push(point);
 
             while (!que.empty()) {
-                Point *curr = new Point(que.front());
-                if (visited[curr->row][curr->col])
+                Point curr = que.front();
+                que.pop();
+                if (visited[curr.row][curr.col])
                     continue;
 
-                visited[curr->row][curr->col] = true;
+                visited[curr.row][curr.col] = true;
                 for (auto &[dx, dy] : DIRECTIONS)
-                    if (roomMap[curr->row + dx][curr->col + dy] != '#')
-                        que.emplace(curr->row + dx, curr->col + dy, curr);
+                    if (roomMap[curr.row + dx][curr.col + dy] != '#')
+                        que.emplace(curr.row + dx, curr.col + dy);
             }
         };
 
