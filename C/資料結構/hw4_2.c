@@ -28,9 +28,9 @@ void quickSort(int arr[MAX_SIZE], int left, int right) {
     if (left > right) return;
     int lIndex = left, rIndex = right, pivot = arr[left];
     while (lIndex != rIndex) {
-        while (pivot < arr[lIndex] && lIndex < rIndex)
+        while (pivot > arr[lIndex] && lIndex < rIndex)
             lIndex ++;
-        while (pivot >= arr[rIndex] && lIndex < rIndex)
+        while (pivot <= arr[rIndex] && lIndex < rIndex)
             rIndex --;
         if (lIndex < rIndex)
             swap(arr + lIndex, arr + rIndex);
@@ -53,11 +53,11 @@ int main() {
         bubbleSortClocks = clock() - bubbleSortClocks;
 
         quickSortClocks = clock();
-        quickSort(numsCopy, 0, n);
+        quickSort(numsCopy, 0, n - 1);
         quickSortClocks = clock() - quickSortClocks;
 
         for (i = 0; i < n; i ++)
-            printf("%d ", nums[i]);
+            printf("%d ", numsCopy[i]);
         putchar('\n');
         printf("bubble sort: %.4lf sec\n", (double)bubbleSortClocks / CLOCKS_PER_SEC);
         printf("quick sort: %.4lf sec\n", (double)quickSortClocks / CLOCKS_PER_SEC);
