@@ -5,16 +5,20 @@ class Solve {
 private:
 
     vector<int> primes;
+    bool buildingPrimes = true;
 
     bool isPrime(int n) {
-        int n_sqrt = (int)sqrt(n);
-        for (auto &x : primes) {
-            if (x > n_sqrt)
-                break;
-            if (n % x == 0)
-                return false;
+        if (buildingPrimes) {
+            int n_sqrt = (int)sqrt(n);
+            for (auto &x : primes) {
+                if (x > n_sqrt)
+                    break;
+                if (n % x == 0)
+                    return false;
+            }
+            return true;    
         }
-        return true;
+        return find(primes.begin(), primes.end(), n) != primes.end();
     }
 
 public:
@@ -23,6 +27,7 @@ public:
         for (int i = 3; i < 2001; i ++)
             if (isPrime(i))
                 primes.emplace_back(i);
+        buildingPrimes = false;
     }
 
     void solve(string &str) {
@@ -31,7 +36,7 @@ public:
             count[c] ++;
         bool flag = false;
         for (auto &[key, val] : count)
-            if (find(primes.begin(), primes.end(), val) != primes.end()) {
+            if (isPrime(val)) {
                 flag = true;
                 cout << key;
             }

@@ -17,8 +17,8 @@ void solve(unsigned long long n) {
 
 int main() {
 
-    // ios_base::sync_with_stdio(false);
-    // cin.tie(0);
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
 
     unsigned long long n;
     while (cin >> n) {
