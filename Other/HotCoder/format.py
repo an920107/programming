@@ -1,9 +1,9 @@
 import string
 
 
-def format(filein:str, fileout:str) -> str:
+def format(filein: str, fileout: str):
 
-    def last(s : str) -> str:
+    def last(s: str) -> str:
         return s[len(s) - 1]
 
     WORD = string.ascii_letters + string.digits + "_"

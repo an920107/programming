@@ -1,0 +1,759 @@
+文法
+
+    0 $accept: stmts $end
+
+    1 stmts: stmts stmt
+    2      | stmt
+
+    3 stmt: def_stmt
+    4     | print_stmt
+    5     | exp
+
+    6 print_stmt: LB print_op exp RB
+
+    7 print_op: PRINT_B
+    8         | PRINT_N
+
+    9 def_stmt: LB DEF ID exp RB
+
+   10 variable: ID
+
+   11 exp: BOOL_VAL
+   12    | NUM_VAL
+   13    | variable
+   14    | operation
+   15    | fun_exp
+   16    | fun_call
+
+   17 operation: LB operator exps_or_not RB
+
+   18 exps_or_not: exps_or_not exp
+   19            | ε
+
+   20 operator: ADD
+   21         | SUB
+   22         | MUL
+   23         | DIV
+   24         | MOD
+   25         | AND
+   26         | OR
+   27         | NOT
+   28         | GT
+   29         | LT
+   30         | EQ
+   31         | IF
+
+   32 fun_exp: LB FUN LB params_or_not RB ldef_stmts_or_not exp RB
+
+   33 params_or_not: params_or_not variable
+   34              | ε
+
+   35 fun_call: LB variable exps_or_not RB
+   36         | LB fun_exp exps_or_not RB
+
+   37 ldef_stmts_or_not: ldef_stmts_or_not ldef_stmt
+   38                  | ε
+
+   39 ldef_stmt: LB DEF ID exp RB
+
+
+終結語詞，附有它們出現處的規則
+
+    $end (0) 0
+    error (256)
+    ID <text> (258) 9 10 39
+    BOOL_VAL <bool_val> (259) 11
+    NUM_VAL <num_val> (260) 12
+    ADD (261) 20
+    SUB (262) 21
+    MUL (263) 22
+    DIV (264) 23
+    MOD (265) 24
+    AND (266) 25
+    OR (267) 26
+    NOT (268) 27
+    GT (269) 28
+    LT (270) 29
+    EQ (271) 30
+    PRINT_B (272) 7
+    PRINT_N (273) 8
+    DEF (274) 9 39
+    FUN (275) 32
+    IF (276) 31
+    LB (277) 6 9 17 32 35 36 39
+    RB (278) 6 9 17 32 35 36 39
+
+
+非終結語詞，附有它們出現處的規則
+
+    $accept (24)
+        於左側： 0
+    stmts (25)
+        於左側： 1 2
+        於右側： 0 1
+    stmt (26)
+        於左側： 3 4 5
+        於右側： 1 2
+    print_stmt (27)
+        於左側： 6
+        於右側： 4
+    print_op <node> (28)
+        於左側： 7 8
+        於右側： 6
+    def_stmt (29)
+        於左側： 9
+        於右側： 3
+    variable <node> (30)
+        於左側： 10
+        於右側： 13 33 35
+    exp <node> (31)
+        於左側： 11 12 13 14 15 16
+        於右側： 5 6 9 18 32 39
+    operation <node> (32)
+        於左側： 17
+        於右側： 14
+    exps_or_not <nodes> (33)
+        於左側： 18 19
+        於右側： 17 18 35 36
+    operator <node> (34)
+        於左側： 20 21 22 23 24 25 26 27 28 29 30 31
+        於右側： 17
+    fun_exp <node> (35)
+        於左側： 32
+        於右側： 15 36
+    params_or_not <nodes> (36)
+        於左側： 33 34
+        於右側： 32 33
+    fun_call <node> (37)
+        於左側： 35 36
+        於右側： 16
+    ldef_stmts_or_not <nodes> (38)
+        於左側： 37 38
+        於右側： 32 37
+    ldef_stmt <node> (39)
+        於左側： 39
+        於右側： 37
+
+
+狀態 0
+
+    0 $accept: • stmts $end
+
+    ID        偏移，並進入狀態 1
+    BOOL_VAL  偏移，並進入狀態 2
+    NUM_VAL   偏移，並進入狀態 3
+    LB        偏移，並進入狀態 4
+
+    stmts       進入狀態 5
+    stmt        進入狀態 6
+    print_stmt  進入狀態 7
+    def_stmt    進入狀態 8
+    variable    進入狀態 9
+    exp         進入狀態 10
+    operation   進入狀態 11
+    fun_exp     進入狀態 12
+    fun_call    進入狀態 13
+
+
+狀態 1
+
+   10 variable: ID •
+
+    $default  使用規則 10 以縮減 (variable)
+
+
+狀態 2
+
+   11 exp: BOOL_VAL •
+
+    $default  使用規則 11 以縮減 (exp)
+
+
+狀態 3
+
+   12 exp: NUM_VAL •
+
+    $default  使用規則 12 以縮減 (exp)
+
+
+狀態 4
+
+    6 print_stmt: LB • print_op exp RB
+    9 def_stmt: LB • DEF ID exp RB
+   17 operation: LB • operator exps_or_not RB
+   32 fun_exp: LB • FUN LB params_or_not RB ldef_stmts_or_not exp RB
+   35 fun_call: LB • variable exps_or_not RB
+   36         | LB • fun_exp exps_or_not RB
+
+    ID       偏移，並進入狀態 1
+    ADD      偏移，並進入狀態 14
+    SUB      偏移，並進入狀態 15
+    MUL      偏移，並進入狀態 16
+    DIV      偏移，並進入狀態 17
+    MOD      偏移，並進入狀態 18
+    AND      偏移，並進入狀態 19
+    OR       偏移，並進入狀態 20
+    NOT      偏移，並進入狀態 21
+    GT       偏移，並進入狀態 22
+    LT       偏移，並進入狀態 23
+    EQ       偏移，並進入狀態 24
+    PRINT_B  偏移，並進入狀態 25
+    PRINT_N  偏移，並進入狀態 26
+    DEF      偏移，並進入狀態 27
+    FUN      偏移，並進入狀態 28
+    IF       偏移，並進入狀態 29
+    LB       偏移，並進入狀態 30
+
+    print_op  進入狀態 31
+    variable  進入狀態 32
+    operator  進入狀態 33
+    fun_exp   進入狀態 34
+
+
+狀態 5
+
+    0 $accept: stmts • $end
+    1 stmts: stmts • stmt
+
+    $end      偏移，並進入狀態 35
+    ID        偏移，並進入狀態 1
+    BOOL_VAL  偏移，並進入狀態 2
+    NUM_VAL   偏移，並進入狀態 3
+    LB        偏移，並進入狀態 4
+
+    stmt        進入狀態 36
+    print_stmt  進入狀態 7
+    def_stmt    進入狀態 8
+    variable    進入狀態 9
+    exp         進入狀態 10
+    operation   進入狀態 11
+    fun_exp     進入狀態 12
+    fun_call    進入狀態 13
+
+
+狀態 6
+
+    2 stmts: stmt •
+
+    $default  使用規則 2 以縮減 (stmts)
+
+
+狀態 7
+
+    4 stmt: print_stmt •
+
+    $default  使用規則 4 以縮減 (stmt)
+
+
+狀態 8
+
+    3 stmt: def_stmt •
+
+    $default  使用規則 3 以縮減 (stmt)
+
+
+狀態 9
+
+   13 exp: variable •
+
+    $default  使用規則 13 以縮減 (exp)
+
+
+狀態 10
+
+    5 stmt: exp •
+
+    $default  使用規則 5 以縮減 (stmt)
+
+
+狀態 11
+
+   14 exp: operation •
+
+    $default  使用規則 14 以縮減 (exp)
+
+
+狀態 12
+
+   15 exp: fun_exp •
+
+    $default  使用規則 15 以縮減 (exp)
+
+
+狀態 13
+
+   16 exp: fun_call •
+
+    $default  使用規則 16 以縮減 (exp)
+
+
+狀態 14
+
+   20 operator: ADD •
+
+    $default  使用規則 20 以縮減 (operator)
+
+
+狀態 15
+
+   21 operator: SUB •
+
+    $default  使用規則 21 以縮減 (operator)
+
+
+狀態 16
+
+   22 operator: MUL •
+
+    $default  使用規則 22 以縮減 (operator)
+
+
+狀態 17
+
+   23 operator: DIV •
+
+    $default  使用規則 23 以縮減 (operator)
+
+
+狀態 18
+
+   24 operator: MOD •
+
+    $default  使用規則 24 以縮減 (operator)
+
+
+狀態 19
+
+   25 operator: AND •
+
+    $default  使用規則 25 以縮減 (operator)
+
+
+狀態 20
+
+   26 operator: OR •
+
+    $default  使用規則 26 以縮減 (operator)
+
+
+狀態 21
+
+   27 operator: NOT •
+
+    $default  使用規則 27 以縮減 (operator)
+
+
+狀態 22
+
+   28 operator: GT •
+
+    $default  使用規則 28 以縮減 (operator)
+
+
+狀態 23
+
+   29 operator: LT •
+
+    $default  使用規則 29 以縮減 (operator)
+
+
+狀態 24
+
+   30 operator: EQ •
+
+    $default  使用規則 30 以縮減 (operator)
+
+
+狀態 25
+
+    7 print_op: PRINT_B •
+
+    $default  使用規則 7 以縮減 (print_op)
+
+
+狀態 26
+
+    8 print_op: PRINT_N •
+
+    $default  使用規則 8 以縮減 (print_op)
+
+
+狀態 27
+
+    9 def_stmt: LB DEF • ID exp RB
+
+    ID  偏移，並進入狀態 37
+
+
+狀態 28
+
+   32 fun_exp: LB FUN • LB params_or_not RB ldef_stmts_or_not exp RB
+
+    LB  偏移，並進入狀態 38
+
+
+狀態 29
+
+   31 operator: IF •
+
+    $default  使用規則 31 以縮減 (operator)
+
+
+狀態 30
+
+   32 fun_exp: LB • FUN LB params_or_not RB ldef_stmts_or_not exp RB
+
+    FUN  偏移，並進入狀態 28
+
+
+狀態 31
+
+    6 print_stmt: LB print_op • exp RB
+
+    ID        偏移，並進入狀態 1
+    BOOL_VAL  偏移，並進入狀態 2
+    NUM_VAL   偏移，並進入狀態 3
+    LB        偏移，並進入狀態 39
+
+    variable   進入狀態 9
+    exp        進入狀態 40
+    operation  進入狀態 11
+    fun_exp    進入狀態 12
+    fun_call   進入狀態 13
+
+
+狀態 32
+
+   35 fun_call: LB variable • exps_or_not RB
+
+    $default  使用規則 19 以縮減 (exps_or_not)
+
+    exps_or_not  進入狀態 41
+
+
+狀態 33
+
+   17 operation: LB operator • exps_or_not RB
+
+    $default  使用規則 19 以縮減 (exps_or_not)
+
+    exps_or_not  進入狀態 42
+
+
+狀態 34
+
+   36 fun_call: LB fun_exp • exps_or_not RB
+
+    $default  使用規則 19 以縮減 (exps_or_not)
+
+    exps_or_not  進入狀態 43
+
+
+狀態 35
+
+    0 $accept: stmts $end •
+
+    $default  接受
+
+
+狀態 36
+
+    1 stmts: stmts stmt •
+
+    $default  使用規則 1 以縮減 (stmts)
+
+
+狀態 37
+
+    9 def_stmt: LB DEF ID • exp RB
+
+    ID        偏移，並進入狀態 1
+    BOOL_VAL  偏移，並進入狀態 2
+    NUM_VAL   偏移，並進入狀態 3
+    LB        偏移，並進入狀態 39
+
+    variable   進入狀態 9
+    exp        進入狀態 44
+    operation  進入狀態 11
+    fun_exp    進入狀態 12
+    fun_call   進入狀態 13
+
+
+狀態 38
+
+   32 fun_exp: LB FUN LB • params_or_not RB ldef_stmts_or_not exp RB
+
+    $default  使用規則 34 以縮減 (params_or_not)
+
+    params_or_not  進入狀態 45
+
+
+狀態 39
+
+   17 operation: LB • operator exps_or_not RB
+   32 fun_exp: LB • FUN LB params_or_not RB ldef_stmts_or_not exp RB
+   35 fun_call: LB • variable exps_or_not RB
+   36         | LB • fun_exp exps_or_not RB
+
+    ID   偏移，並進入狀態 1
+    ADD  偏移，並進入狀態 14
+    SUB  偏移，並進入狀態 15
+    MUL  偏移，並進入狀態 16
+    DIV  偏移，並進入狀態 17
+    MOD  偏移，並進入狀態 18
+    AND  偏移，並進入狀態 19
+    OR   偏移，並進入狀態 20
+    NOT  偏移，並進入狀態 21
+    GT   偏移，並進入狀態 22
+    LT   偏移，並進入狀態 23
+    EQ   偏移，並進入狀態 24
+    FUN  偏移，並進入狀態 28
+    IF   偏移，並進入狀態 29
+    LB   偏移，並進入狀態 30
+
+    variable  進入狀態 32
+    operator  進入狀態 33
+    fun_exp   進入狀態 34
+
+
+狀態 40
+
+    6 print_stmt: LB print_op exp • RB
+
+    RB  偏移，並進入狀態 46
+
+
+狀態 41
+
+   18 exps_or_not: exps_or_not • exp
+   35 fun_call: LB variable exps_or_not • RB
+
+    ID        偏移，並進入狀態 1
+    BOOL_VAL  偏移，並進入狀態 2
+    NUM_VAL   偏移，並進入狀態 3
+    LB        偏移，並進入狀態 39
+    RB        偏移，並進入狀態 47
+
+    variable   進入狀態 9
+    exp        進入狀態 48
+    operation  進入狀態 11
+    fun_exp    進入狀態 12
+    fun_call   進入狀態 13
+
+
+狀態 42
+
+   17 operation: LB operator exps_or_not • RB
+   18 exps_or_not: exps_or_not • exp
+
+    ID        偏移，並進入狀態 1
+    BOOL_VAL  偏移，並進入狀態 2
+    NUM_VAL   偏移，並進入狀態 3
+    LB        偏移，並進入狀態 39
+    RB        偏移，並進入狀態 49
+
+    variable   進入狀態 9
+    exp        進入狀態 48
+    operation  進入狀態 11
+    fun_exp    進入狀態 12
+    fun_call   進入狀態 13
+
+
+狀態 43
+
+   18 exps_or_not: exps_or_not • exp
+   36 fun_call: LB fun_exp exps_or_not • RB
+
+    ID        偏移，並進入狀態 1
+    BOOL_VAL  偏移，並進入狀態 2
+    NUM_VAL   偏移，並進入狀態 3
+    LB        偏移，並進入狀態 39
+    RB        偏移，並進入狀態 50
+
+    variable   進入狀態 9
+    exp        進入狀態 48
+    operation  進入狀態 11
+    fun_exp    進入狀態 12
+    fun_call   進入狀態 13
+
+
+狀態 44
+
+    9 def_stmt: LB DEF ID exp • RB
+
+    RB  偏移，並進入狀態 51
+
+
+狀態 45
+
+   32 fun_exp: LB FUN LB params_or_not • RB ldef_stmts_or_not exp RB
+   33 params_or_not: params_or_not • variable
+
+    ID  偏移，並進入狀態 1
+    RB  偏移，並進入狀態 52
+
+    variable  進入狀態 53
+
+
+狀態 46
+
+    6 print_stmt: LB print_op exp RB •
+
+    $default  使用規則 6 以縮減 (print_stmt)
+
+
+狀態 47
+
+   35 fun_call: LB variable exps_or_not RB •
+
+    $default  使用規則 35 以縮減 (fun_call)
+
+
+狀態 48
+
+   18 exps_or_not: exps_or_not exp •
+
+    $default  使用規則 18 以縮減 (exps_or_not)
+
+
+狀態 49
+
+   17 operation: LB operator exps_or_not RB •
+
+    $default  使用規則 17 以縮減 (operation)
+
+
+狀態 50
+
+   36 fun_call: LB fun_exp exps_or_not RB •
+
+    $default  使用規則 36 以縮減 (fun_call)
+
+
+狀態 51
+
+    9 def_stmt: LB DEF ID exp RB •
+
+    $default  使用規則 9 以縮減 (def_stmt)
+
+
+狀態 52
+
+   32 fun_exp: LB FUN LB params_or_not RB • ldef_stmts_or_not exp RB
+
+    $default  使用規則 38 以縮減 (ldef_stmts_or_not)
+
+    ldef_stmts_or_not  進入狀態 54
+
+
+狀態 53
+
+   33 params_or_not: params_or_not variable •
+
+    $default  使用規則 33 以縮減 (params_or_not)
+
+
+狀態 54
+
+   32 fun_exp: LB FUN LB params_or_not RB ldef_stmts_or_not • exp RB
+   37 ldef_stmts_or_not: ldef_stmts_or_not • ldef_stmt
+
+    ID        偏移，並進入狀態 1
+    BOOL_VAL  偏移，並進入狀態 2
+    NUM_VAL   偏移，並進入狀態 3
+    LB        偏移，並進入狀態 55
+
+    variable   進入狀態 9
+    exp        進入狀態 56
+    operation  進入狀態 11
+    fun_exp    進入狀態 12
+    fun_call   進入狀態 13
+    ldef_stmt  進入狀態 57
+
+
+狀態 55
+
+   17 operation: LB • operator exps_or_not RB
+   32 fun_exp: LB • FUN LB params_or_not RB ldef_stmts_or_not exp RB
+   35 fun_call: LB • variable exps_or_not RB
+   36         | LB • fun_exp exps_or_not RB
+   39 ldef_stmt: LB • DEF ID exp RB
+
+    ID   偏移，並進入狀態 1
+    ADD  偏移，並進入狀態 14
+    SUB  偏移，並進入狀態 15
+    MUL  偏移，並進入狀態 16
+    DIV  偏移，並進入狀態 17
+    MOD  偏移，並進入狀態 18
+    AND  偏移，並進入狀態 19
+    OR   偏移，並進入狀態 20
+    NOT  偏移，並進入狀態 21
+    GT   偏移，並進入狀態 22
+    LT   偏移，並進入狀態 23
+    EQ   偏移，並進入狀態 24
+    DEF  偏移，並進入狀態 58
+    FUN  偏移，並進入狀態 28
+    IF   偏移，並進入狀態 29
+    LB   偏移，並進入狀態 30
+
+    variable  進入狀態 32
+    operator  進入狀態 33
+    fun_exp   進入狀態 34
+
+
+狀態 56
+
+   32 fun_exp: LB FUN LB params_or_not RB ldef_stmts_or_not exp • RB
+
+    RB  偏移，並進入狀態 59
+
+
+狀態 57
+
+   37 ldef_stmts_or_not: ldef_stmts_or_not ldef_stmt •
+
+    $default  使用規則 37 以縮減 (ldef_stmts_or_not)
+
+
+狀態 58
+
+   39 ldef_stmt: LB DEF • ID exp RB
+
+    ID  偏移，並進入狀態 60
+
+
+狀態 59
+
+   32 fun_exp: LB FUN LB params_or_not RB ldef_stmts_or_not exp RB •
+
+    $default  使用規則 32 以縮減 (fun_exp)
+
+
+狀態 60
+
+   39 ldef_stmt: LB DEF ID • exp RB
+
+    ID        偏移，並進入狀態 1
+    BOOL_VAL  偏移，並進入狀態 2
+    NUM_VAL   偏移，並進入狀態 3
+    LB        偏移，並進入狀態 39
+
+    variable   進入狀態 9
+    exp        進入狀態 61
+    operation  進入狀態 11
+    fun_exp    進入狀態 12
+    fun_call   進入狀態 13
+
+
+狀態 61
+
+   39 ldef_stmt: LB DEF ID exp • RB
+
+    RB  偏移，並進入狀態 62
+
+
+狀態 62
+
+   39 ldef_stmt: LB DEF ID exp RB •
+
+    $default  使用規則 39 以縮減 (ldef_stmt)
