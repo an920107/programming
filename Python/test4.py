@@ -1,3 +1,3 @@
-import math
+s = "Farm Inn Nyanbarwan"
 
-print(math.log2(1E9))
+print(s.upper())
