@@ -12,7 +12,7 @@ void solve(unsigned long long n) {
         bs >>= 1;
     }
     reverse(bs_str.begin(), bs_str.end());
-    cout << bs_str << ' ' << bs_count << '\n';
+    cout << "The parity of " << bs_str << " is " << bs_count << " (mod 2).\n";
 }
 
 int main() {

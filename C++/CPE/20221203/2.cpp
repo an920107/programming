@@ -57,8 +57,9 @@ int main() {
     int t;
     cin >> t;
     string str;
-    while (t --) {
+    for (int n = 1; n <= t; n ++) {
         cin >> str;
+        cout << "Case " << n << ": ";
         sol.solve(str);
     }
 
