@@ -11,9 +11,9 @@ void solve(int n, int k, vector<vector<int>> &games) {
     for (auto &game : games) {
         bitset<4> bs;
         for (auto &move : game) {
-			if (move != Move::NONE)
-	            bs[move] = 1;
-		}
+            if (move != Move::NONE)
+                bs[move] = 1;
+        }
 
         if (bs.count() == 1)
             continue;
@@ -52,31 +52,31 @@ int main() {
 
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-	
-	bool newline_flag = false;
+    
+    bool newline_flag = false;
     int n, k;
     while (cin >> n) {
         if (n == 0)
             break;
         cin >> k;
-		if (newline_flag)
-			cout << '\n';
-		newline_flag = true;
+        if (newline_flag)
+            cout << '\n';
+        newline_flag = true;
 
         string move;
         int player;
         vector<vector<int>> games(k * n * (n - 1) / 2, vector<int>(n));
         for (int i = 0; i < games.size(); i ++) {
-			for (int j = 0; j < 2; j ++) {
-	            cin >> player >> move;
-		        player --;
-			    if (move[0] == 'r')
-				    games[i][player] = Move::ROCK;
-	            else if (move[0] == 'p')
-		            games[i][player] = Move::PAPER;
-	            else
-	                games[i][player] = Move::SCISSOR;
-			}
+            for (int j = 0; j < 2; j ++) {
+                cin >> player >> move;
+                player --;
+                if (move[0] == 'r')
+                    games[i][player] = Move::ROCK;
+                else if (move[0] == 'p')
+                    games[i][player] = Move::PAPER;
+                else
+                    games[i][player] = Move::SCISSOR;
+            }
         }
         solve(n, k, games);
     }
