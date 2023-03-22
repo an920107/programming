@@ -79,7 +79,9 @@
         "stdio.h": "c",
         "string.h": "c",
         "rope": "cpp",
-        "slist": "cpp"
+        "slist": "cpp",
+        "ranges": "cpp",
+        "span": "cpp"
     },
     // "java.jdt.ls.java.home": "C:\\Compilers\\Java\\jdk-17.0.2",
     "java.project.referencedLibraries": [

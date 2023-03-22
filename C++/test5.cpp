@@ -1,31 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const size_t bs_size = 35;
-
-void solve(unsigned long long n) {
-    bitset<bs_size> bs(n);
-    const int bs_count = bs.count();
-    string bs_str;
-    while (bs.any()) {
-        bs_str += to_string(bs[0]);
-        bs >>= 1;
+int solve(vector<int> &vec) {
+    int result = 1;
+    for (int start = 0; start < vec.size(); start ++) {
+        int index = start, current = 1;
+        bool state = true;
+        for (; index < vec.size() - 1; (++ index)) {
+            if (vec[index] > vec[index + 1] == state) {
+                result = max(result, (++ current));
+                state = !state;
+            }
+            else {
+                start = index;
+                break;
+            }
+        }
     }
-    reverse(bs_str.begin(), bs_str.end());
-    cout << bs_str << ' ' << bs_count << '\n';
+    return result;
 }
 
 int main() {
 
-    // ios_base::sync_with_stdio(false);
-    // cin.tie(0);
+    int n;
+    cin >> n;
+    vector<int> vec(n);
+    for (int i = 0; i < n; i ++)
+        cin >> vec[i];
 
-    unsigned long long n;
-    while (cin >> n) {
-        if (n == 0)
-            break;
-        solve(n);
-    }
+    cout << solve(vec) << '\n';
 
     return 0;
 }
+
+// + - + - + + + - + - +
