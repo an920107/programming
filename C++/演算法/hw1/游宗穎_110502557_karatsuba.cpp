@@ -116,10 +116,6 @@ public:
         this->tidy_up();
     }
 
-    void operator*=(const BigNumber &bn) {
-
-    }
-
     BigNumber operator*(int n) {
         BigNumber new_bn(*this);
         new_bn *= n;
@@ -127,9 +123,13 @@ public:
     }
 
     BigNumber operator*(BigNumber &bn) {
-        if (this->size() == 1 || bn.size() == 1) {
-            const int n = (this->size() == 1 ? this->front() : bn.front());
-            return (this->size() == 1 ? bn : *this) * n;
+        // if (this->size() == 1 || bn.size() == 1) {
+        //     const int n = (this->size() == 1 ? this->front() : bn.front());
+        //     return (this->size() == 1 ? bn : *this) * n;
+        // }
+
+        if (this->size() <= 4 && bn.size() <= 4) {
+            return BigNumber(this->parse_to_int() * bn.parse_to_int());
         }
         
         const int max_dig_2 = max(this->size(), bn.size()) / 2;
