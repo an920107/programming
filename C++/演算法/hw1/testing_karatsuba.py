@@ -16,7 +16,7 @@ with open("input", "r") as file:
 
 karatsuba_nanosecs = []
 
-for i in range(1, 5001):
+for i in range(1, 10001, 2):
     with open("input_karatsuba", "w") as file:
         file.write(testing_inputs[i - 1].strip("\n"))
     
