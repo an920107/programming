@@ -1,0 +1,676 @@
+2023-04-05 18:41:41,196 INFO    StreamThr :4126 [internal.py:wandb_internal():87] W&B internal server running at pid: 4126, started at: 2023-04-05 18:41:41.195674
+2023-04-05 18:41:41,198 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: status
+2023-04-05 18:41:41,201 INFO    WriterThread:4126 [datastore.py:open_for_write():85] open: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/run-tv1nxcn0.wandb
+2023-04-05 18:41:41,204 DEBUG   SenderThread:4126 [sender.py:send():336] send: header
+2023-04-05 18:41:41,208 DEBUG   SenderThread:4126 [sender.py:send():336] send: run
+2023-04-05 18:41:41,952 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: check_version
+2023-04-05 18:41:41,954 INFO    SenderThread:4126 [dir_watcher.py:__init__():219] watching files in: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files
+2023-04-05 18:41:41,954 INFO    SenderThread:4126 [sender.py:_start_run_threads():1078] run started: tv1nxcn0 with start time 1680691301.195327
+2023-04-05 18:41:41,954 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:41,954 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:41,954 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: check_version
+2023-04-05 18:41:42,297 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: run_start
+2023-04-05 18:41:42,956 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_created():278] file/dir created: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:43,094 DEBUG   HandlerThread:4126 [system_info.py:__init__():31] System info init
+2023-04-05 18:41:43,094 DEBUG   HandlerThread:4126 [system_info.py:__init__():46] System info init done
+2023-04-05 18:41:43,094 INFO    HandlerThread:4126 [system_monitor.py:start():183] Starting system monitor
+2023-04-05 18:41:43,095 INFO    SystemMonitor:4126 [system_monitor.py:_start():147] Starting system asset monitoring threads
+2023-04-05 18:41:43,096 INFO    SystemMonitor:4126 [interfaces.py:start():187] Started cpu monitoring
+2023-04-05 18:41:43,097 INFO    HandlerThread:4126 [system_monitor.py:probe():204] Collecting system info
+2023-04-05 18:41:43,097 INFO    SystemMonitor:4126 [interfaces.py:start():187] Started disk monitoring
+2023-04-05 18:41:43,098 INFO    SystemMonitor:4126 [interfaces.py:start():187] Started gpu monitoring
+2023-04-05 18:41:43,099 INFO    SystemMonitor:4126 [interfaces.py:start():187] Started memory monitoring
+2023-04-05 18:41:43,100 INFO    SystemMonitor:4126 [interfaces.py:start():187] Started network monitoring
+2023-04-05 18:41:43,118 DEBUG   HandlerThread:4126 [system_info.py:probe():195] Probing system
+2023-04-05 18:41:43,128 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:43,129 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:43,374 DEBUG   HandlerThread:4126 [system_info.py:_probe_git():180] Probing git
+2023-04-05 18:41:43,380 DEBUG   HandlerThread:4126 [system_info.py:_probe_git():188] Probing git done
+2023-04-05 18:41:43,380 DEBUG   HandlerThread:4126 [system_info.py:probe():240] Probing system done
+2023-04-05 18:41:43,380 DEBUG   HandlerThread:4126 [system_monitor.py:probe():213] {'os': 'Linux-5.15.90.1-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'python': '3.10.6', 'heartbeatAt': '2023-04-05T10:41:43.118196', 'startedAt': '2023-04-05T10:41:41.186611', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/home/an920107/Documents/Programming/C++/演算法/hw1/testing.py', 'codePath': 'C++/演算法/hw1/testing.py', 'git': {'remote': 'git@github.com:an920107/Programming.git', 'commit': '9ee15b9e6f550052b823ad79cbfa8e0035d0c4a5'}, 'email': 'an920107@gmail.com', 'root': '/home/an920107/Documents/Programming', 'host': 'DESKTOP-3DUF3UJ', 'username': 'an920107', 'executable': '/usr/bin/python', 'cpu_count': 4, 'cpu_count_logical': 8, 'cpu_freq': {'current': 2419.2000000000003, 'min': 0.0, 'max': 0.0}, 'cpu_freq_per_core': [{'current': 2419.2, 'min': 0.0, 'max': 0.0}, {'current': 2419.2, 'min': 0.0, 'max': 0.0}, {'current': 2419.2, 'min': 0.0, 'max': 0.0}, {'current': 2419.2, 'min': 0.0, 'max': 0.0}, {'current': 2419.2, 'min': 0.0, 'max': 0.0}, {'current': 2419.2, 'min': 0.0, 'max': 0.0}, {'current': 2419.2, 'min': 0.0, 'max': 0.0}, {'current': 2419.2, 'min': 0.0, 'max': 0.0}], 'disk': {'total': 1006.853931427002, 'used': 7.288352966308594}, 'gpu': 'NVIDIA GeForce MX330', 'gpu_count': 1, 'gpu_devices': [{'name': 'NVIDIA GeForce MX330', 'memory_total': 2147483648}], 'memory': {'total': 7.61126708984375}}
+2023-04-05 18:41:43,380 INFO    HandlerThread:4126 [system_monitor.py:probe():214] Finished collecting system info
+2023-04-05 18:41:43,380 INFO    HandlerThread:4126 [system_monitor.py:probe():217] Publishing system info
+2023-04-05 18:41:43,380 DEBUG   HandlerThread:4126 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2023-04-05 18:41:43,380 DEBUG   HandlerThread:4126 [system_info.py:_save_pip():67] Saving pip packages done
+2023-04-05 18:41:43,380 INFO    HandlerThread:4126 [system_monitor.py:probe():219] Finished publishing system info
+2023-04-05 18:41:43,382 DEBUG   SenderThread:4126 [sender.py:send():336] send: files
+2023-04-05 18:41:43,382 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-metadata.json with policy now
+2023-04-05 18:41:43,387 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: stop_status
+2023-04-05 18:41:43,388 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: stop_status
+2023-04-05 18:41:43,398 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,406 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,417 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,432 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,447 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,468 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,498 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,527 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,563 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,601 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,638 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,694 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,754 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,821 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,875 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,941 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:43,956 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_created():278] file/dir created: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/requirements.txt
+2023-04-05 18:41:43,957 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_created():278] file/dir created: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-metadata.json
+2023-04-05 18:41:43,967 DEBUG   SenderThread:4126 [sender.py:send():336] send: telemetry
+2023-04-05 18:41:43,967 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,967 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,968 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,968 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,968 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,969 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,969 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,969 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,972 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,972 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,972 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,972 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,972 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,973 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,973 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,973 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,973 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,973 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,974 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,974 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,974 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,974 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,974 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,975 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,975 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,975 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,975 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,975 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,975 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,976 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,976 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,976 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,976 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,977 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,977 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,977 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,977 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,977 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,977 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,978 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,978 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,978 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:43,978 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:43,978 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:43,979 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:44,023 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:44,026 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:44,026 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:44,026 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:44,128 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:44,128 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:44,128 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:44,129 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:44,231 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:44,231 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:44,231 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:44,232 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:44,332 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:44,333 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:44,333 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:44,334 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:44,506 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:44,507 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:44,507 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:44,508 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:44,617 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:44,617 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:44,618 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:44,618 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:44,662 INFO    wandb-upload_0:4126 [upload_job.py:push():138] Uploaded file /tmp/tmpxtcc61nkwandb/ovprx0cw-wandb-metadata.json
+2023-04-05 18:41:44,752 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:44,753 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:44,754 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:44,754 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:44,872 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:44,874 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:44,874 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:44,875 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:44,958 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:45,034 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:45,036 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:45,036 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:45,037 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:45,133 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:45,134 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:45,190 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:45,190 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:45,191 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:45,191 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:45,330 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:45,331 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:45,331 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:45,332 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:45,481 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:45,482 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:45,482 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:45,482 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:45,637 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:45,637 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:45,638 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:45,638 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:45,792 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:45,793 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:45,793 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:45,794 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:45,959 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:45,974 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:45,975 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:45,975 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:45,977 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:46,147 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:46,148 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:46,148 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:46,148 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:46,321 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:46,322 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:46,322 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:46,322 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 18:41:46,323 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:46,522 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:46,523 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:46,523 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:46,523 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:46,732 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:46,733 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:46,734 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:46,734 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:46,952 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:46,953 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:46,953 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:46,954 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:46,959 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:47,140 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:47,140 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:47,192 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:47,193 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:47,193 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:47,193 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:47,423 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:47,424 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:47,424 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:47,424 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:47,702 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:47,703 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:47,703 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:47,704 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:47,960 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:47,975 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:47,975 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:47,976 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:47,978 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:48,241 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:48,242 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:48,242 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:48,243 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:48,554 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:48,556 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:48,556 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:48,556 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:48,850 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:48,852 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:48,852 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:48,852 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:48,962 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:49,145 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:49,146 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:49,153 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:49,154 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:49,155 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:49,155 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:49,596 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:49,597 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:49,597 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:49,598 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:49,966 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:50,017 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:50,018 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:50,018 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:50,021 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:50,557 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:50,558 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:50,558 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:50,559 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:50,968 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:51,133 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:51,134 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:51,134 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:51,135 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:51,149 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:51,150 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:51,859 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:51,861 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:51,861 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:51,861 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 18:41:51,861 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:51,970 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:52,306 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:52,307 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:52,307 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:52,309 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:52,713 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:52,714 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:52,715 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:52,715 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:52,972 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:53,155 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:53,155 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:53,207 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:53,208 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:53,209 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:53,209 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:53,735 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:53,736 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:53,736 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:53,737 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:53,974 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:54,216 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:54,217 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:54,217 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:54,218 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:54,832 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:54,833 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:54,833 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:54,835 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:54,976 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:55,355 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:55,356 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:55,357 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:55,357 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:55,409 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:55,409 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:55,865 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:55,867 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:55,867 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:55,868 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:55,977 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:56,358 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:56,360 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:56,360 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:56,360 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:56,860 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:56,861 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:56,861 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:56,861 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 18:41:56,864 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:56,977 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:57,336 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:57,337 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:57,338 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:57,338 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:57,416 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:57,417 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:57,849 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:57,850 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:57,851 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:57,851 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:57,978 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:58,339 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:58,340 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:58,340 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:58,341 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:58,388 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: stop_status
+2023-04-05 18:41:58,388 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: stop_status
+2023-04-05 18:41:58,942 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:58,943 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:58,943 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:58,946 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:58,979 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:41:59,424 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:59,425 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:41:59,524 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:41:59,525 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:41:59,526 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:41:59,526 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:41:59,979 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:00,089 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:00,090 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:00,090 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:00,090 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:00,692 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:00,693 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:00,693 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:00,694 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:00,981 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:01,317 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:01,318 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:01,318 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:01,320 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:01,430 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:01,431 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:01,968 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:01,969 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:01,970 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:01,970 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 18:42:01,972 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:01,982 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:02,627 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:02,628 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:02,629 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:02,629 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:02,983 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:03,348 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:03,349 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:03,349 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:03,351 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:03,437 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:03,438 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:03,984 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:04,045 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:04,046 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:04,047 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:04,047 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:04,822 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:04,823 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:04,824 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:04,824 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:04,985 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:05,453 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:05,454 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:05,533 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:05,534 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:05,535 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:05,536 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:05,986 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:06,290 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:06,291 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:06,292 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:06,292 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:06,986 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:07,052 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:07,053 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:07,053 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:07,053 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 18:42:07,054 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:07,715 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:07,716 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:07,861 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:07,862 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:07,862 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:07,863 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:07,987 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:08,664 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:08,664 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:08,665 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:08,665 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:08,987 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:09,545 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:09,546 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:09,546 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:09,547 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:09,728 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:09,729 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:09,988 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:10,377 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:10,378 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:10,378 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:10,380 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:10,989 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:11,185 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:11,186 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:11,186 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:11,187 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:11,743 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:11,744 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:11,990 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:12,083 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:12,084 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:12,089 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 18:42:12,700 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:12,701 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:13,001 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/config.yaml
+2023-04-05 18:42:13,001 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:13,034 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:13,036 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:13,036 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:13,036 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:13,396 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: stop_status
+2023-04-05 18:42:13,397 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: stop_status
+2023-04-05 18:42:13,768 ERROR   gpu       :4126 [interfaces.py:aggregate():158] Failed to serialize metric: division by zero
+2023-04-05 18:42:13,772 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:13,773 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:13,894 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:13,895 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:13,895 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:13,896 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:14,002 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:14,784 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:14,785 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:14,785 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:14,787 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:15,003 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:15,631 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:15,632 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:15,632 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:15,633 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:15,778 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:15,778 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:16,006 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:16,558 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:16,559 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:16,559 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:16,560 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:17,007 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:17,520 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:17,521 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:17,522 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:17,524 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:17,785 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:17,785 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:18,008 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:18,483 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:18,484 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:18,484 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:18,484 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 18:42:18,485 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:19,021 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:19,440 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:19,441 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:19,441 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:19,442 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:20,033 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:20,036 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:20,036 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:20,446 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:20,446 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:20,447 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:20,448 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:21,034 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:21,413 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:21,414 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:21,415 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:21,415 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:22,035 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:22,075 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:22,075 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:22,542 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:22,543 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:22,543 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:22,545 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:23,043 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:23,548 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 18:42:23,864 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:23,864 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:23,865 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:23,865 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:24,044 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:24,080 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:24,080 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:24,867 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:24,868 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:24,868 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:24,870 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:25,046 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:25,827 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:25,828 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:25,828 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:25,829 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:26,046 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:26,085 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:26,085 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:26,883 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:26,884 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:26,884 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:26,886 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:27,047 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:27,902 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:27,903 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:27,903 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:27,904 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:28,048 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:28,091 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:28,092 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:28,397 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: stop_status
+2023-04-05 18:42:28,397 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: stop_status
+2023-04-05 18:42:28,711 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 18:42:28,972 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:28,973 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:28,974 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:28,975 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:29,051 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:30,099 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:30,100 ERROR   gpu       :4126 [interfaces.py:monitor():141] Failed to sample metric: Not Supported
+2023-04-05 18:42:30,182 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: partial_history
+2023-04-05 18:42:30,184 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:30,184 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:30,185 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:30,186 DEBUG   SenderThread:4126 [sender.py:send():336] send: exit
+2023-04-05 18:42:30,186 INFO    SenderThread:4126 [sender.py:send_exit():559] handling exit code: 0
+2023-04-05 18:42:30,186 INFO    SenderThread:4126 [sender.py:send_exit():561] handling runtime: 47
+2023-04-05 18:42:30,186 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:30,186 INFO    SenderThread:4126 [sender.py:send_exit():567] send defer
+2023-04-05 18:42:30,187 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:30,187 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 0
+2023-04-05 18:42:30,187 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:30,187 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 0
+2023-04-05 18:42:30,187 INFO    SenderThread:4126 [sender.py:transition_state():587] send defer: 1
+2023-04-05 18:42:30,187 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:30,187 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 1
+2023-04-05 18:42:30,187 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:30,188 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 1
+2023-04-05 18:42:30,188 INFO    SenderThread:4126 [sender.py:transition_state():587] send defer: 2
+2023-04-05 18:42:30,188 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:30,188 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 2
+2023-04-05 18:42:30,188 INFO    HandlerThread:4126 [system_monitor.py:finish():193] Stopping system monitor
+2023-04-05 18:42:30,188 DEBUG   SystemMonitor:4126 [system_monitor.py:_start():161] Starting system metrics aggregation loop
+2023-04-05 18:42:30,189 DEBUG   SystemMonitor:4126 [system_monitor.py:_start():168] Finished system metrics aggregation loop
+2023-04-05 18:42:30,189 DEBUG   SystemMonitor:4126 [system_monitor.py:_start():172] Publishing last batch of metrics
+2023-04-05 18:42:30,190 INFO    HandlerThread:4126 [interfaces.py:finish():199] Joined cpu monitor
+2023-04-05 18:42:30,190 INFO    HandlerThread:4126 [interfaces.py:finish():199] Joined disk monitor
+2023-04-05 18:42:30,200 ERROR   gpu       :4126 [interfaces.py:aggregate():158] Failed to serialize metric: division by zero
+2023-04-05 18:42:30,200 INFO    HandlerThread:4126 [interfaces.py:finish():199] Joined gpu monitor
+2023-04-05 18:42:30,200 INFO    HandlerThread:4126 [interfaces.py:finish():199] Joined memory monitor
+2023-04-05 18:42:30,200 INFO    HandlerThread:4126 [interfaces.py:finish():199] Joined network monitor
+2023-04-05 18:42:30,201 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:30,201 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 2
+2023-04-05 18:42:30,201 INFO    SenderThread:4126 [sender.py:transition_state():587] send defer: 3
+2023-04-05 18:42:30,201 DEBUG   SenderThread:4126 [sender.py:send():336] send: stats
+2023-04-05 18:42:30,201 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:30,201 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 3
+2023-04-05 18:42:30,202 DEBUG   SenderThread:4126 [sender.py:send():336] send: history
+2023-04-05 18:42:30,202 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: summary_record
+2023-04-05 18:42:30,202 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:30,202 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:30,202 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 3
+2023-04-05 18:42:30,202 INFO    SenderThread:4126 [sender.py:transition_state():587] send defer: 4
+2023-04-05 18:42:30,203 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:30,203 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 4
+2023-04-05 18:42:30,203 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:30,203 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 4
+2023-04-05 18:42:30,203 INFO    SenderThread:4126 [sender.py:transition_state():587] send defer: 5
+2023-04-05 18:42:30,203 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:30,203 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 5
+2023-04-05 18:42:30,204 DEBUG   SenderThread:4126 [sender.py:send():336] send: summary
+2023-04-05 18:42:30,204 INFO    SenderThread:4126 [sender.py:_save_file():1332] saving file wandb-summary.json with policy end
+2023-04-05 18:42:30,204 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:30,204 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 5
+2023-04-05 18:42:30,204 INFO    SenderThread:4126 [sender.py:transition_state():587] send defer: 6
+2023-04-05 18:42:30,205 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:30,205 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 6
+2023-04-05 18:42:30,205 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:30,205 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 6
+2023-04-05 18:42:30,205 INFO    SenderThread:4126 [sender.py:transition_state():587] send defer: 7
+2023-04-05 18:42:30,205 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: status_report
+2023-04-05 18:42:30,205 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:30,205 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 7
+2023-04-05 18:42:30,206 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:30,206 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 7
+2023-04-05 18:42:30,206 INFO    SenderThread:4126 [sender.py:transition_state():587] send defer: 8
+2023-04-05 18:42:30,206 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:30,206 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 8
+2023-04-05 18:42:30,207 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:30,207 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 8
+2023-04-05 18:42:30,213 INFO    SenderThread:4126 [sender.py:transition_state():587] send defer: 9
+2023-04-05 18:42:30,214 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:30,214 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 9
+2023-04-05 18:42:30,214 DEBUG   SenderThread:4126 [sender.py:send():336] send: artifact
+2023-04-05 18:42:31,061 INFO    Thread-13 :4126 [dir_watcher.py:_on_file_modified():295] file/dir modified: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:31,190 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: poll_exit
+2023-04-05 18:42:32,134 INFO    wandb-upload_0:4126 [upload_job.py:push():93] Skipped uploading /home/an920107/.local/share/wandb/artifacts/staging/tmpsm2fgpi7
+2023-04-05 18:42:32,602 INFO    wandb-upload_1:4126 [upload_job.py:push():96] Uploaded file /home/an920107/.local/share/wandb/artifacts/staging/tmp_l81pp6p
+2023-04-05 18:42:34,510 INFO    SenderThread:4126 [sender.py:send_artifact():1428] sent artifact job-git_github.com_an920107_Programming.git_C_______hw1_testing.py - {'id': 'QXJ0aWZhY3Q6NDE0Mjg0OTUz', 'digest': 'a9f6328587476a38a0609e4a6f73fa89', 'state': 'PENDING', 'aliases': [], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjYwNTMxOTI0', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6NDE0MjgyMTAw', 'versionIndex': 1}}, 'version': 'latest'}
+2023-04-05 18:42:34,511 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:34,511 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 9
+2023-04-05 18:42:34,511 INFO    SenderThread:4126 [dir_watcher.py:finish():365] shutting down directory watcher
+2023-04-05 18:42:35,090 INFO    SenderThread:4126 [dir_watcher.py:finish():395] scan: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files
+2023-04-05 18:42:35,090 INFO    SenderThread:4126 [dir_watcher.py:finish():409] scan save: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json wandb-summary.json
+2023-04-05 18:42:35,090 INFO    SenderThread:4126 [dir_watcher.py:finish():409] scan save: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/requirements.txt requirements.txt
+2023-04-05 18:42:35,095 INFO    SenderThread:4126 [dir_watcher.py:finish():409] scan save: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-metadata.json wandb-metadata.json
+2023-04-05 18:42:35,096 INFO    SenderThread:4126 [dir_watcher.py:finish():409] scan save: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/config.yaml config.yaml
+2023-04-05 18:42:35,097 INFO    SenderThread:4126 [sender.py:transition_state():587] send defer: 10
+2023-04-05 18:42:35,097 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: poll_exit
+2023-04-05 18:42:35,097 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:35,098 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 10
+2023-04-05 18:42:35,101 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:35,101 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 10
+2023-04-05 18:42:35,102 INFO    SenderThread:4126 [file_pusher.py:finish():164] shutting down file pusher
+2023-04-05 18:42:36,140 INFO    wandb-upload_1:4126 [upload_job.py:push():138] Uploaded file /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/requirements.txt
+2023-04-05 18:42:36,210 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: keepalive
+2023-04-05 18:42:36,497 INFO    wandb-upload_0:4126 [upload_job.py:push():138] Uploaded file /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/wandb-summary.json
+2023-04-05 18:42:36,499 INFO    wandb-upload_2:4126 [upload_job.py:push():138] Uploaded file /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/files/config.yaml
+2023-04-05 18:42:36,700 INFO    Thread-12 (_thread_body):4126 [sender.py:transition_state():587] send defer: 11
+2023-04-05 18:42:36,700 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:36,700 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 11
+2023-04-05 18:42:36,701 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:36,701 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 11
+2023-04-05 18:42:36,701 INFO    SenderThread:4126 [file_pusher.py:join():169] waiting for file pusher
+2023-04-05 18:42:36,701 INFO    SenderThread:4126 [sender.py:transition_state():587] send defer: 12
+2023-04-05 18:42:36,701 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:36,701 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 12
+2023-04-05 18:42:36,702 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:36,702 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 12
+2023-04-05 18:42:36,925 INFO    SenderThread:4126 [sender.py:transition_state():587] send defer: 13
+2023-04-05 18:42:36,926 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:36,926 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 13
+2023-04-05 18:42:36,926 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:36,926 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 13
+2023-04-05 18:42:36,926 INFO    SenderThread:4126 [sender.py:transition_state():587] send defer: 14
+2023-04-05 18:42:36,927 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: defer
+2023-04-05 18:42:36,927 INFO    HandlerThread:4126 [handler.py:handle_request_defer():170] handle defer: 14
+2023-04-05 18:42:36,927 DEBUG   SenderThread:4126 [sender.py:send():336] send: final
+2023-04-05 18:42:36,927 DEBUG   SenderThread:4126 [sender.py:send():336] send: footer
+2023-04-05 18:42:36,927 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: defer
+2023-04-05 18:42:36,927 INFO    SenderThread:4126 [sender.py:send_request_defer():583] handle sender defer: 14
+2023-04-05 18:42:36,928 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: poll_exit
+2023-04-05 18:42:36,928 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: server_info
+2023-04-05 18:42:36,928 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: get_summary
+2023-04-05 18:42:36,929 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: sampled_history
+2023-04-05 18:42:36,930 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: poll_exit
+2023-04-05 18:42:36,930 DEBUG   SenderThread:4126 [sender.py:send_request():363] send_request: server_info
+2023-04-05 18:42:37,216 INFO    MainThread:4126 [wandb_run.py:_footer_history_summary_info():3422] rendering history
+2023-04-05 18:42:37,216 INFO    MainThread:4126 [wandb_run.py:_footer_history_summary_info():3454] rendering summary
+2023-04-05 18:42:37,217 INFO    MainThread:4126 [wandb_run.py:_footer_sync_info():3380] logging synced files
+2023-04-05 18:42:37,217 DEBUG   HandlerThread:4126 [handler.py:handle_request():144] handle_request: shutdown
+2023-04-05 18:42:37,217 INFO    HandlerThread:4126 [handler.py:finish():842] shutting down handler
+2023-04-05 18:42:37,940 INFO    WriterThread:4126 [datastore.py:close():298] close: /home/an920107/Documents/Programming/C++/演算法/hw1/wandb/run-20230405_184141-tv1nxcn0/run-tv1nxcn0.wandb
+2023-04-05 18:42:38,225 INFO    SenderThread:4126 [sender.py:finish():1504] shutting down sender
+2023-04-05 18:42:38,225 INFO    SenderThread:4126 [file_pusher.py:finish():164] shutting down file pusher
+2023-04-05 18:42:38,225 INFO    SenderThread:4126 [file_pusher.py:join():169] waiting for file pusher

@@ -1,17 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+void solve(vector<int> &vec) {
+
+    vector<vector<int>> dp(vec.size() + 1, vector<int>(vec.size() + 1));
+    
+}
+
 int main() {
 
-    long long t0 = 0xAAAAAAAA;
-    long long t1 = 0x12345678;
-    long long t2;
+    // ios_base::sync_with_stdio(false);
+    // cin.tie(0);
 
-
-    t2 = t0 >> 3;
-    t2 &= 0xFFEF;
-
-    printf("%llX\n", t2);
+    int n;
+    cin >> n;
+    vector<int> vec(n);
+    for (int i = 0; i < n; i ++)
+        cin >> vec[n];
+    solve(vec);
 
     return 0;
 }

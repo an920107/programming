@@ -62,91 +62,68 @@
 #include <bits/stdc++.h> 
 使う namespace std っ 
  
-タイプ定義 構造体 time カラ 
-    整数 month と day と hour と minute っ 
-    time から まで カラ マデ 
-    time から 文字列 & str まで カラ 
-        文字 tmp っ 
-        stringstream ss っ 
-        ss 左に動く str っ 
-        ss 右に動く month 右に動く tmp 右に動く day 右に動く tmp 右に動く hour 右に動く tmp 右に動く minute っ 
-    マデ 
-    friend 論理値 operator 小なり から 定数 time & x と 定数 time & y まで カラ 
-        もしも から x の month 等しくない y の month まで 戻る x の month 小なり y の month っ 
-        もしも から x の day 等しくない y の day まで 戻る x の day 小なり y の day っ 
-        もしも から x の hour 等しくない y の hour まで 戻る x の hour 小なり y の hour っ 
-        戻る x の minute 小なり y の minute っ 
-    マデ 
-マデ Time っ 
+類 Solve カラ 
+プライベート : 
  
-タイプ定義 構造体 record カラ 
-    文字列 license っ 
-    Time time っ 
-    論理値 inOut っ 
-    整数 loc っ 
-    record から まで カラ マデ 
-    record から 文字列 & line まで カラ 
-        文字列 tmp っ 
-        stringstream ss っ 
-        ss 左に動く line っ 
-        ss 右に動く license 右に動く tmp っ 
-        time は Time から tmp まで っ 
-        ss 右に動く tmp っ 
-        inOut は から tmp 等しい "exit" まで っ 
-        ss 右に動く loc っ 
-    マデ 
-マデ Record っ 
+    vector 小なり pair 小なり 整数 と 整数 右に動く existedRoads っ 
+    vector 小なり vector 小なり 整数 右に動く adjacencyList っ 
+    整数 existedRoadsCount と cityRange っ 
  
-自動タイプ recordCmp は [ ] から 定数 Record & x と 定数 Record & y まで カラ 
-    もしも から x の license 等しい y の license まで 戻る x の time 小なり y の time っ 
-    戻る x の license 小なり y の license っ 
-マデ っ 
+パブリック : 
  
-虚 solve から 定数 整数 & t まで カラ 
-    整数 price [ 24 ] っ 
-    文字列 line っ 
-    stringstream ss っ 
-    vector 小なり Record 大なり data っ 
-    map 小なり 文字列 と 整数 大なり result っ 
-    getline から 入力 と line まで っ 
-    ss 左に動く line っ 
-    為に から 整数 i は 0 っ i 小なり 24 っ i 増える まで 
-        ss 右に動く price [ i ] っ 
-    繰り返す から getline から 入力 と line まで まで カラ 
-        もしも から line 等しい "" まで 中断する っ 
-        data の emplace_back から Record から line まで まで っ 
-    マデ 
-    sort から data の begin から まで と data の end から まで と recordCmp まで っ 
-    為に から 自動タイプ iter は data の begin から まで っ iter 等しくない data の end から まで っ 増える iter まで カラ 
-        自動タイプ last は iter 増える っ 
-        もしも から iter 等しい data の end から まで まで 中断する っ 
-        もしも から から 掛け算 last まで の license 等しくない から 掛け算 iter まで の license || から 掛け算 last まで の inOut 大なりイコール から 掛け算 iter まで の inOut まで カラ 
-            減る iter っ 
-            続ける っ 
+    Solve から 整数 _cityRange と 定数 vector 小なり pair 小なり 整数 と 整数 右に動く & _existedRoads まで 
+    : existedRoads から _existedRoads まで と cityRange から _cityRange まで カラ 
+ 
+        existedRoadsCount は existedRoads の size から まで っ 
+ 
+        adjacencyList は vector 小なり vector 小なり 整数 右に動く から cityRange 足す 1 まで っ 
+        為に から 自動タイプ & [ x と y ] : existedRoads まで カラ 
+            adjacencyList [ x ] の emplace_back から y まで っ 
+            adjacencyList [ y ] の emplace_back から x まで っ 
         マデ 
-        自動タイプ fd は result の find から から 掛け算 iter まで の license まで っ 
-        整数 cost は price [ から 掛け算 last まで の time の hour ] 掛け算 abs から から 掛け算 iter まで の loc 引く から 掛け算 last まで の loc まで 足す 100 っ 
-        もしも から fd 等しい result の end から まで まで 
-            result の insert から make_pair から から 掛け算 iter まで の license と cost 足す 200 まで まで っ 
-        それ以外 から 掛け算 fd まで の second 足される cost っ 
     マデ 
-    為に から 自動タイプ & p : result まで 
-        出力 左に動く p の first 左に動く " $" 左に動く p の second 割る 100 左に動く '.' 
-            左に動く setw から 2 まで 左に動く setfill から '0' まで 左に動く p の second 残る 100 左に動く '\n' っ 
-    もしも から t まで 出力 左に動く '\n' っ 
-マデ 
+ 
+    虚 run から まで カラ 
+ 
+        vector 小なり 整数 大なり blockLeader っ 
+        vector 小なり 論理値 大なり visited から cityRange 足す 1 まで っ 
+ 
+        function 小なり 虚 から 整数 まで 大なり dfs は [ & ] から 整数 root まで ポインター 虚 カラ 
+            visited [ root ] は 真 っ 
+            為に から 自動タイプ & city : adjacencyList [ root ] まで 
+                もしも から ! visited [ city ] まで 
+                    dfs から city まで っ 
+        マデ っ 
+ 
+        為に から 整数 city は 1 っ city 小なりイコール cityRange っ city 増える まで カラ 
+            もしも から visited [ city ] まで 
+                続ける っ 
+ 
+            blockLeader の emplace_back から city まで っ 
+            dfs から city まで っ 
+        マデ 
+ 
+        定数 整数 blockCount は blockLeader の size から まで っ 
+        出力 左に動く blockCount 引く 1 左に動く '\n' っ 
+        為に から 整数 i は 1 っ i 小なり blockCount っ i 増える まで 
+            出力 左に動く blockLeader [ i 引く 1 ] 左に動く ' ' 左に動く blockLeader [ i ] 左に動く '\n' っ 
+    マデ 
+マデ っ 
  
 整数 main から まで カラ 
  
     ios_base の中の sync_with_stdio から 偽 まで っ 
     入力 の tie から 0 まで っ 
  
-    整数 t っ 
-    文字列 tmp っ 
-    入力 右に動く t っ 
-    getline から 入力 と tmp まで っ 
-    getline から 入力 と tmp まで っ 
-    繰り返す から t 減る まで 
-        solve から t まで っ 
+    整数 cityRange と roadCount っ 
+    入力 右に動く cityRange 右に動く roadCount っ 
+ 
+    vector 小なり pair 小なり 整数 と 整数 右に動く existedRoads から roadCount まで っ 
+    為に から 整数 i は 0 っ i 小なり roadCount っ i 増える まで 
+        入力 右に動く existedRoads [ i ] の first 右に動く existedRoads [ i ] の second っ 
+     
+    Solve sol から cityRange と existedRoads まで っ 
+    sol の run から まで っ 
+ 
     戻る 0 っ 
 マデ 
