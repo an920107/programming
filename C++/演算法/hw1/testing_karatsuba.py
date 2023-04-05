@@ -20,8 +20,8 @@ for i in range(1, 5001):
     with open("input_karatsuba", "w") as file:
         file.write(testing_inputs[i - 1].strip("\n"))
     
-    os.system("./karatsuba -t 10 < input_karatsuba > output_karatsuba")
+    os.system("./karatsuba -t 1 < input_karatsuba > output_karatsuba")
     with open("output_karatsuba", "r") as file:
         karatsuba_nanosecs.append(int(file.readline()))
 
-    wandb.log({"cost time": karatsuba_nanosecs[-1]}, step=i)
+    wandb.log({"cost time": karatsuba_nanosecs[-1] / 1E6}, step=i)

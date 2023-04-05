@@ -20,8 +20,8 @@ for i in range(1, 5001):
     with open("input_n2", "w") as file:
         file.write(testing_inputs[i - 1].strip("\n"))
     
-    os.system("./n2 -t 10 < input_n2 > output_n2")
+    os.system("./n2 -t 1 < input_n2 > output_n2")
     with open("output_n2", "r") as file:
         n2_nanosecs.append(int(file.readline()))
     
-    wandb.log({"cost time": n2_nanosecs[-1]}, step=i)
+    wandb.log({"cost time": n2_nanosecs[-1] / 1E6}, step=i)
