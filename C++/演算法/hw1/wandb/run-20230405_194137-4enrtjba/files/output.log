@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/an920107/Documents/Programming/C++/演算法/hw1/testing_n2.py", line 25, in <module>
+    n2_nanosecs.append(int(file.readline()))
+ValueError: invalid literal for int() with base 10: ''
+Traceback (most recent call last):
+  File "/home/an920107/Documents/Programming/C++/演算法/hw1/testing_n2.py", line 25, in <module>
+    n2_nanosecs.append(int(file.readline()))
+ValueError: invalid literal for int() with base 10: ''

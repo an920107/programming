@@ -1,0 +1,85 @@
+{
+    "os": "Linux-5.15.90.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "python": "3.10.6",
+    "heartbeatAt": "2023-04-05T10:41:43.118196",
+    "startedAt": "2023-04-05T10:41:41.186611",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "/home/an920107/Documents/Programming/C++/\u6f14\u7b97\u6cd5/hw1/testing.py",
+    "codePath": "C++/\u6f14\u7b97\u6cd5/hw1/testing.py",
+    "git": {
+        "remote": "git@github.com:an920107/Programming.git",
+        "commit": "9ee15b9e6f550052b823ad79cbfa8e0035d0c4a5"
+    },
+    "email": "an920107@gmail.com",
+    "root": "/home/an920107/Documents/Programming",
+    "host": "DESKTOP-3DUF3UJ",
+    "username": "an920107",
+    "executable": "/usr/bin/python",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 2419.2000000000003,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2419.2,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2419.2,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2419.2,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2419.2,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2419.2,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2419.2,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2419.2,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 2419.2,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "total": 1006.853931427002,
+        "used": 7.288352966308594
+    },
+    "gpu": "NVIDIA GeForce MX330",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce MX330",
+            "memory_total": 2147483648
+        }
+    ],
+    "memory": {
+        "total": 7.61126708984375
+    }
+}

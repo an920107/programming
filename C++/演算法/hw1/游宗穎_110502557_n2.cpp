@@ -1,99 +1,152 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-typedef long long llong;
-const int digits_per_unit = 1;
-const llong carry = 1E1;
+class BigNumber : protected vector<int> {
+protected:
 
-class BigNumber {
-private:
-
-    vector<llong> vec;
-
-    void tidyUp() {
-        vec.insert(vec.begin(), 0);
-        for (int i = vec.size(); i > 0; i --) {
-            if (vec[i] >= carry) {
-                vec[i - 1] += vec[i] / carry;
-                vec[i] %= carry;
+    void tidy_up() {
+        int new_size = 1;
+        for (int i = this->size() - 1; i >= 0; i --)
+            if ((*this)[i] != 0) {
+                new_size = i + 1;
+                break;
             }
-        }
-        if (vec[0] == 0)
-            vec.erase(vec.begin());
+        this->resize(new_size);
     }
 
 public:
 
-    BigNumber() : vec({0}) {}
+    // 建構子
 
-    BigNumber(string str) {
-        while (!str.empty()) {
-            int begin = str.length() - digits_per_unit;
-            begin = begin < 0 ? 0 : begin;
-            string sub = str.substr(begin, digits_per_unit);
-            str = str.substr(0, str.length() - sub.length());
-            vec.emplace_back(stoll(sub));
-        }
-        reverse(vec.begin(), vec.end());
+    BigNumber() : vector<int>(1, 0) {}
+
+    BigNumber(size_t n, int value) : vector<int>(n, value) {}
+
+    BigNumber(vector<int>::iterator first, vector<int>::iterator last) :
+    vector<int>(first, last) {}
+
+    BigNumber(const string &str) :
+    vector<int>(str.length()) {
+        for (int i = 0; i < str.length(); i ++)
+            (*this)[i] = str[str.length() - i - 1] - '0';
+        this->tidy_up();
     }
 
-    BigNumber operator+(const BigNumber &x) {
-        int thisIndex = vec.size() - 1;
-        int xIndex = x.vec.size() - 1;
-        BigNumber result;
-        result.vec.clear();
-        while (thisIndex >= 0 || xIndex >= 0) {
-            const llong thisNum = thisIndex >= 0 ? vec[thisIndex --] : 0;
-            const llong xNum = xIndex >= 0 ? x.vec[xIndex --] : 0;
-            result.vec.emplace_back(thisNum + xNum);
-        }
-        reverse(result.vec.begin(), result.vec.end());
-        result.tidyUp();
-        return result;
+    BigNumber(int num) : BigNumber(to_string(num)) {}
+
+    // 運算
+
+    void operator<<=(size_t n) {
+        const vector<int> to_insert(n, 0);
+        this->insert(this->begin(), to_insert.begin(), to_insert.end());
     }
 
-    BigNumber operator*(const BigNumber &x) {
-        BigNumber result;
-        for (int i = vec.size() - 1; i >= 0; i --) {
-            BigNumber tmp;
-            tmp.vec.clear();
-            for (int j = x.vec.size() - 1; j >= 0; j --)
-                tmp.vec.emplace_back(vec[i] * x.vec[j]);
-            reverse(tmp.vec.begin(), tmp.vec.end());
-            tmp.tidyUp();
-            for (int k = 1; k < vec.size() - i; k ++)
-                tmp.vec.emplace_back(0);
-            result = result + tmp;
-            result.tidyUp();
-        }
-        return result;
+    BigNumber operator<<(size_t n) {
+        BigNumber new_bn(*this);
+        new_bn <<= n;
+        return new_bn;
     }
 
-    friend istream& operator>>(istream &is, BigNumber &num) {
+    void operator>>=(size_t n) {
+        *this = BigNumber(this->begin() + n, this->end());
+    }
+
+    BigNumber operator>>(size_t n) {
+        BigNumber new_bn(*this);
+        new_bn >>= n;
+        return new_bn;
+    }
+
+    void operator+=(const BigNumber &bn) {
+        this->resize(max(this->size(), bn.size()) + 1, 0);
+        for (int i = 0; i < this->size() - 1; i ++) {
+            if (i < bn.size())
+                (*this)[i] += bn[i];
+            (*this)[i + 1] += (*this)[i] / 10;
+            (*this)[i] %= 10;
+        }
+        this->tidy_up();
+    }
+
+    BigNumber operator+(const BigNumber &bn) {
+        BigNumber new_bn(*this);
+        new_bn += bn;
+        return new_bn;
+    }
+
+    void operator*=(int n) {
+        BigNumber multiplicand(*this);
+        // *this = BigNumber(this->size() + 1, 0);
+        // for (int i = 0; i < this->size() - 1; i ++) {
+        //     (*this)[i] += multiplicand[i] * n;
+        //     (*this)[i + 1] += (*this)[i] / 10;
+        //     (*this)[i] %= 10;
+        // }
+        // this->tidy_up();
+
+        *this = BigNumber();
+        while (n --)
+            *this += multiplicand;
+    }
+
+    void operator*=(const BigNumber &bn) {
+        if (bn.size() == 1) {
+            *this *= bn.front();
+            return;
+        }
+
+        BigNumber multiplicand(*this);
+        *this = BigNumber();
+        for (int i = 0; i < bn.size(); i ++) {
+            *this += multiplicand * BigNumber(1, bn[i]);
+            multiplicand <<= 1;
+        }
+    }
+
+    BigNumber operator*(const BigNumber &bn) {
+        BigNumber new_bn(*this);
+        new_bn *= bn;
+        return new_bn;
+    }
+
+
+
+    // 輸出入
+
+    friend istream &operator>>(istream &is, BigNumber &bn) {
         string str;
         is >> str;
-        num = BigNumber(str);
+        bn = BigNumber(str);
         return is;
     }
 
-    friend ostream& operator<<(ostream &os, const BigNumber &num) {
-        for (auto &x : num.vec)
-            os << x;
+    friend ostream &operator<<(ostream &os, const BigNumber &bn) {
+        for (int i = bn.size() - 1; i >= 0; i --)
+            os << bn[i];
         return os;
     }
 
 };
 
-int main() {
+int main(int argc, char** argv) {
 
-    BigNumber x, y, z;
+    BigNumber x, y;
     cin >> x >> y;
-    clock_t start = clock();
-    for (int i = 0; i < 1; i ++)
-        z = x * y;
-    clock_t end = clock();
-    cout << z << '\n';
-    cout << (long long)(double(end - start) / CLOCKS_PER_SEC * 1E9 / 1) << '\n';
+
+    if (argc <= 1)
+        cout << x * y << '\n';
+    else {
+        for (int i = 1; i < argc; i ++) {
+            if (string(argv[i]) == "-t") {
+                int t = atoi(argv[++ i]);
+                clock_t start = clock();
+                for (int i = 0; i < t; i ++)
+                    x * y;
+                clock_t end = clock();
+                cout << (long long)(double(end - start) / CLOCKS_PER_SEC * 1E9 / t) << '\n';
+            }
+        }
+    }
 
     return 0;
 }

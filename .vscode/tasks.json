@@ -29,6 +29,7 @@
             "command": "/usr/bin/g++",
             "args": [
                 "-fdiagnostics-color=always",
+                "-fsanitize=address",
                 "-std=c++17",
                 "-g",
                 "${file}",
