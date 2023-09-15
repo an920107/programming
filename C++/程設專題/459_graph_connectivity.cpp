@@ -8,7 +8,7 @@ int solve(int max_node, vector<pair<int, int>> &edges) {
         graph[p.second].emplace_back(p.first);
     }
 
-    vector<bool> visited(max_node, false);
+    vector<bool> visited(max_node + 1, false);
     int result = 0;
     function<void(int)> dfs = [&](int point) {
         if (visited[point]) return;
@@ -16,7 +16,7 @@ int solve(int max_node, vector<pair<int, int>> &edges) {
         for (auto x : graph[point])
             dfs(x);
     };
-    for (int i = 0; i < max_node; i++) {
+    for (int i = 0; i <= max_node; i++) {
         if (!visited[i]) {
             result++;
             dfs(i);
@@ -40,7 +40,7 @@ int main() {
             if (input == "") break;
             edges.emplace_back(make_pair(input[0] - 'A', input[1] - 'A'));
         }
-        cout << solve(max_node - 'A', edges) << "\n";
+        cout << solve(max_node - 'A', edges) << (count ? "\n\n" : "\n");
     }
     return 0;
 }
