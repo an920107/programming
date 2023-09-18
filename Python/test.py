@@ -1,42 +1,61 @@
-import signal
 import os
+import signal
+import threading
 
-PWD = "986052"
+def handler(signum, frame):
+    raise KeyboardInterrupt()
+
+class Lock:
+    password: str
+    message: str
+
+    def __init__(self, password: str, message: str):
+        self.password = password
+        self.message = message
+
 MAX_TRY = 10
-EXIT_CODE = "_"
-
-def signal_handler(sig, frame):
-    raise KeyboardInterrupt
+LOCKS: list[Lock] = [
+    Lock("??????", "Give me five~"),
+    Lock("??????", "Rat is stupid but scary."),
+    Lock("2B4841", "I've said, DON'T LOOK AT ME!!!"),
+    Lock("B8BCAB", "The knife is pretty sharp, isn't it?"),
+    Lock("??????", "Is this my head?"),
+]
 
 if __name__ == "__main__":
-    os.system("clear")
+    signal.signal(signal.SIGTSTP, handler)
 
-    signal.signal(signal.SIGINT, signal_handler)
-    signal.signal(signal.SIGTSTP, signal_handler)
-
-    locking = True
     tried = 0
-    while locking:
+    stage = 0
+    while stage >= 0:
         try:
-            print(f"Enter the password ({tried}/{MAX_TRY}):")
-            val = input("#")
-            if (len(val) == 0):
+            print(f"Enter the password: (you have tried {tried}/{MAX_TRY})")
+            pwd = input("#").upper()
+            if pwd == LOCKS[stage].password:
+                print(LOCKS[stage].message)
+                stage = stage + 1 if stage < len(LOCKS) - 1 else -1
+            elif len(pwd) == 0:
                 continue
-            elif (val == PWD):
-                locking = False
             else:
-                print("Wrong!!!")
+                print(f"WA ({stage / len(LOCKS) * 100}%)\n")
+                stage = 0
                 tried += 1
-                if (tried == MAX_TRY):
+                if tried > MAX_TRY:
+                    threading.Thread(target=lambda: os.system("play -q {os.getcwd()}/shriek.mp3")).start()
                     break
+                threading.Thread(target=lambda: os.system("play -q {os.getcwd()}/laugh.mp3")).start()
         except KeyboardInterrupt:
             print()
             continue
-    while locking:
-        try:
-            val = input("Locking forever...")
-            if (val == EXIT_CODE):
-                break
-        except KeyboardInterrupt:
-            print()
-    print("Unlocked!!!")
+    if stage < 0:
+        print("Unlocked!!")
+        threading.Thread(target=lambda: os.system("sox -q ??.mp3"))
+    else:
+        while True:
+            try:
+                cmd = input("Locked forever...")
+                if cmd == "~":
+                    break
+            except KeyboardInterrupt:
+                print()
+                continue
