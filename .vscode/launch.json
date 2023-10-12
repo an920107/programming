@@ -2,6 +2,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "JAVA",
+            "request": "launch",
+            "mainClass": "JAVA",
+            "projectName": "programming_6074c602"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "programming_6074c602"
+        },
+        {
             "name": "Python",
             "type": "python",
             "request": "launch",
@@ -14,7 +28,9 @@
             "type": "java",
             "request": "launch",
             "cwd": "${workspaceRoot}\\.vscode\\classpath",
-            "classPaths": ["${workspaceRoot}\\.vscode\\classpath"],
+            "classPaths": [
+                "${workspaceRoot}\\.vscode\\classpath"
+            ],
             "mainClass": "${file}",
             "vmArgs": "--module-path C:\\Compilers\\Java\\javafx-sdk-17.0.2\\lib --add-modules=javafx.controls,javafx.fxml"
         },
@@ -57,7 +73,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "build - C++ (Linux)",
+            "preLaunchTask": "build - C++ (Linux)"
         },
         {
             "name": "Assembly32",
@@ -76,7 +92,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "ASM32",
+            "preLaunchTask": "ASM32"
         }
     ]
 }
