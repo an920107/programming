@@ -1,8 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-    unordered_map<string, int> mp;
-    cout << mp["123"];
-    return 0;
-}
+enum Type { A, B, C };
+
+template <typename T>
+class Enum {
+   private:
+    T value;
+
+   public:
+    enum X = T;
+
+    Enum() = default;
+    Enum(T value) : value(value) {}
+};
+
+int main() { return 0; }
