@@ -100,7 +100,8 @@
     "java.project.sourcePaths": [
         "Java\\計實作業",
         "Java\\計實考試",
-        "Java\\計概作業"
+        "Java\\計概作業",
+        "C++/程設專題/week_4"
     ],
     "python.analysis.typeCheckingMode": "basic",
     "[python]": {
