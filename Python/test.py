@@ -1,18 +1,10 @@
-import dis
+words = input().split(" ")
 
+word_count = dict()
+for word in words:
+    if word not in word_count.keys():
+        word_count[word] = 0
+    word_count[word] += 1
 
-def f1(x):
-    return x // 4
-
-
-def f2(x):
-    return x >> 2
-
-
-def f3(x):
-    return x / 4
-
-
-dis.dis(f1)
-dis.dis(f2)
-dis.dis(f3)
+for word, count in word_count.items():
+    print(f"[{word}]:{count}")
