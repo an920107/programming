@@ -1,18 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-enum Type { A, B, C };
+struct Point {
+    int x, y;
 
-template <typename T>
-class Enum {
-   private:
-    T value;
-
-   public:
-    enum X = T;
-
-    Enum() = default;
-    Enum(T value) : value(value) {}
+    Point(int x, int y) : x(x), y(y) {}
 };
 
-int main() { return 0; }
+
+int main() {
+    map<string, int> m;
+    m["a"]++;
+    m["b"] = 20;
+    for (auto p : m) {
+        cout << p.first << " " << p.second << endl;
+    }
+
+    set<int> s;
+    s.insert(1);
+    s.insert(1);
+    s.insert(-1);
+    for (auto p : s) {
+        cout << p << endl;
+    }
+    if (s.find(5) != s.end()) {
+        cout << "yes" << endl;
+    };
+
+    double d;
+
+    printf("%.2lf\n", d);
+
+
+    return 0;
+}
