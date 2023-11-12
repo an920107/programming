@@ -1,36 +1,50 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Point {
-    int x, y;
+class Symbol {
+   public:
+    enum Type { terminal,
+                nonterminal,
+                empty,
+                eof };
 
-    Point(int x, int y) : x(x), y(y) {}
+   private:
+    char _c;
+
+   public:
+    Symbol(char c) : _c(c) {}
+
+    char get() const { return _c; }
+    Type type() const {
+        if (_c >= 'a' && _c <= 'z')
+            return terminal;
+        else if (_c >= 'A' && _c <= 'Z')
+            return nonterminal;
+        else if (_c == ';')
+            return empty;
+        else if (_c == '$')
+            return eof;
+        return terminal;
+    }
+
+    bool operator==(const Symbol &rhs) const {
+        return _c == rhs._c;
+    }
+
+    bool operator>(const Symbol &rhs) const {
+        return _c > rhs._c;
+    }
+
+    bool operator<(const Symbol &rhs) const {
+        return _c < rhs._c;
+    }
 };
 
-
 int main() {
-    map<string, int> m;
-    m["a"]++;
-    m["b"] = 20;
-    for (auto p : m) {
-        cout << p.first << " " << p.second << endl;
-    }
-
-    set<int> s;
-    s.insert(1);
-    s.insert(1);
-    s.insert(-1);
-    for (auto p : s) {
-        cout << p << endl;
-    }
-    if (s.find(5) != s.end()) {
-        cout << "yes" << endl;
-    };
-
-    double d;
-
-    printf("%.2lf\n", d);
-
+    set<Symbol> s;
+    s.insert(Symbol(';'));
+    s.insert(Symbol('$'));
+    s.erase(Symbol('a'));
 
     return 0;
 }

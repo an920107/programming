@@ -67,21 +67,36 @@ class Grammer : public map<Symbol, Rule> {
         FirstSet result;
         for (auto &p : *this) {
             auto nonterminal_symbol = p.first;
+            vector<Symbol> current_set;
+            current_set.clear();
 
             function<void(Symbol)> dfs = [&](Symbol key) {
                 for (auto &sequence : this->at(key)) {
-                    auto first_symbol = sequence.front();
-                    if (first_symbol.type() == Symbol::nonterminal) {
-                        dfs(first_symbol);
-                        for (auto &symbol : result[first_symbol])
-                            result[key].insert(symbol);
-                    } else {
-                        result[key].insert(first_symbol);
+                    for (auto iter = sequence.begin(); iter != sequence.end(); iter++) {
+                        // 如果是 non terminal
+                        if (iter->type() == Symbol::nonterminal) {
+                            // 用 dfs 尋找 non terminal 的 first set
+                            dfs(*iter);
+                            // 如果 non terminal 的 first set 最後是 empty
+                            if (current_set.back().type() == Symbol::empty) {
+                                // 如果已經迭代到底了
+                                if (iter != sequence.end() - 1)
+                                    // 移除最後的 empty symbol
+                                    current_set.pop_back();
+                            // 否則結束迭代
+                            } else break;
+                        // 如果是 terminal
+                        } else {
+                            // 將 terminal 加入 current_set
+                            current_set.push_back(*iter);
+                            // 結束迭代 symbol sequence
+                            break;
+                        }
                     }
                 }
             };
-
             dfs(nonterminal_symbol);
+            result[nonterminal_symbol].insert(current_set.begin(), current_set.end());
         }
         return result;
     }
