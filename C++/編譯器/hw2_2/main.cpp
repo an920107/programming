@@ -79,7 +79,7 @@ class Grammer : public map<Symbol, Rule> {
                             dfs(*iter);
                             // 如果 non terminal 的 first set 最後是 empty
                             if (current_set.back().type() == Symbol::empty) {
-                                // 如果已經迭代到底了
+                                // 如果還沒迭代到底
                                 if (iter != sequence.end() - 1)
                                     // 移除最後的 empty symbol
                                     current_set.pop_back();
