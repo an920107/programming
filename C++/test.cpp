@@ -1,50 +1,91 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Symbol {
+template <typename T>
+class Sequence : public vector<T> {
    public:
-    enum Type { terminal,
-                nonterminal,
-                empty,
-                eof };
+    friend istream &operator>>(istream &is, Sequence<T> &seq) {
+        seq.emplace_back();
+        is >> seq.back();
+        return is;
+    }
 
-   private:
-    char _c;
+    friend ostream &operator<<(ostream &os, const Sequence<T> &seq) {
+        for (int i = 0; i < seq.size(); i++) {
+            cout << seq[i] << (i == seq.size() - 1 ? "" : " ");
+        }
+        return os;
+    }
+};
 
+struct Node {
+    int data = 0;
+    struct Node *left = nullptr;
+    struct Node *right = nullptr;
+};
+
+class BinaryTree {
    public:
-    Symbol(char c) : _c(c) {}
+    Node *root = nullptr;
 
-    char get() const { return _c; }
-    Type type() const {
-        if (_c >= 'a' && _c <= 'z')
-            return terminal;
-        else if (_c >= 'A' && _c <= 'Z')
-            return nonterminal;
-        else if (_c == ';')
-            return empty;
-        else if (_c == '$')
-            return eof;
-        return terminal;
+    BinaryTree() {}
+
+    BinaryTree(vector<int> &nums) {
+        function<void(Node *&, int)> insert = [&](Node *&node, int i) {
+            if (i >= nums.size() || nums[i] == 0) return;
+            node = new Node;
+            node->data = nums[i];
+            insert(node->left, i * 2 + 1);
+            insert(node->right, i * 2 + 2);
+        };
+        insert(root, 0);
     }
 
-    bool operator==(const Symbol &rhs) const {
-        return _c == rhs._c;
+    Sequence<int> preorder() {
+        Sequence<int> result;
+        function<void(Node *)> dfs = [&](Node *node) {
+            if (node == nullptr) return;
+            result.emplace_back(node->data);
+            dfs(node->left);
+            dfs(node->right);
+        };
+        dfs(root);
+        return result;
     }
 
-    bool operator>(const Symbol &rhs) const {
-        return _c > rhs._c;
+    Sequence<int> inorder() {
+        Sequence<int> result;
+        function<void(Node *)> dfs = [&](Node *node) {
+            if (node == nullptr) return;
+            dfs(node->left);
+            result.emplace_back(node->data);
+            dfs(node->right);
+        };
+        dfs(root);
+        return result;
     }
 
-    bool operator<(const Symbol &rhs) const {
-        return _c < rhs._c;
+    Sequence<int> postorder() {
+        Sequence<int> result;
+        function<void(Node *)> dfs = [&](Node *node) {
+            if (node == nullptr) return;
+            dfs(node->left);
+            dfs(node->right);
+            result.emplace_back(node->data);
+        };
+        dfs(root);
+        return result;
     }
 };
 
 int main() {
-    set<Symbol> s;
-    s.insert(Symbol(';'));
-    s.insert(Symbol('$'));
-    s.erase(Symbol('a'));
-
+    Sequence<int> nums;
+    int t;
+    cin >> t;
+    while (t--) cin >> nums;
+    BinaryTree bt(nums);
+    cout << bt.preorder() << "\n"
+         << bt.inorder() << "\n"
+         << bt.postorder() << "\n";
     return 0;
 }
