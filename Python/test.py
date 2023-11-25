@@ -1,10 +1,17 @@
-words = input().split(" ")
+import multiprocessing
+import math
 
-word_count = dict()
-for word in words:
-    if word not in word_count.keys():
-        word_count[word] = 0
-    word_count[word] += 1
+def run():
+    x = 1
+    while True:
+        print(x)
+        x *= 1.00000001
+        if x > 2:
+            x = math.sqrt(x)
 
-for word, count in word_count.items():
-    print(f"[{word}]:{count}")
+l = [multiprocessing.Process(target=run) for _ in range(100)]
+for p in l:
+    p.start()
+
+for p in l:
+    p.join()
