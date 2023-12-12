@@ -4,13 +4,13 @@
 #include <string.h>
 #include <stdbool.h>
 
-// yy definitions
 extern int yylex(void);
+extern void yyerror(const char *);
 
-void yyerror(const char *message) {
-	printf("%s", message);
-    exit(0);
+void throw_error() {
+    yyerror("");
 }
+
 
 // struct definitions
 typedef struct node node_t;
@@ -40,28 +40,28 @@ void stack_push(stack_t* s, int value) {
 }
 
 void stack_pop(stack_t* s) {
-    if (stack_is_empty(s)) return;
+    if (stack_is_empty(s)) throw_error();
     s->top = s->top->last;
 }
 
 int stack_top(stack_t* s) {
-    if (stack_is_empty(s)) return 0;
+    if (stack_is_empty(s)) {
+        throw_error();
+        return 0;
+    }
     return s->top->value;
 }
 
 pair_t get_params(stack_t* s) {
     pair_t result;
-    if (stack_is_empty(s)) yyerror("Invalid format\n");
     result.x = stack_top(s);
     stack_pop(s);
-    if (stack_is_empty(s)) yyerror("Invalid format\n");
     result.y = stack_top(s);
     stack_pop(s);
     return result;
 }
 
 int get_param(stack_t* s) {
-    if (stack_is_empty(s)) yyerror("Invalid format\n");
     int result = stack_top(s);
     stack_pop(s);
     return result;
@@ -69,6 +69,7 @@ int get_param(stack_t* s) {
 
 // initialization
 stack_t num_stack = {NULL};
+
 %}
 
 %token LOAD ADD SUB MUL MOD INC DEC LF NUM;
@@ -100,6 +101,7 @@ mul: MUL {
 
 mod: MOD {
     pair_t params = get_params(&num_stack);
+    if (params.y == 0) throw_error();
     stack_push(&num_stack, params.x % params.y);
 };
 
@@ -114,12 +116,17 @@ dec: DEC {
 };
 
 %%
+void yyerror(const char *message) {
+	printf("Invalid format\n");
+    exit(0);
+}
+
 int main(int argc, char **argv) {
     yyparse();
 
     int param = get_param(&num_stack);
     if (!stack_is_empty(&num_stack))
-        yyerror("Invalid format\n");
+        throw_error();
     else printf("%d\n", param);
 
     return 0;
