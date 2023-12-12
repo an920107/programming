@@ -76,7 +76,7 @@ stack_t num_stack = {NULL};
 
 %%
 
-commands: commands command LF | LF | ;
+commands: commands command LF | commands LF | ;
 
 command: load | add | sub | mul | mod | inc | dec;
 
