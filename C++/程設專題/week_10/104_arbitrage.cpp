@@ -54,6 +54,7 @@ vector<int> solve(vector<vector<double>> &table) {
             return;
         }
         find_path(t - 1, i, path[t][i][j]);
+        // 貨幣編號從 1 開始
         result.emplace_back(j + 1);
     };
     find_path(best_t, best_i, best_i);
