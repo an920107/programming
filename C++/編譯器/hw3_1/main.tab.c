@@ -140,7 +140,8 @@ int get_param(stack_t* s) {
 // initialization
 stack_t num_stack = {NULL};
 
-#line 144 "main.tab.c"
+
+#line 145 "main.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -515,7 +516,7 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  3
+#define YYFINAL  2
 /* YYLAST -- Last index in YYTABLE.  */
 #define YYLAST   10
 
@@ -576,8 +577,8 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    78,    78,    78,    78,    80,    80,    80,    80,    80,
-      80,    80,    82,    86,    91,    96,   101,   107,   112
+       0,    79,    79,    79,    79,    81,    81,    81,    81,    81,
+      81,    81,    83,    87,    92,    97,   102,   108,   113
 };
 #endif
 
@@ -605,7 +606,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-10)
+#define YYPACT_NINF (-11)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -619,9 +620,9 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -9,   -10,     0,   -10,    -1,   -10,   -10,   -10,   -10,   -10,
-     -10,    -8,   -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,
-     -10
+     -11,     0,   -11,   -10,   -11,   -11,   -11,   -11,   -11,   -11,
+     -11,    -8,   -11,   -11,   -11,   -11,   -11,   -11,   -11,   -11,
+     -11
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -629,21 +630,21 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       4,     3,     0,     1,     0,    13,    14,    15,    16,    17,
-      18,     0,     5,     6,     7,     8,     9,    10,    11,    12,
+       4,     0,     1,     0,    13,    14,    15,    16,    17,    18,
+       3,     0,     5,     6,     7,     8,     9,    10,    11,    12,
        2
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10,   -10
+     -11,   -11,   -11,   -11,   -11,   -11,   -11,   -11,   -11,   -11
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2,    11,    12,    13,    14,    15,    16,    17,    18
+       0,     1,    11,    12,    13,    14,    15,    16,    17,    18
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -651,22 +652,22 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       3,     1,    20,     4,     5,     6,     7,     8,     9,    10,
-      19
+       2,    19,    20,     3,     4,     5,     6,     7,     8,     9,
+      10
 };
 
 static const yytype_int8 yycheck[] =
 {
-       0,    10,    10,     3,     4,     5,     6,     7,     8,     9,
-      11
+       0,    11,    10,     3,     4,     5,     6,     7,     8,     9,
+      10
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,    10,    13,     0,     3,     4,     5,     6,     7,     8,
-       9,    14,    15,    16,    17,    18,    19,    20,    21,    11,
+       0,    13,     0,     3,     4,     5,     6,     7,     8,     9,
+      10,    14,    15,    16,    17,    18,    19,    20,    21,    11,
       10
 };
 
@@ -680,7 +681,7 @@ static const yytype_int8 yyr1[] =
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     3,     1,     0,     1,     1,     1,     1,     1,
+       0,     2,     3,     2,     0,     1,     1,     1,     1,     1,
        1,     1,     2,     1,     1,     1,     1,     1,     1
 };
 
@@ -1145,70 +1146,70 @@ yyreduce:
   switch (yyn)
     {
   case 12: /* load: LOAD NUM  */
-#line 82 "main.y"
+#line 83 "main.y"
                {
     stack_push(&num_stack, yyvsp[0]);
 }
-#line 1153 "main.tab.c"
+#line 1154 "main.tab.c"
     break;
 
   case 13: /* add: ADD  */
-#line 86 "main.y"
+#line 87 "main.y"
          {
     pair_t params = get_params(&num_stack);
     stack_push(&num_stack, params.x + params.y);
 }
-#line 1162 "main.tab.c"
+#line 1163 "main.tab.c"
     break;
 
   case 14: /* sub: SUB  */
-#line 91 "main.y"
+#line 92 "main.y"
          {
     pair_t params = get_params(&num_stack);
     stack_push(&num_stack, params.x - params.y);
 }
-#line 1171 "main.tab.c"
+#line 1172 "main.tab.c"
     break;
 
   case 15: /* mul: MUL  */
-#line 96 "main.y"
+#line 97 "main.y"
          {
     pair_t params = get_params(&num_stack);
     stack_push(&num_stack, params.x * params.y);
 }
-#line 1180 "main.tab.c"
+#line 1181 "main.tab.c"
     break;
 
   case 16: /* mod: MOD  */
-#line 101 "main.y"
+#line 102 "main.y"
          {
     pair_t params = get_params(&num_stack);
     if (params.y == 0) throw_error();
     stack_push(&num_stack, params.x % params.y);
 }
-#line 1190 "main.tab.c"
+#line 1191 "main.tab.c"
     break;
 
   case 17: /* inc: INC  */
-#line 107 "main.y"
+#line 108 "main.y"
          {
     int param = get_param(&num_stack);
     stack_push(&num_stack, param + 1);
 }
-#line 1199 "main.tab.c"
+#line 1200 "main.tab.c"
     break;
 
   case 18: /* dec: DEC  */
-#line 112 "main.y"
+#line 113 "main.y"
          {
     int param = get_param(&num_stack);
     stack_push(&num_stack, param - 1);
 }
-#line 1208 "main.tab.c"
+#line 1209 "main.tab.c"
     break;
 
 
-#line 1212 "main.tab.c"
+#line 1213 "main.tab.c"
 
       default: break;
     }
@@ -1401,7 +1402,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 117 "main.y"
+#line 118 "main.y"
 
 void yyerror(const char *message) {
 	printf("Invalid format\n");
