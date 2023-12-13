@@ -17,7 +17,7 @@ dec { return DEC; }
     return NUM;
 }
 
-[ \r] { /** ignore */ }
+[ \t\r] { /** ignore */ }
 . { return '.'; }
 
 %%
