@@ -45,10 +45,30 @@ struct _mtx {
 %left LB RB
 %token LM RM COMMA <inum>NUM LF
 %type <mtx>matrix
+%type <mtx>eval
 
 %%
 
-line: matrix LF;
+line: eval LF;
+
+eval:
+matrix|
+LB eval RB { $$ = $2; }|
+eval ADD eval {
+    if (!mtx_equal($1, $3))
+        throw_error($<col_count>2);
+    $$ = $1;
+}|
+eval MUL eval {
+    if (!mtx_can_mul($1, $3))
+        throw_error($<col_count>2);
+    $$.row = $1.row;
+    $$.col = $3.col;
+}|
+eval TRANS {
+    $$.row = $1.col;
+    $$.col = $1.row;
+};
 
 matrix:
 LM NUM COMMA NUM RM {
@@ -56,30 +76,7 @@ LM NUM COMMA NUM RM {
         throw_error($<col_count>1);
     $$.row = $2;
     $$.col = $4;
-}|
-
-LB matrix RB {
-    $$ = $2;
-}|
-
-matrix ADD matrix {
-    if (!mtx_equal($1, $3))
-        throw_error($<col_count>2);
-    $$ = $1;
-}|
-
-matrix MUL matrix {
-    if (!mtx_can_mul($1, $3))
-        throw_error($<col_count>2);
-    $$.row = $1.row;
-    $$.col = $3.col;
-}|
-
-matrix TRANS {
-    $$.row = $1.col;
-    $$.col = $1.row;
 };
-
 
 %%
 
