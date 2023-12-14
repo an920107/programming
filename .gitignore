@@ -16,3 +16,4 @@ Python/TensorFlow/venv
 Python/AniGamerDownloader
 Python/AniGamer
 **/node_modules
+.venv

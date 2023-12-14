@@ -1,0 +1,6 @@
+%{
+#include "main.tab.h"
+%}
+%%
+
+%%
