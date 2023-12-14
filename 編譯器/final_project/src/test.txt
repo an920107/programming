@@ -1,0 +1,10 @@
+1234456789
+a123
+a-
+x
+#t     #f
+mod
+mod1
+xmod
+modx
+1mod
