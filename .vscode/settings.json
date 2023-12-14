@@ -83,7 +83,20 @@
         "ranges": "cpp",
         "span": "cpp",
         "format": "cpp",
-        "stacktrace": "cpp"
+        "stacktrace": "cpp",
+        "barrier": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "coroutine": "cpp",
+        "expected": "cpp",
+        "source_location": "cpp",
+        "latch": "cpp",
+        "numbers": "cpp",
+        "semaphore": "cpp",
+        "spanstream": "cpp",
+        "stdfloat": "cpp",
+        "stop_token": "cpp",
+        "syncstream": "cpp"
     },
     // "java.jdt.ls.java.home": "C:\\Compilers\\Java\\jdk-17.0.2",
     "java.project.referencedLibraries": [

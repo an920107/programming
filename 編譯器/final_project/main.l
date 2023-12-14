@@ -1,6 +1,0 @@
-%{
-#include "main.tab.h"
-%}
-%%
-
-%%
