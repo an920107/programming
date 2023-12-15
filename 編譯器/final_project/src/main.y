@@ -26,7 +26,7 @@ unordered_map<string, Symbol> symbols;
 #include "include/util.hpp"
 using namespace std;
 
-#define _DEBUG_
+// #define _DEBUG_
 }
 
 %union {
@@ -50,7 +50,8 @@ using namespace std;
       <symbol>add <symbol>substract <symbol>multiply <symbol>divide 
       <symbol>modulus <symbol>greater <symbol>less <symbol>equal
       <symbol>and_op <symbol>or_op <symbol>not_op
-      <symbol>test_exp <symbol>then_exp <symbol>else_exp
+      <symbol>test_exp <symbol>then_exp <symbol>else_exp <symbol>fun_body
+      <symbol>fun_name <symbol>local_def_stmts <symbol>local_def_stmt
 
 %%
 
@@ -58,7 +59,7 @@ stmts: stmts stmt | stmt
 
 stmt: exp |
 def_stmt {
-    string command($<symbol>1->name + "=" + $<symbol>1->command);
+    string command(string($<symbol>1->name) + "=" + $<symbol>1->command);
     if (is_debug) cout << ">" << command << "\n";
     py.commit(command);
 } | 
@@ -107,7 +108,7 @@ add: LB ADD exp exps RB {
         throw runtime_error("type mismatch. the types of arguments after '+' must be number.");
     auto params = split($4->command, ",");
     $$ = new Symbol(DataType::NUMBER, "(" + $3->command);
-    for (auto param : params) $$->command += "+" + param;
+    for (auto param : params) $$->command += " + " + param;
     $$->command += ")";
 }
 
@@ -115,7 +116,7 @@ substract: LB SUB exp exp RB {
     if ($3->type != DataType::NUMBER || $4->type != DataType::NUMBER)
         throw runtime_error("type mismatch. the types of arguments after '-' must be number.");
     $$ = new Symbol(
-        DataType::NUMBER, "(" + $3->command + "-" + $4->command + ")");
+        DataType::NUMBER, "(" + $3->command + " - " + $4->command + ")");
 }
 
 multiply: LB MUL exp exps RB {
@@ -123,7 +124,7 @@ multiply: LB MUL exp exps RB {
         throw runtime_error("type mismatch. the types of arguments after '*' must be number.");
     auto params = split($4->command, ",");
     $$ = new Symbol(DataType::NUMBER, "(" + $3->command);
-    for (auto param : params) $$->command += "*" + param;
+    for (auto param : params) $$->command += " * " + param;
     $$->command += ")";
 }
 
@@ -131,28 +132,28 @@ divide: LB DIV exp exp RB {
     if ($3->type != DataType::NUMBER || $4->type != DataType::NUMBER)
         throw runtime_error("type mismatch. the types of arguments after '/' must be number.");
     $$ = new Symbol(
-        DataType::NUMBER, "(" + $3->command + "//" + $4->command + ")");
+        DataType::NUMBER, "(" + $3->command + " // " + $4->command + ")");
 }
 
 modulus: LB MOD exp exp RB {
     if ($3->type != DataType::NUMBER || $4->type != DataType::NUMBER)
         throw runtime_error("type mismatch. the types of arguments after 'mod' must be number.");
     $$ = new Symbol(
-        DataType::NUMBER, "(" + $3->command + "%" + $4->command + ")");
+        DataType::NUMBER, "(" + $3->command + " % " + $4->command + ")");
 }
 
 greater: LB GT exp exp RB {
     if ($3->type != DataType::NUMBER || $4->type != DataType::NUMBER)
         throw runtime_error("type mismatch. the types of arguments after '>' must be number.");
     $$ = new Symbol(
-        DataType::BOOLEAN, "(" + $3->command + ">" + $4->command + ")");
+        DataType::BOOLEAN, "(" + $3->command + " > " + $4->command + ")");
 }
 
 less: LB LT exp exp RB {
     if ($3->type != DataType::NUMBER || $4->type != DataType::NUMBER)
         throw runtime_error("type mismatch. the types of arguments after '<' must be number.");
     $$ = new Symbol(
-        DataType::BOOLEAN, "(" + $3->command + "<" + $4->command + ")");
+        DataType::BOOLEAN, "(" + $3->command + " < " + $4->command + ")");
 }
 
 equal: LB EQ exp exps RB {
@@ -160,7 +161,7 @@ equal: LB EQ exp exps RB {
         ($3->type != DataType::BOOLEAN || $4->type != DataType::BOOLEAN))
         throw runtime_error("type mismatch. the types of arguments after '=' must be same in boolean or number.");
     $$ = new Symbol(
-        DataType::BOOLEAN, "(" + $3->command + "==" + $4->command + ")");
+        DataType::BOOLEAN, "(" + $3->command + " == " + $4->command + ")");
 }
 
 logical_op: and_op | or_op | not_op
@@ -190,9 +191,10 @@ not_op: LB NOT exp RB {
 }
 
 def_stmt: LB DEF variable exp RB {
-    Symbol new_symbol($3->name, $4->type, $4->command);
-    symbols[$3->name] = new_symbol;
-    $<symbol>$ = &new_symbol;
+    Symbol* new_symbol = new Symbol(*$4);
+    new_symbol->name = $3->name;
+    symbols[$3->name] = *new_symbol;
+    $<symbol>$ = new_symbol;
 }
 
 variable: ID {
@@ -201,18 +203,30 @@ variable: ID {
     else $$ = new Symbol(*$1);
 }
 
-fun_exp: LB FUN LB fun_ids RB fun_body RB {}
+fun_exp: LB FUN LB { $<symbol>$ = new Symbol(); } fun_ids RB fun_body RB {}
 
-fun_ids: fun_ids ID | ;
+fun_ids: fun_ids ID {
+    string id = string($2);
+    $<symbol>0->symbols[id] = Symbol(id, DataType::DYNAMIC, id);
+} | ;
 
-fun_body: exp
+fun_body: local_def_stmts exp {}
 
 fun_call: LB fun_exp params RB {}
         | LB fun_name params RB {}
 
 params: params exp | ;
 
-fun_name: ID {};
+fun_name: ID {}
+
+local_def_stmts: local_def_stmts local_def_stmt | {} ;
+
+local_def_stmt: LB DEF variable exp RB {
+    Symbol* new_symbol = new Symbol(*$4);
+    new_symbol->name = $3->name;
+    $<symbol>-2->symbols[$3->name] = *new_symbol;
+    $$ = new_symbol;
+}
 
 if_exp: LB IF test_exp then_exp else_exp RB {
     if ($4->type != $5->type)

@@ -48,7 +48,7 @@ print\-bool { if (is_debug) cerr << "[PRINT_B]\n"; return PRINT_B; }
 }
 
 [a-z][a-z0-9\-]* {
-    if (is_debug) cerr << "ID\n";
+    if (is_debug) cerr << "[ID]\n";
     yylval.id_name = new string(yytext);
     return ID;
 }

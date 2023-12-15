@@ -1,0 +1,7 @@
+(define x 1)
+(define x (+ 1 x))
+(print-num x)
+(fun (x)
+    (define x 1)
+    (+ x 1)
+)
