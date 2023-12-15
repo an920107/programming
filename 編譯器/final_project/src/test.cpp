@@ -1,12 +1,13 @@
-#include <bits/stdc++.h>
-#include "include/python.hpp"
+#include <iostream>
+#include <unordered_map>
+#include <unordered_map>
+#include "include/util.hpp"
 using namespace std;
 
 int main() {
-    Python py;
-    py.commit("for i in range(1, 10):");
-    py.commit(" if i % 2 == 0:");
-    py.commit("  print(f'count {i}')");
-    cout << py.exec();
+    string str = ",12,-23,111,2334,";
+    for (auto s : split(str, ",")) {
+        cout << s << "~\n";
+    }
     return 0;
 }
