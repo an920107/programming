@@ -10,8 +10,12 @@ const bool is_debug = false;
 extern int yylex(void);
 extern void yyerror(const char*);
 
+void execute();
+
 Python py;
-unordered_map<string, Symbol> symbols;
+stack<void*> esp;
+Function main_func;
+State scope(&main_func);
 %}
 
 %code requires {
@@ -21,23 +25,31 @@ unordered_map<string, Symbol> symbols;
 #include <stdexcept>
 #include <unordered_map>
 #include <vector>
+#include <algorithm>
+#include <stack>
 #include "include/python.hpp"
-#include "include/symbol.hpp"
-#include "include/util.hpp"
+#include "include/ast.hpp"
+#include "include/object.hpp"
+#include "include/operator.hpp"
+#include "include/state.hpp"
+#include "include/execute.hpp"
 using namespace std;
 
 // #define _DEBUG_
 }
 
 %union {
-    bool bool_val;
-    int num_val;
-    string* id_name;
-    Symbol* symbol;
+    string* text;
+    ASTNode* node;
+    Object* obj;
+    Function* fun_obj;
+    Number* num_obj;
+    Boolean* bool_obj;
+    Operator* opr;
 }
 
-%token <id_name>ID
-%token <bool_val>BOOL_VAL <num_val>NUM_VAL
+%token <text>ID
+%token <bool_obj>BOOL_VAL <num_obj>NUM_VAL
 %token ADD SUB
 %token MUL DIV MOD
 %token AND OR NOT
@@ -45,213 +57,249 @@ using namespace std;
 %token PRINT_B PRINT_N DEF FUN IF
 %token LB RB
 
-%type <symbol>exp <symbol>exps <symbol>variable <symbol>fun_call
-      <symbol>if_exp <symbol>num_op <symbol>logical_op <symbol>fun_exp
-      <symbol>add <symbol>substract <symbol>multiply <symbol>divide 
-      <symbol>modulus <symbol>greater <symbol>less <symbol>equal
-      <symbol>and_op <symbol>or_op <symbol>not_op
-      <symbol>test_exp <symbol>then_exp <symbol>else_exp <symbol>fun_body
-      <symbol>fun_name <symbol>local_def_stmts <symbol>local_def_stmt
+%type <node>exp exps params fun_body
+%type <obj>variable
+%type <opr>opr_exp add substract multiply divide modulus
+      greater less equal and_op or_op not_op if_exp
+%type <fun_obj>fun_exp fun_call fun_name fun_var
 
 %%
 
 stmts: stmts stmt | stmt
 
-stmt: exp |
-def_stmt {
-    string command(string($<symbol>1->name) + "=" + $<symbol>1->command);
-    if (is_debug) cout << ">" << command << "\n";
-    py.commit(command);
-} | 
-print_stmt {
-    string command("print(" + $<symbol>1->command + ")");
-    if (is_debug) cout << ">" << command << "\n";
-    py.commit(command);
+stmt: def_stmt {
+    scope.reset();
+} | exec {
+    if (is_debug)
+        scope.back()->traverse();
+    execute(scope);
+    scope.reset();
 }
+
+exec: exp | print_stmt
 
 print_stmt:
-LB PRINT_B exp RB {
-    if ($3->type != DataType::BOOLEAN) throw runtime_error("type mismatch.");
-    $3->command = "'#t' if " + $3->command + " else '#f'";
-    $<symbol>$ = $3;
+LB PRINT_B {
+    scope.append(new Operator(DataType::NONE, "pb"));
+} exp RB {
+    ((Operator*)scope.back())->append($4);
+    scope.pop_back();
 } |
-LB PRINT_N exp RB {
-    if ($3->type != DataType::NUMBER) throw runtime_error("type mismatch.");
-    $<symbol>$ = $3;
+LB PRINT_N {
+    scope.append(new Operator(DataType::NONE, "pn"));
+} exp RB {
+    ((Operator*)scope.back())->append($4);
+    scope.pop_back();
 }
 
-exp:
-BOOL_VAL {
-    $$ = new Symbol(DataType::BOOLEAN, $1 ? "True" : "False");
-} |
-NUM_VAL {
-    $$ = new Symbol(DataType::NUMBER, to_string($1));
-} | 
-variable {
-    if (symbols.find($1->name) == symbols.end())
-        throw runtime_error("'" + $1->name + "' has not been defined.");
-    $$ = $1;
-} | num_op | logical_op | fun_exp | fun_call | if_exp
-
-exps:
-exps exp {
-    if ($1->type != $2->type)
-        throw runtime_error("type mismatch. the types of all the arguments must be same.");
-    $$ = new Symbol($1->type, $1->command + "," + $2->command);
-} | exp
-
-num_op: add | substract | multiply | divide | modulus 
-      | greater | less | equal
-
-add: LB ADD exp exps RB {
-    if ($3->type != DataType::NUMBER || $4->type != DataType::NUMBER)
-        throw runtime_error("type mismatch. the types of arguments after '+' must be number.");
-    auto params = split($4->command, ",");
-    $$ = new Symbol(DataType::NUMBER, "(" + $3->command);
-    for (auto param : params) $$->command += " + " + param;
-    $$->command += ")";
+exp: BOOL_VAL {
+    $$ = (ASTNode*)$1;
+} | NUM_VAL {
+    $$ = (ASTNode*)$1;
+} | variable {
+    $$ = (ASTNode*)$1;
+} | opr_exp {
+    $$ = (ASTNode*)$1;
+} | fun_exp {
+    $$ = (ASTNode*)$1;
+} | fun_call {
+    $$ = (ASTNode*)$1;
+} | if_exp {
+    $$ = (ASTNode*)$1;
 }
 
-substract: LB SUB exp exp RB {
-    if ($3->type != DataType::NUMBER || $4->type != DataType::NUMBER)
-        throw runtime_error("type mismatch. the types of arguments after '-' must be number.");
-    $$ = new Symbol(
-        DataType::NUMBER, "(" + $3->command + " - " + $4->command + ")");
+exps: exps exp { scope.back()->append($2); $$ = $1; } | exp
+
+opr_exp: add | substract | multiply | divide | modulus | greater | less | equal
+       | and_op | or_op | not_op
+
+add: LB ADD {
+    scope.append(new Operator(DataType::NUMBER, "+"));
+} exp exps RB {
+    $$ = (Operator*)scope.back();
+    $$->append($4);
+    $$->append($5);
+    scope.pop_back();
 }
 
-multiply: LB MUL exp exps RB {
-    if ($3->type != DataType::NUMBER || $4->type != DataType::NUMBER)
-        throw runtime_error("type mismatch. the types of arguments after '*' must be number.");
-    auto params = split($4->command, ",");
-    $$ = new Symbol(DataType::NUMBER, "(" + $3->command);
-    for (auto param : params) $$->command += " * " + param;
-    $$->command += ")";
+substract: LB SUB {
+    scope.append(new Operator(DataType::NUMBER, "-"));
+} exp {
+    scope.back()->append($4);
+} exp RB {
+    $$ = (Operator*)scope.back();
+    $$->append($6);
+    scope.pop_back();
 }
 
-divide: LB DIV exp exp RB {
-    if ($3->type != DataType::NUMBER || $4->type != DataType::NUMBER)
-        throw runtime_error("type mismatch. the types of arguments after '/' must be number.");
-    $$ = new Symbol(
-        DataType::NUMBER, "(" + $3->command + " // " + $4->command + ")");
+multiply: LB MUL {
+    scope.append(new Operator(DataType::NUMBER, "*"));
+} exp exps RB {
+    $$ = (Operator*)scope.back();
+    $$->append($4);
+    $$->append($5);
+    scope.pop_back();
 }
 
-modulus: LB MOD exp exp RB {
-    if ($3->type != DataType::NUMBER || $4->type != DataType::NUMBER)
-        throw runtime_error("type mismatch. the types of arguments after 'mod' must be number.");
-    $$ = new Symbol(
-        DataType::NUMBER, "(" + $3->command + " % " + $4->command + ")");
+divide: LB DIV {
+    scope.append(new Operator(DataType::NUMBER, "/"));
+} exp {
+    scope.back()->append($4);
+} exp RB {
+    $$ = (Operator*)scope.back();
+    $$->append($6);
+    scope.pop_back();
 }
 
-greater: LB GT exp exp RB {
-    if ($3->type != DataType::NUMBER || $4->type != DataType::NUMBER)
-        throw runtime_error("type mismatch. the types of arguments after '>' must be number.");
-    $$ = new Symbol(
-        DataType::BOOLEAN, "(" + $3->command + " > " + $4->command + ")");
+modulus: LB MOD {
+    scope.append(new Operator(DataType::NUMBER, "%"));
+} exp {
+    scope.back()->append($4);
+} exp RB {
+    $$ = (Operator*)scope.back();
+    $$->append($6);
+    scope.pop_back();
 }
 
-less: LB LT exp exp RB {
-    if ($3->type != DataType::NUMBER || $4->type != DataType::NUMBER)
-        throw runtime_error("type mismatch. the types of arguments after '<' must be number.");
-    $$ = new Symbol(
-        DataType::BOOLEAN, "(" + $3->command + " < " + $4->command + ")");
+greater: LB GT {
+    scope.append(new Operator(DataType::BOOLEAN, ">"));
+} exp {
+    scope.back()->append($4);
+} exp RB {
+    $$ = (Operator*)scope.back();
+    $$->append($6);
+    scope.pop_back();
 }
 
-equal: LB EQ exp exps RB {
-    if (($3->type != DataType::NUMBER || $4->type != DataType::NUMBER) &&
-        ($3->type != DataType::BOOLEAN || $4->type != DataType::BOOLEAN))
-        throw runtime_error("type mismatch. the types of arguments after '=' must be same in boolean or number.");
-    $$ = new Symbol(
-        DataType::BOOLEAN, "(" + $3->command + " == " + $4->command + ")");
+less: LB LT {
+    scope.append(new Operator(DataType::BOOLEAN, "<"));
+} exp {
+    scope.back()->append($4);
+} exp RB {
+    $$ = (Operator*)scope.back();
+    $$->append($6);
+    scope.pop_back();
 }
 
-logical_op: and_op | or_op | not_op
-
-and_op: LB AND exp exps RB {
-    if ($3->type != DataType::BOOLEAN || $4->type != DataType::BOOLEAN)
-        throw runtime_error("type mismatch. the types of arguments after 'and' must be boolean.");
-    auto params = split($4->command, ",");
-    $$ = new Symbol(DataType::BOOLEAN, "(" + $3->command);
-    for (auto param : params) $$->command += " and " + param;
-    $$->command += ")";
+equal: LB EQ {
+    scope.append(new Operator(DataType::BOOLEAN, "=="));
+} exp exps RB {
+    $$ = (Operator*)scope.back();
+    $$->append($4);
+    $$->append($5);
+    scope.pop_back();
 }
 
-or_op: LB OR exp exps RB {
-    if ($3->type != DataType::BOOLEAN || $4->type != DataType::BOOLEAN)
-        throw runtime_error("type mismatch. the types of arguments after 'or' must be boolean.");
-    auto params = split($4->command, ",");
-    $$ = new Symbol(DataType::BOOLEAN, "(" + $3->command);
-    for (auto param : params) $$->command += " or " + param;
-    $$->command += ")";
+and_op: LB AND {
+    scope.append(new Operator(DataType::BOOLEAN, "&&"));
+} exp exps RB {
+    $$ = (Operator*)scope.back();
+    $$->append($4);
+    $$->append($5);
+    scope.pop_back();
 }
 
-not_op: LB NOT exp RB {
-    if ($3->type != DataType::BOOLEAN)
-        throw runtime_error("type mismatch. the type of argument after 'not' must be boolean.");
-    $$ = new Symbol(DataType::BOOLEAN, "(not " + $3->command + ")");
+or_op: LB OR {
+    scope.append(new Operator(DataType::BOOLEAN, "||"));
+} exp exps RB {
+    $$ = (Operator*)scope.back();
+    $$->append($4);
+    $$->append($5);
+    scope.pop_back();
+}
+
+not_op: LB NOT {
+    scope.append(new Operator(DataType::BOOLEAN, "!"));
+} exp RB {
+    $$ = (Operator*)scope.back();
+    $$->append($4);
+    scope.pop_back();
+}
+
+if_exp: LB IF {
+    scope.append(new Operator(DataType::DYNAMIC, "?:"));
+} exp {
+    scope.back()->append($4);
+} exp {
+    scope.back()->append($6);
+} exp RB {
+    $$ = (Operator*)scope.back();
+    $$->append($8);
+    scope.pop_back();
 }
 
 def_stmt: LB DEF variable exp RB {
-    Symbol* new_symbol = new Symbol(*$4);
-    new_symbol->name = $3->name;
-    symbols[$3->name] = *new_symbol;
-    $<symbol>$ = new_symbol;
+    if (scope.find($3->name) != nullptr)
+        throw runtime_error(("'" + $3->name + "' has already been defined.").c_str());
+    Object* obj = Object::from_ast_node($4);
+    obj->name = $3->name;
+    scope.declare(obj);
 }
 
 variable: ID {
-    auto iter = symbols.find(*$1);
-    if (iter != symbols.end()) $$ = &(iter->second);
-    else $$ = new Symbol(*$1);
+    auto obj_p = scope.find(*$1);
+    if (obj_p != nullptr) $$ = obj_p;
+    else $$ = new Object(*$1);
 }
 
-fun_exp: LB FUN LB { $<symbol>$ = new Symbol(); } fun_ids RB fun_body RB {}
+fun_exp: LB FUN LB {
+    scope.append(new Function());
+} fun_ids RB fun_body RB {
+    $$ = (Function*)scope.back();
+    $$->append($7);
+    scope.pop_back();
+}
 
 fun_ids: fun_ids ID {
-    string id = string($2);
-    $<symbol>0->symbols[id] = Symbol(id, DataType::DYNAMIC, id);
+    ((Function*)scope.back())->params.push_back(*$2);
 } | ;
 
-fun_body: local_def_stmts exp {}
-
-fun_call: LB fun_exp params RB {}
-        | LB fun_name params RB {}
-
-params: params exp | ;
-
-fun_name: ID {}
-
-local_def_stmts: local_def_stmts local_def_stmt | {} ;
-
-local_def_stmt: LB DEF variable exp RB {
-    Symbol* new_symbol = new Symbol(*$4);
-    new_symbol->name = $3->name;
-    $<symbol>-2->symbols[$3->name] = *new_symbol;
-    $$ = new_symbol;
+fun_body: local_def_stmts exp {
+    $$ = $2;
 }
 
-if_exp: LB IF test_exp then_exp else_exp RB {
-    if ($4->type != $5->type)
-        throw runtime_error("type mismatch. the types of then_exp and else_exp must be same.");
-    $$ = new Symbol(
-        $5->type, "(" + $4->command + " if " + $3->command + " else " + $5->command + ")");
+fun_call: LB fun_var {
+    scope.append($2);
+    int* param_index = new int(0);
+    esp.push(param_index);
+} params RB {
+    $$ = (Function*)scope.back();
+    auto param_index = (int*)esp.top();
+    if ($4 != nullptr) {
+        auto obj = Object::from_ast_node($4);
+        obj->name = $$->params[(*param_index)++];
+        scope.declare(obj);
+    }
+    delete param_index;
+    esp.pop();
+    scope.pop_back();
 }
 
-test_exp: exp {
-    if ($1->type != DataType::BOOLEAN)
-        throw runtime_error("type mismatch. test_exp should be boolean.");
-    $$ = $1;
+fun_var: fun_exp | fun_name
+
+params: params exp {
+    auto func = (Function*)scope.back();
+    auto param_index = (int*)esp.top();
+    if ($1 != nullptr) {
+        auto obj = Object::from_ast_node($1);
+        obj->name = func->params[(*param_index)++];
+        scope.declare(obj);
+    }
+    $$ = $2;
+} | {
+    $$ = nullptr;
+} ;
+
+fun_name: ID {
+    auto obj = scope.find(*$1);
+    if (obj == nullptr)
+        throw std::runtime_error("'" + *$1 + "' has not been defined.");
+    $$ = (Function*)obj;
 }
 
-then_exp: exp {
-    if ($1->type != DataType::BOOLEAN && $1->type != DataType::NUMBER)
-        throw runtime_error("type mismatch. then_exp should be boolean or number.");
-    $$ = $1;
-}
+local_def_stmts: local_def_stmts local_def_stmt | ;
 
-else_exp: exp {
-    if ($1->type != DataType::BOOLEAN && $1->type != DataType::NUMBER)
-        throw runtime_error("type mismatch. else_exp should be boolean or number.");
-    $$ = $1;
-}
+local_def_stmt: LB DEF variable exp RB {}
 
 %%
 
