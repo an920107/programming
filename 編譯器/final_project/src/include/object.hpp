@@ -8,8 +8,8 @@
 #include "ast.hpp"
 
 enum DataType {
-    NONE = 1,
-    DYNAMIC = 2,
+    NONE = 1, // void
+    DYNAMIC = 2, // 未知
     FUNCTION = 4,
     NUMBER = 8,
     BOOLEAN = 16,
@@ -35,7 +35,6 @@ class Function : public Object {
 
     Function();
     void declare(Object* obj);
-    ASTNode* first_child();
 };
 
 class Number : public Object {

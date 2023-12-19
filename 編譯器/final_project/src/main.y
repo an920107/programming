@@ -10,10 +10,11 @@ const bool is_debug = false;
 extern int yylex(void);
 extern void yyerror(const char*);
 
-void execute();
-
 Python py;
 stack<void*> esp;
+
+// 沒有全域區域之分，進入點為預設的 main_func，
+// 宣告變數時往 parent 尋找最近 Function
 Function main_func;
 State scope(&main_func);
 %}
@@ -275,7 +276,7 @@ fun_call: LB fun_var {
     scope.pop_back();
 }
 
-fun_var: fun_exp | fun_name
+fun_var: fun_exp | fun_name { $$ = new Function(*$1); }
 
 params: params exp {
     auto func = (Function*)scope.back();
