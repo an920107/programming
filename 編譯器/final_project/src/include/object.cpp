@@ -31,11 +31,6 @@ Function::Function() : Object(DataType::FUNCTION, "") {}
 
 void Function::declare(Object* obj) { variables[obj->name] = obj; }
 
-ASTNode* Function::first_child() {
-    if (this->children.empty()) return nullptr;
-    return this->children.front();
-}
-
 Number::Number(int value) : Object(DataType::NUMBER, ""), value(value) {}
 
 Boolean::Boolean(bool value) : Object(DataType::BOOLEAN, ""), value(value) {}

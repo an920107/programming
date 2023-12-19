@@ -4,8 +4,8 @@
 #include <vector>
 
 enum NodeType {
-    OBJECT,
-    OPERATOR,
+    OBJECT, // 物件
+    OPERATOR, // 運算子
 };
 
 class ASTNode {

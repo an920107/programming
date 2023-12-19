@@ -13,6 +13,7 @@ void ASTNode::append(ASTNode* node) {
     node->parent = this;
 }
 
+// debug 用途
 std::vector<ASTNode*> ASTNode::traverse() {
     std::vector<ASTNode*> result;
     std::unordered_map<ASTNode*, bool> visited;

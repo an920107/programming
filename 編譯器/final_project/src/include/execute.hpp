@@ -6,6 +6,7 @@
 #include "operator.hpp"
 #include "state.hpp"
 
+// 執行
 Object* execute(State& scope);
 
 #endif
