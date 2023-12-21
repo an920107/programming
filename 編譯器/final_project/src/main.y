@@ -36,7 +36,7 @@ State scope(&main_func);
 #include "include/execute.hpp"
 using namespace std;
 
-// #define _DEBUG_
+#define _DEBUG_
 }
 
 %union {
@@ -229,10 +229,11 @@ if_exp: LB IF {
     scope.pop_back();
 }
 
-def_stmt: LB DEF variable exp RB {
+def_stmt: LB DEF variable {
     if (scope.find($3->name) != nullptr)
         throw runtime_error(("'" + $3->name + "' has already been defined.").c_str());
-    Object* obj = Object::from_ast_node($4);
+} exp RB {
+    Object* obj = Object::from_ast_node($5);
     obj->name = $3->name;
     scope.declare(obj);
 }

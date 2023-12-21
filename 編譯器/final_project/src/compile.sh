@@ -11,4 +11,4 @@ g++ main.tab.c main.yy.c \
     include/execute.cpp \
     include/python.cpp
 
-rm main.tab.c main.tab.h main.yy.c
+# rm main.tab.c main.tab.h main.yy.c
