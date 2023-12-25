@@ -1,36 +1,31 @@
 #include "object.hpp"
 
-#include <iostream>
-
-#include "operator.hpp"
-
-Object::Object(DataType type, std::string name)
-    : ASTNode(NodeType::OBJECT), type(type), name(name) {}
+Object::Object(DataType type, std::string name) : type(type), name(name) {}
 
 Object::Object(DataType type) : Object(type, "") {}
 
-Object::Object(std::string name) : Object(DataType::DYNAMIC, name) {}
+Object::Object(std::string name) : Object(DataType::SYMBOL, name) {}
 
-Object::Object() : Object(DataType::DYNAMIC, "") {}
+Object::Object() : Object(DataType::SYMBOL, "") {}
 
-Object* Object::from_ast_node(ASTNode* node) {
-    Object* obj = nullptr;
-    switch (node->type) {
-        case NodeType::OBJECT:
-            obj = (Object*)node;
-            break;
-        case NodeType::OPERATOR:
-            obj = new Function();
-            obj->append(node);
-            break;
-    }
-    return obj;
-}
+Number::Number(std::string name, int value)
+    : Object(DataType::NUMBER, name), value(value) {}
 
-Function::Function() : Object(DataType::FUNCTION, "") {}
+Number::Number(int value) : Number("", value) {}
 
-void Function::declare(Object* obj) { variables[obj->name] = obj; }
+Boolean::Boolean(std::string name, bool value)
+    : Object(DataType::BOOLEAN, name), value(value) {}
 
-Number::Number(int value) : Object(DataType::NUMBER, ""), value(value) {}
+Boolean::Boolean(int value) : Boolean("", value) {}
 
-Boolean::Boolean(bool value) : Object(DataType::BOOLEAN, ""), value(value) {}
+Function::Function(std::string name, std::vector<std::string> params)
+    : Object(DataType::FUNCTION, name),
+      params(params),
+      infinity_params(false) {}
+
+Function::Function(std::string name) : Function(name, {}) {}
+
+Function::Function() : Function("") {}
+
+Call::Call(Function* func, std::vector<Object*> args)
+    : func(func), args(args) {}

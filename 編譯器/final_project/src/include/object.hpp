@@ -1,18 +1,17 @@
-#ifndef _TYPING_HPP_
-#define _TYPING_HPP_
+#ifndef _OBJECT_HPP_
+#define _OBJECT_HPP_
 
 #include <string>
-#include <unordered_map>
 #include <vector>
-
+#include <unordered_map>
 #include "ast.hpp"
 
 enum DataType {
-    NONE = 1, // void
-    DYNAMIC = 2, // 未知
-    FUNCTION = 4,
-    NUMBER = 8,
-    BOOLEAN = 16,
+    SYMBOL = 1,
+    NONE = 2,
+    NUMBER = 4,
+    BOOLEAN = 8,
+    FUNCTION = 16,
 };
 
 class Object : public ASTNode {
@@ -20,27 +19,19 @@ class Object : public ASTNode {
     DataType type;
     std::string name;
 
+   public:
     Object(DataType type, std::string name);
     Object(DataType type);
     Object(std::string name);
     Object();
-
-    static Object* from_ast_node(ASTNode* node);
-};
-
-class Function : public Object {
-   public:
-    std::vector<std::string> params;
-    std::unordered_map<std::string, Object*> variables;
-
-    Function();
-    void declare(Object* obj);
 };
 
 class Number : public Object {
    public:
     int value;
 
+   public:
+    Number(std::string name, int value);
     Number(int value);
 };
 
@@ -48,7 +39,30 @@ class Boolean : public Object {
    public:
     bool value;
 
-    Boolean(bool value);
+   public:
+    Boolean(std::string name, bool value);
+    Boolean(int value);
+};
+
+class Function : public Object {
+   public:
+    bool infinity_params;
+    std::vector<std::string> params;
+    std::unordered_map<std::string, Object*> vars;
+
+   public:
+    Function(std::string name, std::vector<std::string> params);
+    Function(std::string name);
+    Function();
+};
+
+class Call : public Object {
+   public:
+    Function* func;
+    std::vector<Object*> args;
+   
+   public:
+    Call(Function* func, std::vector<Object*> args);
 };
 
 #endif

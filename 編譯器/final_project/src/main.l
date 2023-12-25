@@ -32,7 +32,7 @@ print\-num { if (is_debug) cerr << "[PRINT_N]\n"; return PRINT_N; }
 print\-bool { if (is_debug) cerr << "[PRINT_B]\n"; return PRINT_B; }
 
 #[tf] {
-    yylval.bool_obj = new Boolean(yytext[1] == 't');
+    yylval.bool_val = yytext[1] == 't';
     if (is_debug) cerr << "[BOOL_VAL]\n";
     return BOOL_VAL;
 }
@@ -43,7 +43,7 @@ print\-bool { if (is_debug) cerr << "[PRINT_B]\n"; return PRINT_B; }
     py.commit(string("print(-2**31<=") + yytext + string("<2**31)"));
     if (py.exec() == "False\n")
         throw domain_error("the number is out of bounds.");
-    yylval.num_obj = new Number(atoi(yytext));
+    yylval.num_val = atoi(yytext);
     return NUM_VAL;
 }
 
