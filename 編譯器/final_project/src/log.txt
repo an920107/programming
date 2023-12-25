@@ -1,0 +1,161 @@
+# TESTCASE '../test_cases/01_1.lsp'
+[LB] [ADD] [RB] 
+
+# TESTCASE '../test_cases/01_2.lsp'
+[LB] [ADD] [LB] [MUL] [NUM_VAL] [NUM_VAL] [RB] [SUB] syntax error.
+
+# TESTCASE '../test_cases/02_1.lsp'
+[LB] [PRINT_N] [NUM_VAL] [RB] 
+[LB] [PRINT_N] [NUM_VAL] [RB] 
+[LB] [PRINT_N] [NUM_VAL] [RB] 
+[LB] [PRINT_N] [NUM_VAL] [RB] 
+
+# TESTCASE '../test_cases/02_2.lsp'
+[LB] [PRINT_N] [NUM_VAL] [RB] 
+[LB] [PRINT_N] [NUM_VAL] [RB] 
+[LB] [PRINT_N] [NUM_VAL] [RB] 
+
+# TESTCASE '../test_cases/03_1.lsp'
+[LB] [ADD] [NUM_VAL] [NUM_VAL] [NUM_VAL] [RB] 
+[LB] [MUL] [NUM_VAL] [NUM_VAL] [NUM_VAL] [RB] 
+[LB] [PRINT_N] [LB] [ADD] [NUM_VAL] [LB] [ADD] [NUM_VAL] [NUM_VAL] [NUM_VAL] [RB] [LB] [MUL] [NUM_VAL] [NUM_VAL] [NUM_VAL] [RB] [LB] [DIV] [NUM_VAL] [NUM_VAL] [RB] [LB] [MOD] [NUM_VAL] [NUM_VAL] [RB] [RB] [RB] 
+[LB] [PRINT_N] [LB] [MOD] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [SUB] [LB] [ADD] [NUM_VAL] [NUM_VAL] [RB] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [NUM_VAL] [RB] 
+
+# TESTCASE '../test_cases/03_2.lsp'
+[LB] [PRINT_N] [LB] [MOD] [NUM_VAL] [LB] [ADD] [NUM_VAL] [NUM_VAL] [RB] [RB] [RB] 
+[LB] [PRINT_N] [LB] [MUL] [LB] [DIV] [NUM_VAL] [NUM_VAL] [RB] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [SUB] [LB] [ADD] [NUM_VAL] [NUM_VAL] [NUM_VAL] [LB] [SUB] [NUM_VAL] [NUM_VAL] [RB] [NUM_VAL] [LB] [DIV] [NUM_VAL] [NUM_VAL] [RB] [LB] [MOD] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+[NUM_VAL] [RB] [RB] 
+
+# TESTCASE '../test_cases/04_1.lsp'
+[LB] [PRINT_B] [BOOL_VAL] [RB] 
+[LB] [PRINT_B] [BOOL_VAL] [RB] 
+[LB] [PRINT_B] [LB] [AND] [BOOL_VAL] [BOOL_VAL] [RB] [RB] 
+[LB] [PRINT_B] [LB] [AND] [BOOL_VAL] [BOOL_VAL] [RB] [RB] 
+[LB] [PRINT_B] [LB] [OR] [BOOL_VAL] [BOOL_VAL] [RB] [RB] 
+[LB] [PRINT_B] [LB] [OR] [BOOL_VAL] [BOOL_VAL] [RB] [RB] 
+[LB] [PRINT_B] [LB] [NOT] [BOOL_VAL] [RB] [RB] 
+[LB] [PRINT_B] [LB] [NOT] [BOOL_VAL] [RB] [RB] 
+
+# TESTCASE '../test_cases/04_2.lsp'
+[LB] [PRINT_B] [LB] [OR] [BOOL_VAL] [BOOL_VAL] [BOOL_VAL] [RB] [RB] 
+[LB] [PRINT_B] [LB] [OR] [BOOL_VAL] [LB] [AND] [BOOL_VAL] [BOOL_VAL] [RB] [LB] [NOT] [BOOL_VAL] [RB] [RB] [RB] 
+[LB] [PRINT_B] [LB] [AND] [BOOL_VAL] [LB] [NOT] [BOOL_VAL] [RB] [LB] [OR] [BOOL_VAL] [BOOL_VAL] [RB] [LB] [AND] [BOOL_VAL] [LB] [NOT] [BOOL_VAL] [RB] [RB] [RB] [RB] 
+
+# TESTCASE '../test_cases/05_1.lsp'
+[LB] [PRINT_N] [LB] [IF] [BOOL_VAL] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [IF] [BOOL_VAL] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+
+# TESTCASE '../test_cases/05_2.lsp'
+[LB] [PRINT_N] [LB] [IF] [LB] [LT] [NUM_VAL] [NUM_VAL] [RB] [LB] [ADD] [NUM_VAL] [NUM_VAL] [NUM_VAL] [RB] [LB] [MUL] [NUM_VAL] [NUM_VAL] [NUM_VAL] [NUM_VAL] [NUM_VAL] [RB] [RB] [RB] 
+[LB] [PRINT_N] [LB] [IF] [LB] [EQ] [NUM_VAL] [LB] [MUL] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+[NUM_VAL] 
+[LB] [IF] [BOOL_VAL] [NUM_VAL] [NUM_VAL] [RB] [RB] [RB] 
+
+# TESTCASE '../test_cases/06_1.lsp'
+[LB] [DEF] [ID] [NUM_VAL] [RB] 
+[LB] [PRINT_N] [ID] [RB] 
+[LB] [DEF] [ID] [LB] [ADD] [NUM_VAL] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [ID] [RB] 
+
+# TESTCASE '../test_cases/06_2.lsp'
+[LB] [DEF] [ID] [LB] [MUL] [NUM_VAL] [NUM_VAL] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+[LB] [DEF] [ID] [LB] [ADD] [NUM_VAL] [NUM_VAL] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ADD] [ID] [ID] [RB] [RB] 
+
+# TESTCASE '../test_cases/07_1.lsp'
+[LB] [PRINT_N] 
+[LB] [LB] [FUN] [LB] [ID] [RB] [LB] [ADD] [ID] [NUM_VAL] [RB] [RB] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] 
+[LB] [LB] [FUN] [LB] [ID] [ID] [RB] [LB] [ADD] [ID] [ID] [RB] [RB] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+
+# TESTCASE '../test_cases/07_2.lsp'
+[LB] [DEF] [ID] [NUM_VAL] [RB] 
+[LB] [PRINT_N] 
+[LB] [LB] [FUN] [LB] [ID] [ID] [ID] [RB] [LB] [ADD] [ID] [LB] [MUL] [ID] [ID] [RB] [RB] [RB] [NUM_VAL] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [ID] [RB] 
+
+# TESTCASE '../test_cases/08_1.lsp'
+[LB] [DEF] [ID] 
+[LB] [FUN] [LB] [ID] [ID] [ID] [RB] [LB] [ADD] [ID] [ID] [LB] [MUL] [ID] [ID] [RB] [RB] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+
+# TESTCASE '../test_cases/08_2.lsp'
+[LB] [DEF] [ID] [LB] [FUN] [LB] [ID] [RB] [LB] [ADD] [ID] [NUM_VAL] [RB] [RB] [RB] 
+[LB] [DEF] [ID] [LB] [FUN] [LB] [RB] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [LB] [ID] [RB] [RB] [RB] 
+
+# TESTCASE '../test_cases/b1_1.lsp'
+[LB] [DEF] [ID] 
+[LB] [FUN] [LB] [ID] [RB] [LB] [IF] [LB] [LT] [ID] [NUM_VAL] [RB] [ID] 
+[LB] [MUL] [ID] [LB] [ID] [LB] [SUB] [ID] [NUM_VAL] [RB] [RB] [RB] [RB] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [RB] [RB] 
+[LB] [DEF] [ID] [LB] [FUN] [LB] [ID] [RB] 
+[LB] [IF] [LB] [LT] [ID] [NUM_VAL] [RB] [ID] [LB] [ADD] 
+[LB] [ID] [LB] [SUB] [ID] [NUM_VAL] [RB] [RB] 
+[LB] [ID] [LB] [SUB] [ID] [NUM_VAL] [RB] [RB] [RB] [RB] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [RB] [RB] 
+
+# TESTCASE '../test_cases/b1_2.lsp'
+[LB] [DEF] [ID] 
+[LB] [FUN] [LB] [ID] [ID] [RB] 
+[LB] [IF] [LB] [LT] [ID] [ID] [RB] [ID] [ID] [RB] [RB] [RB] 
+[LB] [DEF] [ID] 
+[LB] [FUN] [LB] [ID] [ID] [RB] 
+[LB] [IF] [LB] [GT] [ID] [ID] [RB] [ID] [ID] [RB] [RB] [RB] 
+[LB] [DEF] [ID] 
+[LB] [FUN] [LB] [ID] [ID] [RB] 
+[LB] [IF] [LB] [EQ] [NUM_VAL] [LB] [MOD] [LB] [ID] [ID] [ID] [RB] [LB] [ID] [ID] [ID] [RB] [RB] [RB] 
+[LB] [ID] [ID] [ID] [RB] 
+[LB] [ID] [LB] [ID] [ID] [ID] [RB] [LB] [MOD] [LB] [ID] [ID] [ID] [RB] [LB] [ID] [ID] [ID] [RB] [RB] [RB] [RB] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+
+# TESTCASE '../test_cases/b2_1.lsp'
+[LB] [ADD] [NUM_VAL] [NUM_VAL] [NUM_VAL] [LB] [OR] [BOOL_VAL] [BOOL_VAL] [RB] [RB] 
+
+# TESTCASE '../test_cases/b2_2.lsp'
+[LB] [DEF] [ID] 
+[LB] [FUN] [LB] [ID] [RB] 
+[LB] [IF] [LB] [GT] [ID] [NUM_VAL] [RB] [NUM_VAL] [LB] [EQ] [ID] [NUM_VAL] [RB] [RB] [RB] [RB] 
+[LB] [PRINT_N] [LB] [MUL] [NUM_VAL] [LB] [ID] [NUM_VAL] [RB] [RB] [RB] 
+
+# TESTCASE '../test_cases/b3_1.lsp'
+[LB] [DEF] [ID] 
+[LB] [FUN] [LB] [ID] [ID] [RB] 
+[LB] [DEF] [ID] [LB] [FUN] [LB] [ID] [RB] [LB] [MUL] [ID] [ID] [RB] [RB] [RB] 
+[LB] [ADD] [LB] [ID] [ID] [RB] [LB] [ID] [ID] [RB] [RB] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+
+# TESTCASE '../test_cases/b3_2.lsp'
+[LB] [DEF] [ID] 
+[LB] [FUN] [LB] [ID] [ID] [RB] 
+[LB] [DEF] [ID] 
+[LB] [FUN] [LB] [ID] [RB] 
+[LB] [IF] [LB] [LT] [ID] [NUM_VAL] [RB] [LB] [SUB] [NUM_VAL] [ID] [RB] [ID] [RB] [RB] [RB] 
+[LB] [ID] [LB] [SUB] [ID] [ID] [RB] [RB] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [NUM_VAL] [RB] [RB] 
+
+# TESTCASE '../test_cases/b4_1.lsp'
+[LB] [DEF] [ID] 
+[LB] [FUN] [LB] [ID] [RB] [LB] [FUN] [LB] [ID] [RB] [LB] [ADD] [ID] [ID] [RB] [RB] [RB] [RB] 
+[LB] [DEF] [ID] [LB] [ID] [NUM_VAL] [RB] [RB] 
+[LB] [PRINT_N] [LB] [ID] [NUM_VAL] [RB] [RB] 
+
+# TESTCASE '../test_cases/b4_2.lsp'
+[LB] [DEF] [ID] 
+[LB] [FUN] [LB] [ID] [ID] [RB] [LB] [ID] [ID] [RB] [RB] [RB] 
+[LB] [PRINT_N] 
+[LB] [ID] [LB] [FUN] [LB] [ID] [RB] [LB] [SUB] [ID] [NUM_VAL] [RB] [RB] [NUM_VAL] [RB] [RB] 
+

@@ -1,6 +1,7 @@
 *.exe
 *.in
 *.out
+*.output
 *.o
 *.so
 *.class

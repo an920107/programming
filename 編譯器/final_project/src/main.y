@@ -10,12 +10,8 @@ const bool is_debug = false;
 extern int yylex(void);
 extern void yyerror(const char*);
 
-Python py;
-stack<void*> esp;
+vector<ASTNode*> nodes;
 
-// 沒有全域區域之分，進入點為預設的 main_func，
-// 宣告變數時往 parent 尋找最近 Function
-Function main_func;
 %}
 
 %code requires {
@@ -28,7 +24,7 @@ Function main_func;
 #include <algorithm>
 #include <stack>
 #include "include/python.hpp"
-#include "include/object.hpp"
+#include "include/ast.hpp"
 using namespace std;
 
 #define _DEBUG_
@@ -38,12 +34,12 @@ using namespace std;
     int num_val;
     bool bool_val;
     string* text;
-    Number* num_obj;
-    Boolean* bool_obj;
+    ASTNode* node;
+    vector<ASTNode*>* nodes;
 }
 
 %token <text>ID
-%token BOOL_VAL NUM_VAL
+%token <bool_val>BOOL_VAL <num_val>NUM_VAL
 %token ADD SUB
 %token MUL DIV MOD
 %token AND OR NOT
@@ -51,35 +47,109 @@ using namespace std;
 %token PRINT_B PRINT_N DEF FUN IF
 %token LB RB
 
+%type <node> exp variable operation operator print_op fun_exp ldef_stmt fun_call
+%type <nodes> exps_or_not params_or_not ldef_stmts_or_not
+
 %%
 
 stmts: stmts stmt | stmt
 
 stmt: def_stmt | print_stmt | exp
 
-print_stmt: LB print_op exp RB
+print_stmt: LB print_op exp RB {
+    $2->append($3);
+    nodes.push_back($2);
+}
 
-print_op: PRINT_B | PRINT_N
+print_op: PRINT_B {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('b'));
+} | PRINT_N {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('n'));
+}
 
-def_stmt: LB DEF variable exp RB
+def_stmt: LB DEF ID exp RB {
+    auto node = new ASTNode(NodeType::DEFINE, $3);
+    node->append($4);
+    nodes.push_back(node);
+}
 
-variable: ID
+variable: ID {
+    $$ = new ASTNode(NodeType::VARIABLE, $1);
+}
 
-exp: BOOL_VAL | NUM_VAL | variable | operation | fun_exp | fun_call
+exp: BOOL_VAL {
+    $$ = new ASTNode(NodeType::BOOL_VAL, new bool($1));
+} | NUM_VAL {
+    $$ = new ASTNode(NodeType::NUMBER_VAL, new int($1));
+} | variable | operation | fun_exp | fun_call
 
-operation: LB operator args_or_not RB
+operation: LB operator exps_or_not RB {
+    $$ = $2;
+    for (auto node : *$3) $$->append(node);
+}
 
-operator: ADD | SUB | MUL | DIV | MOD | AND | OR | NOT | GT | LT | EQ | IF
+exps_or_not: exps_or_not exp {
+    $$->push_back($2);
+} | {
+    $$ = new vector<ASTNode*>();
+} ;
 
-fun_exp: LB FUN LB params_or_not RB def_stmts_or_not exp RB
+operator: ADD {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('+'));
+} | SUB {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('-'));
+} | MUL {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('*'));
+} | DIV {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('/'));
+} | MOD {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('%'));
+} | AND {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('&'));
+} | OR {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('|'));
+} | NOT {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('!'));
+} | GT {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('>'));
+} | LT {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('<'));
+} | EQ {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('='));
+} | IF {
+    $$ = new ASTNode(NodeType::OPERATOR, new char('?'));
+}
 
-params_or_not: params_or_not ID | ;
+fun_exp: LB FUN LB params_or_not RB ldef_stmts_or_not exp RB {
+    $$ = new ASTNode(NodeType::FUNCTION);
+    for (auto node : *$6) $$->append(node);
+    for (auto node : *$4) $$->append(node);
+    $$->append($7);
+}
 
-fun_call: LB variable args_or_not RB | LB fun_exp args_or_not RB
+params_or_not: params_or_not variable {
+    $$->push_back($2);
+} | {
+    $$ = new vector<ASTNode*>();
+} ;
 
-args_or_not: args_or_not exp | ;
+fun_call: LB variable exps_or_not RB {
+    $$ = new ASTNode(NodeType::CALL, $2);
+    for (auto node : *$3) $$->append(node);
+} | LB fun_exp exps_or_not RB {
+    $$ = new ASTNode(NodeType::CALL, $2);
+    for (auto node : *$3) $$->append(node);
+}
 
-def_stmts_or_not: def_stmts_or_not def_stmt | ;
+ldef_stmts_or_not: ldef_stmts_or_not ldef_stmt {
+    $$->push_back($2);
+} | {
+    $$ = new vector<ASTNode*>();
+} ;
+
+ldef_stmt: LB DEF ID exp RB {
+    $$ = new ASTNode(NodeType::DEFINE, $3);
+}
 
 %%
 
