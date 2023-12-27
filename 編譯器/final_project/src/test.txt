@@ -1,4 +1,7 @@
-(define fact
-  (fun (n) (if (< n 3) n
-               (* n (fact (- n 1))))))
-(print-num (fact 10))
+(define add-x
+  (fun (x) (fun (y) (+ x y))))
+
+(define z (add-x 10))
+
+(print-num (z 1))
+

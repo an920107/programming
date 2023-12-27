@@ -1,19 +1,10 @@
 #include "python.hpp"
 
-PyCommand::PyCommand(std::string command, int indentation)
-    : command(command), indentation(indentation) {}
-
 Python::Python() = default;
 
-void Python::indent_inc() { current_indent++; }
-
-void Python::indent_dec() { current_indent--; }
-
-void Python::append(std::string) {
-}
 
 void Python::commit(std::string command) {
-    cmds.emplace(command, current_indent);
+    cmds.emplace(command);
 }
 
 std::string Python::exec() {
@@ -23,9 +14,7 @@ std::string Python::exec() {
     // write python file and execute
     std::ofstream py_file(py_filename);
     while (!cmds.empty()) {
-        for (int i = 0; i < cmds.front().indentation; i++)
-            py_file << " ";
-        py_file << cmds.front().command << "\n";
+        py_file << cmds.front() << "\n";
         cmds.pop();
     }
     py_file.close();
