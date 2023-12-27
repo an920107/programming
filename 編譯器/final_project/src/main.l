@@ -1,11 +1,5 @@
 %{
 #include "main.tab.h"
-
-#ifdef _DEBUG_
-const bool is_debug = true;
-#else
-const bool is_debug = false;
-#endif
 %}
 
 %option noyywrap
@@ -63,7 +57,7 @@ print\-bool { if (is_debug) cout << "[PRINT_B] "; return PRINT_B; }
 . {
     if (is_debug) cout << "[ERR] ";
     throw runtime_error(
-        ("unexpected character: '" + string(yytext) + "'.").c_str());
+        ("Unexpected character: '" + string(yytext) + "'.").c_str());
 }
 
 %%

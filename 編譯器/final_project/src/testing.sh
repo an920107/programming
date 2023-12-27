@@ -8,4 +8,5 @@ do
     echo "# TESTCASE '$entry'"
     echo "$($EXEC_FILE < "$entry")"
     echo ""
+    echo ""
 done

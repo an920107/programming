@@ -1,14 +1,20 @@
 #!/bin/bash
 
+G_DEBUG_FLAG=""
+
+for arg in "$@"
+do
+    if [ "$arg" = "--debug" ]
+    then
+        G_DEBUG_FLAG="-D_DEBUG_"
+    fi
+done
+
 bison -d -t --verbose -o main.tab.c main.y
 flex -o main.yy.c main.l
 
-g++ main.tab.c main.yy.c \
+g++ $G_DEBUG_FLAG main.tab.c main.yy.c \
     include/python.cpp \
-    include/ast.cpp \
-    # include/object.cpp \
-    # include/state.cpp \
-    # include/operator.cpp \
-    # include/execute.cpp
+    include/ast.cpp
 
 rm main.tab.c main.tab.h main.yy.c

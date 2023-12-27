@@ -1,12 +1,6 @@
 %{
 #include "main.tab.h"
 
-#ifdef _DEBUG_
-const bool is_debug = true;
-#else
-const bool is_debug = false;
-#endif
-
 extern int yylex(void);
 extern void yyerror(const char*);
 
@@ -27,7 +21,15 @@ vector<ASTNode*> nodes;
 #include "include/ast.hpp"
 using namespace std;
 
-#define _DEBUG_
+#ifndef _YACC_DECLARE_
+#define _YACC_DECLARE_
+#ifdef _DEBUG_
+const bool is_debug = true;
+#else
+const bool is_debug = false;
+#endif
+#endif
+
 }
 
 %union {
@@ -52,9 +54,17 @@ using namespace std;
 
 %%
 
-stmts: stmts stmt | stmt
+stmts: stmts stmt {
+    if (is_debug) cout << "\n";
+    nodes.back()->traverse();
+} | stmt {
+    if (is_debug) cout << "\n";
+    nodes.back()->traverse();
+}
 
-stmt: def_stmt | print_stmt | exp
+stmt: def_stmt | print_stmt | exp {
+    nodes.push_back($1);
+}
 
 print_stmt: LB print_op exp RB {
     $2->append($3);
@@ -121,9 +131,8 @@ operator: ADD {
 }
 
 fun_exp: LB FUN LB params_or_not RB ldef_stmts_or_not exp RB {
-    $$ = new ASTNode(NodeType::FUNCTION);
+    $$ = new ASTNode(NodeType::FUNCTION, $4);
     for (auto node : *$6) $$->append(node);
-    for (auto node : *$4) $$->append(node);
     $$->append($7);
 }
 
@@ -154,13 +163,14 @@ ldef_stmt: LB DEF ID exp RB {
 %%
 
 void yyerror(const char* message) {
-    throw runtime_error("syntax error.");
+    throw runtime_error("Syntax error.");
 }
 
 int main(int argc, char** argv) {
     try {
         yyparse();
     } catch (const exception& e) {
+        if (is_debug) cout << "\n";
         cout << e.what() << "\n";
         return 1;
     }
