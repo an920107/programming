@@ -5,7 +5,7 @@ extern int yylex(void);
 extern void yyerror(const char*);
 
 vector<ASTNode*> nodes;
-
+Python py;
 %}
 
 %code requires {
@@ -55,11 +55,15 @@ const bool is_debug = false;
 %%
 
 stmts: stmts stmt {
-    if (is_debug) cout << "\n";
-    nodes.back()->traverse();
+    auto cmd = nodes.back()->traverse();
+    if (is_debug)
+        cout << "\n" << cmd << "\n";
+    py.commit(cmd);
 } | stmt {
-    if (is_debug) cout << "\n";
-    nodes.back()->traverse();
+    auto cmd = nodes.back()->traverse();
+    if (is_debug)
+        cout << "\n" << cmd << "\n";
+    py.commit(cmd);
 }
 
 stmt: def_stmt | print_stmt | exp {
@@ -158,6 +162,7 @@ ldef_stmts_or_not: ldef_stmts_or_not ldef_stmt {
 
 ldef_stmt: LB DEF ID exp RB {
     $$ = new ASTNode(NodeType::DEFINE, $3);
+    $$->append($4);
 }
 
 %%
@@ -169,6 +174,7 @@ void yyerror(const char* message) {
 int main(int argc, char** argv) {
     try {
         yyparse();
+        cout << py.exec();
     } catch (const exception& e) {
         if (is_debug) cout << "\n";
         cout << e.what() << "\n";

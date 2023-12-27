@@ -6,24 +6,12 @@
 #include <queue>
 #include <string>
 
-class PyCommand {
-   public:
-    std::string command;
-    int indentation;
-
-    PyCommand(std::string, int);
-};
-
 class Python {
    private:
-    std::queue<PyCommand> cmds;
-    int current_indent = 0;
+    std::queue<std::string> cmds;
 
    public:
     Python();
-    void indent_inc();
-    void indent_dec();
-    void append(std::string);
     void commit(std::string);
     std::string exec();
 };

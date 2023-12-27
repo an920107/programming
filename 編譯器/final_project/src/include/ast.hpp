@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include "python.hpp"
 
 enum class NodeType {
     DEFINE,      // name: str, node
@@ -21,6 +22,7 @@ class ASTNode {
     ASTNode* parent;
     std::vector<ASTNode*> children;
     std::unordered_map<std::string, ASTNode*> vars;
+    int indent;
     void* data;
 
    public:
@@ -28,14 +30,13 @@ class ASTNode {
     ASTNode(NodeType type);
     void append(ASTNode* node);
     void append(int index, ASTNode* node);
-    ASTNode* find(std::string str);
-    ASTNode* traverse();
+    std::string traverse();
     std::string to_string();
-    void check(NodeType type);
 };
 
 namespace ast {
-extern std::unordered_map<std::string, ASTNode*> global;
+extern std::stringstream pre_ss;
+extern std::unordered_map<ASTNode*, bool> pre_vis;
 }  // namespace ast
 
 #endif

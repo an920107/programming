@@ -3,6 +3,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <regex>
 
 #ifdef _DEBUG_
 const bool is_debug = true;
@@ -10,7 +11,7 @@ const bool is_debug = true;
 const bool is_debug = false;
 #endif
 
-ASTNode::ASTNode(NodeType type, void* data) : type(type), data(data), parent(nullptr) {}
+ASTNode::ASTNode(NodeType type, void* data) : type(type), data(data), parent(nullptr), indent(0) {}
 
 ASTNode::ASTNode(NodeType type) : ASTNode(type, nullptr) {}
 
@@ -24,20 +25,30 @@ void ASTNode::append(int index, ASTNode* node) {
     this->children.insert(this->children.begin(), node);
 }
 
-ASTNode* ASTNode::find(std::string str) {
-    if (this->vars[str] != nullptr) return this->vars[str];
-    if (this->parent == nullptr) return ast::global[str];
-    return this->parent->find(str);
-}
-
-ASTNode* ASTNode::traverse() {
-    ASTNode* result = nullptr;
+std::string ASTNode::traverse() {
+    std::stringstream ss;
+    std::string pre_def;
 
     if (is_debug) std::cout << this->to_string() << "\n";
 
     if (this->type == NodeType::DEFINE) {
-        auto vars = (this->parent == nullptr) ? &ast::global : &this->parent->vars;
-        (*vars)[*(std::string*)this->data] = this->children.front();
+        auto child = this->children.front();
+        auto var = *(std::string*)this->data;
+        std::regex re("\\-");
+        var = std::regex_replace(var, re, "_");
+        if (child->type == NodeType::FUNCTION) {
+            child->traverse();
+            pre_def = ast::pre_ss.str();
+            ast::pre_ss.str("");
+            ss << pre_def << var << " = f_"
+               << child << "\n";
+        } else {
+            pre_def = ast::pre_ss.str();
+            ast::pre_ss.str("");
+            ss << pre_def << var << " = "
+               << child->traverse() << "\n";
+        }
+        return ss.str();
 
     } else if (this->type == NodeType::OPERATOR) {
         const auto opr = *(char*)this->data;
@@ -49,14 +60,13 @@ ASTNode* ASTNode::traverse() {
 
         // 三元運算子
         if (opr == '?') {
-            if (param_count < 3)
-                throw std::runtime_error("Operation argument error.");
-            auto first = this->children[0]->traverse();
+            if (param_count < 3) throw std::runtime_error("Operation argument error.");
             param_check(3);
-            first->check(NodeType::BOOL_VAL);
-            if (*(bool*)first->data)
-                return this->children[1]->traverse();
-            else return this->children[2]->traverse();
+            ss << "(" << this->children[1]->traverse()
+               << " if " << this->children[0]->traverse()
+               << " else " << this->children[2]->traverse()
+               << ")";
+            return ss.str();
         }
 
         // 單元運算子
@@ -66,22 +76,19 @@ ASTNode* ASTNode::traverse() {
 
         if (opr == '!') {
             param_check(1);
-            first->check(NodeType::BOOL_VAL);
-            result = new ASTNode(
-                NodeType::BOOL_VAL, new bool(!*(bool*)first->data));
-            return result;
+            return "(not " + first + ")";
 
         } else if (opr == 'b') {
             param_check(1);
-            first->check(NodeType::BOOL_VAL);
-            std::cout << (*(bool*)first->data ? "#t" : "#f") << "\n";
-            return nullptr;
+            pre_def = ast::pre_ss.str();
+            ast::pre_ss.str("");
+            return pre_def + "print('#t' if " + first + " else '#f')\n";
 
         } else if (opr == 'n') {
             param_check(1);
-            first->check(NodeType::NUMBER_VAL);
-            std::cout << *(int*)first->data << "\n";
-            return nullptr;
+            pre_def = ast::pre_ss.str();
+            ast::pre_ss.str("");
+            return pre_def + "print(" + first + ")\n";
         }
 
         // 二元運算子
@@ -89,156 +96,126 @@ ASTNode* ASTNode::traverse() {
             throw std::runtime_error("Operation argument error.");
         auto second = this->children[1]->traverse();
 
-        if (opr == '-') {
+        if (opr == '-' || opr == '/' || opr == '%' || opr == '>' || opr == '<') {
             param_check(2);
-            first->check(NodeType::NUMBER_VAL);
-            second->check(NodeType::NUMBER_VAL);
-            result = new ASTNode(
-                NodeType::NUMBER_VAL,
-                new int(*(int*)first->data - *(int*)second->data));
-            return result;
-
-        } else if (opr == '/') {
-            param_check(2);
-            first->check(NodeType::NUMBER_VAL);
-            second->check(NodeType::NUMBER_VAL);
-            result = new ASTNode(
-                NodeType::NUMBER_VAL,
-                new int(*(int*)first->data / *(int*)second->data));
-            return result;
-
-        } else if (opr == '%') {
-            param_check(2);
-            first->check(NodeType::NUMBER_VAL);
-            second->check(NodeType::NUMBER_VAL);
-            result = new ASTNode(
-                NodeType::NUMBER_VAL,
-                new int(*(int*)first->data % *(int*)second->data));
-            return result;
-
-        } else if (opr == '>') {
-            param_check(2);
-            first->check(NodeType::NUMBER_VAL);
-            second->check(NodeType::NUMBER_VAL);
-            result = new ASTNode(NodeType::BOOL_VAL,
-                                 new bool(*(int*)first->data > *(int*)second->data));
-            return result;
-
-        } else if (opr == '<') {
-            param_check(2);
-            first->check(NodeType::NUMBER_VAL);
-            second->check(NodeType::NUMBER_VAL);
-            result = new ASTNode(NodeType::BOOL_VAL,
-                                 new bool(*(int*)first->data < *(int*)second->data));
-            return result;
+            std::string py_opr;
+            switch (opr) {
+                case '-':
+                case '%':
+                case '>':
+                case '<':
+                    py_opr = std::string(1, opr);
+                    break;
+                case '/':
+                    py_opr = "//";
+                    break;
+            }
+            return "(" + first + " " + py_opr + " " + second + ")";
         }
 
         // 多元運算子
-        if (opr == '+') {
-            first->check(NodeType::NUMBER_VAL);
-            second->check(NodeType::NUMBER_VAL);
-            result = new ASTNode(NodeType::NUMBER_VAL,
-                                 new int(*(int*)first->data + *(int*)second->data));
-            for (int i = 2; i < param_count; i++) {
-                auto node = this->children[i]->traverse();
-                node->check(NodeType::NUMBER_VAL);
-                *(int*)result->data += *(int*)node->data;
+        if (opr == '+' || opr == '*' || opr == '&' || opr == '|') {
+            std::string py_opr;
+            switch (opr) {
+                case '+':
+                case '*':
+                    py_opr = std::string(1, opr);
+                    break;
+                case '&':
+                    py_opr = "and";
+                    break;
+                case '|':
+                    py_opr = "or";
+                    break;
             }
-            return result;
-
-        } else if (opr == '*') {
-            first->check(NodeType::NUMBER_VAL);
-            second->check(NodeType::NUMBER_VAL);
-            result = new ASTNode(NodeType::NUMBER_VAL,
-                                 new int(*(int*)first->data * *(int*)second->data));
+            ss << "(" << first << " " << py_opr << " " << second;
             for (int i = 2; i < param_count; i++) {
-                auto node = this->children[i]->traverse();
-                node->check(NodeType::NUMBER_VAL);
-                *(int*)result->data *= *(int*)node->data;
+                auto param = this->children[i]->traverse();
+                ss << " " << opr << " " << param;
             }
-            return result;
-
-        } else if (opr == '&') {
-            first->check(NodeType::BOOL_VAL);
-            second->check(NodeType::BOOL_VAL);
-            result = new ASTNode(NodeType::BOOL_VAL,
-                                 new bool(*(bool*)first->data && *(bool*)second->data));
-            for (int i = 2; i < param_count; i++) {
-                auto node = this->children[i]->traverse();
-                node->check(NodeType::BOOL_VAL);
-                *(bool*)result->data &= *(bool*)node->data;
-            }
-            return result;
-
-        } else if (opr == '|') {
-            first->check(NodeType::BOOL_VAL);
-            second->check(NodeType::BOOL_VAL);
-            result = new ASTNode(NodeType::BOOL_VAL,
-                                 new bool(*(bool*)first->data || *(bool*)second->data));
-            for (int i = 2; i < param_count; i++) {
-                auto node = this->children[i]->traverse();
-                node->check(NodeType::BOOL_VAL);
-                *(bool*)result->data |= *(bool*)node->data;
-            }
-            return result;
+            ss << ")";
+            return ss.str();
 
         } else if (opr == '=') {
-            if (first->type != second->type)
-                throw std::runtime_error("Operand type error.");
-            result = new ASTNode(NodeType::BOOL_VAL,
-                                 new bool(*(int*)first->data == *(int*)second->data));
+            ss << "(" << first << " == " << second;
             auto last = second;
             for (int i = 2; i < param_count; i++) {
                 auto current = this->children[i]->traverse();
-                if (last->type != current->type)
-                    throw std::runtime_error("Operand type error.");
-                *(bool*)result->data = *(int*)last->data == *(int*)current->data;
+                ss << " and " << last << " == " << current;
                 last = current;
             }
-            return result;
+            ss << ")";
+            return ss.str();
         }
+
     } else if (this->type == NodeType::VARIABLE) {
-        return this->find(*(std::string*)this->data)->traverse();
+        auto var = *(std::string*)this->data;
+        std::regex re("\\-");
+        var = std::regex_replace(var, re, "_");
+        return var;
 
     } else if (this->type == NodeType::FUNCTION) {
-        return this;
+        if (ast::pre_vis[this]) return "";
+        ast::pre_vis[this] = true;
+        this->indent++;
+
+        ss << "def f_" << this << "(";
+        auto params = *(std::vector<ASTNode*>*)this->data;
+        for (int i = 0; i < params.size(); i++) {
+            if (i > 0) ss << ", ";
+            ss << *(std::string*)params[i]->data;
+        }
+        ss << "):\n";
+        for (int i = 0; i < this->children.size() - 1; i++) {
+            if (this->children[i]->type != NodeType::DEFINE)
+                throw std::runtime_error("Function expression error.");
+            std::stringstream def_ss(((ASTNode*)this->children[i])->traverse());
+            std::string def;
+            while (getline(def_ss, def))
+                ss << "\t" << def << "\n";
+        }
+
+        auto ret = this->children.back()->traverse();
+        if (this->children.back()->type == NodeType::FUNCTION) {
+            std::stringstream def_ss(ast::pre_ss.str());
+            ast::pre_ss.str("");
+            std::string def;
+            while (getline(def_ss, def))
+                ss << "\t" << def << "\n";
+        }
+        ss << "\treturn " << ret << "\n";
+        ast::pre_ss << ss.str();
+        ss.str("");
+
+        this->indent++;
+        ss << "f_" << this;
+        return ss.str();
 
     } else if (this->type == NodeType::BOOL_VAL) {
-        return new ASTNode(this->type, new bool(*(bool*)this->data));
+        return *(bool*)this->data ? "True" : "False";
 
     } else if (this->type == NodeType::NUMBER_VAL) {
-        return new ASTNode(this->type, new int(*(int*)this->data));
+        return std::to_string(*(int*)this->data);
 
     } else if (this->type == NodeType::CALL) {
-        auto func = ((ASTNode*)this->data)->traverse();
-        auto params = *(std::vector<ASTNode*>*)func->data;
+        auto data = (ASTNode*)this->data;
+        if (data->type == NodeType::FUNCTION)
+            ss << data->traverse() << "(";
+        else {
+            auto var = *(std::string*)(ASTNode*)data->data;
+            std::regex re("\\-");
+            ss << std::regex_replace(var, re, "_") << "(";
+        }
         auto args = this->children;
-
-        if (params.size() != args.size())
-            throw std::runtime_error("Function argument error.");
-        for (int i = 0; i < params.size(); i++) {
-            auto def = new ASTNode(NodeType::DEFINE, params[i]->data);
-            def->parent = this;
-            def->append(args[i]->traverse());
-            def->traverse();
+        for (int i = 0; i < args.size(); i++) {
+            if (i > 0) ss << ", ";
+            ss << args[i]->traverse();
         }
-
-        for (int i = 0; i < func->children.size() - 1; i++) {
-            if (func->children[i]->type != NodeType::DEFINE)
-                throw std::runtime_error("Function expression error.");
-            auto def = new ASTNode(NodeType::DEFINE, func->children[i]->data);
-            def->parent = this;
-            def->traverse();
-        }
-        
-        auto original_parent = func->children.back()->parent;
-        func->children.back()->parent = this;
-        auto result = func->children.back()->traverse();
-        func->children.back()->parent = original_parent;
-        return result;
+        ss << ")";
+        return ss.str();
     }
 
-    return nullptr;
+    return "";
 }
 
 std::string ASTNode::to_string() {
@@ -281,11 +258,7 @@ std::string ASTNode::to_string() {
     return ss.str();
 }
 
-void ASTNode::check(NodeType type) {
-    if (this->type != type)
-        throw std::runtime_error("Operand type error.");
-}
-
 namespace ast {
-std::unordered_map<std::string, ASTNode*> global;
+std::stringstream pre_ss;
+std::unordered_map<ASTNode*, bool> pre_vis;
 }  // namespace ast
