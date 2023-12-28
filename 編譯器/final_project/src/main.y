@@ -173,6 +173,7 @@ void yyerror(const char* message) {
 
 int main(int argc, char** argv) {
     try {
+        py.commit("from type import *\n");
         yyparse();
         cout << py.exec();
     } catch (const exception& e) {

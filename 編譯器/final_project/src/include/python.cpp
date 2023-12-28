@@ -1,5 +1,7 @@
 #include "python.hpp"
 
+#include <sstream>
+
 Python::Python() = default;
 
 
@@ -13,10 +15,15 @@ std::string Python::exec() {
 
     // write python file and execute
     std::ofstream py_file(py_filename);
+    py_file << "try:\n";
     while (!cmds.empty()) {
-        py_file << cmds.front() << "\n";
+        std::stringstream ss(cmds.front());
+        std::string line;
+        while (getline(ss, line))
+            py_file << "\t" << line << "\n";
         cmds.pop();
     }
+    py_file << "except Exception as e: print(e)\n";
     py_file.close();
     system(("python " + py_filename + " > " + out_filename).c_str());
 
@@ -27,7 +34,7 @@ std::string Python::exec() {
     out_file.close();
 
     // remove files
-    system(("rm " + py_filename + " " + out_filename).c_str());
+    // system(("rm " + py_filename + " " + out_filename).c_str());
 
     return result;
 }

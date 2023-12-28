@@ -1,9 +1,9 @@
 #include "ast.hpp"
 
 #include <iostream>
+#include <regex>
 #include <sstream>
 #include <stdexcept>
-#include <regex>
 
 #ifdef _DEBUG_
 const bool is_debug = true;
@@ -62,8 +62,10 @@ std::string ASTNode::traverse() {
         if (opr == '?') {
             if (param_count < 3) throw std::runtime_error("Operation argument error.");
             param_check(3);
+            auto first = this->children[0]->traverse();
             ss << "(" << this->children[1]->traverse()
-               << " if " << this->children[0]->traverse()
+               << " if (" << first
+               << " if type(" << first << ") == bool else error_())"
                << " else " << this->children[2]->traverse()
                << ")";
             return ss.str();
@@ -76,19 +78,20 @@ std::string ASTNode::traverse() {
 
         if (opr == '!') {
             param_check(1);
-            return "(not " + first + ")";
+            return "(not(" + first + " if type(" + first + ") == bool else error_()))";
 
         } else if (opr == 'b') {
             param_check(1);
             pre_def = ast::pre_ss.str();
             ast::pre_ss.str("");
-            return pre_def + "print('#t' if " + first + " else '#f')\n";
+            return pre_def + "print('#t' if (" + first +
+                   " if type(" + first + ") == bool else error_()) else '#f')\n";
 
         } else if (opr == 'n') {
             param_check(1);
             pre_def = ast::pre_ss.str();
             ast::pre_ss.str("");
-            return pre_def + "print(" + first + ")\n";
+            return pre_def + "print(" + first + " if type(" + first + ") == int else error_())\n";
         }
 
         // 二元運算子
@@ -110,11 +113,14 @@ std::string ASTNode::traverse() {
                     py_opr = "//";
                     break;
             }
-            return "(" + first + " " + py_opr + " " + second + ")";
+            ss << "(" << first << " " << py_opr << " " << second
+               << " if type(" << first << ") == type(" << second
+               << ") == int else error_())";
+            return ss.str();
         }
 
         // 多元運算子
-        if (opr == '+' || opr == '*' || opr == '&' || opr == '|') {
+        if (opr == '+' || opr == '*' || opr == '&' || opr == '|' || opr == '=') {
             std::string py_opr;
             switch (opr) {
                 case '+':
@@ -127,24 +133,24 @@ std::string ASTNode::traverse() {
                 case '|':
                     py_opr = "or";
                     break;
+                case '=':
+                    py_opr = "==";
+                    break;
             }
+            std::stringstream type_ss;
             ss << "(" << first << " " << py_opr << " " << second;
+            type_ss << " if type(" << first << ") == type(" << second << ")";
             for (int i = 2; i < param_count; i++) {
                 auto param = this->children[i]->traverse();
-                ss << " " << opr << " " << param;
+                ss << " " << py_opr << " " << param;
+                type_ss << " == type(" << param << ")";
             }
-            ss << ")";
-            return ss.str();
-
-        } else if (opr == '=') {
-            ss << "(" << first << " == " << second;
-            auto last = second;
-            for (int i = 2; i < param_count; i++) {
-                auto current = this->children[i]->traverse();
-                ss << " and " << last << " == " << current;
-                last = current;
-            }
-            ss << ")";
+            if (opr == '+' || opr == '*')
+                type_ss << " == int";
+            else if (opr == '&' || opr == '|')
+                type_ss << " == bool";
+            type_ss << " else error_())";
+            ss << type_ss.str();
             return ss.str();
         }
 
