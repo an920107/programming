@@ -173,6 +173,7 @@ void yyerror(const char* message) {
 
 int main(int argc, char** argv) {
     try {
+        if (argc > 1) py.filename = string(argv[1]);
         py.commit("from type import *\n");
         yyparse();
         cout << py.exec();

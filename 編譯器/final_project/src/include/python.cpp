@@ -34,7 +34,11 @@ std::string Python::exec() {
     out_file.close();
 
     // remove files
-    // system(("rm " + py_filename + " " + out_filename).c_str());
+    if (this->filename != "") {
+        system("mkdir -p output_scripts");
+        system(("cp " + py_filename + " output_scripts/" + this->filename + ".py").c_str());
+    }
+    system(("rm " + py_filename + " " + out_filename).c_str());
 
     return result;
 }

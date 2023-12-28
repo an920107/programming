@@ -11,6 +11,9 @@ class Python {
     std::queue<std::string> cmds;
 
    public:
+    std::string filename;
+
+   public:
     Python();
     void commit(std::string);
     std::string exec();
