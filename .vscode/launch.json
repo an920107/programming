@@ -16,16 +16,16 @@
             "projectName": "programming_6074c602"
         },
         {
+            "type": "debugpy",
             "name": "Python",
-            "type": "python",
             "request": "launch",
             "program": "${file}",
             "cwd": "${fileDirname}",
             "console": "integratedTerminal"
         },
         {
-            "name": "Java",
             "type": "java",
+            "name": "Java",
             "request": "launch",
             "cwd": "${workspaceRoot}\\.vscode\\classpath",
             "classPaths": [

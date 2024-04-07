@@ -11,26 +11,17 @@ struct TreeNode {
         val(x), left(_left), right(_right) {}
 };
 
-
 class Solution {
-private:
-    void __inorder(TreeNode* root, vector<int>& result) {
-        if (root == nullptr) return;
-
-        __inorder(root->left, result);
-        result.emplace_back(root->val);
-        __inorder(root->right, result);
-    }
-
 public:
-    vector<int> inorderTraversal(TreeNode* root) {
-        vector<int> result;
-        __inorder(root, result);
-        return result;
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if (p == nullptr && q == nullptr) return true;
+        if (p == nullptr || q == nullptr) return false;
+        if (p->val != q->val) return false;
+
+        return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
     }
 };
 
 int main() {
-    
     return 0;
 }
