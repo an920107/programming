@@ -16,7 +16,7 @@ SN          (978)-[0-9]-{DIG2}{DIG4}-{DIG2}-[0-9]
     BEGIN BSC;
 }
 
-<INIT>[\r\n]* {}
+<INIT>[\r\n]* {BEGIN 0;}
 <INIT>. {}
 
 <INIT,BSC>{AUTHOR} {
@@ -28,10 +28,10 @@ SN          (978)-[0-9]-{DIG2}{DIG4}-{DIG2}-[0-9]
 <INIT,BSC>. {}
 
 <INIT,BSC,ASC>{DIG4}\/{DIG2}\/{DIG2} {
-    char tmp[8];
+    char tmp;
     int y, m, d;
     int error = 0;
-    sscanf(yytext, "%d%c%d%c%d", &y, tmp, &m, tmp, &d);
+    sscanf(yytext, "%d%c%d%c%d", &y, &tmp, &m, &tmp, &d);
     if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) {
         if (d > 31) error = 1;
     } else if (m == 4 || m == 6 || m == 9 || m == 11) {
