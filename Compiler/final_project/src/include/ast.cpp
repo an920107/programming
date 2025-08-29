@@ -11,7 +11,7 @@ const bool is_debug = true;
 const bool is_debug = false;
 #endif
 
-ASTNode::ASTNode(NodeType type, void* data) : type(type), data(data), parent(nullptr), indent(0) {}
+ASTNode::ASTNode(NodeType type, void* data) : type(type), data(data), parent(nullptr) {}
 
 ASTNode::ASTNode(NodeType type) : ASTNode(type, nullptr) {}
 
@@ -163,7 +163,6 @@ std::string ASTNode::traverse() {
     } else if (this->type == NodeType::FUNCTION) {
         if (ast::pre_vis[this]) return "";
         ast::pre_vis[this] = true;
-        this->indent++;
 
         ss << "def f_" << this << "(";
         auto params = *(std::vector<ASTNode*>*)this->data;
@@ -193,7 +192,6 @@ std::string ASTNode::traverse() {
         ast::pre_ss << ss.str();
         ss.str("");
 
-        this->indent++;
         ss << "f_" << this;
         return ss.str();
 

@@ -22,7 +22,6 @@ class ASTNode {
     ASTNode* parent;
     std::vector<ASTNode*> children;
     std::unordered_map<std::string, ASTNode*> vars;
-    int indent;
     void* data;
 
    public:
