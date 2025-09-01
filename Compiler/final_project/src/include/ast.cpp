@@ -53,15 +53,14 @@ std::string ASTNode::traverse() {
     } else if (this->type == NodeType::OPERATOR) {
         const auto opr = *(char*)this->data;
         const auto param_count = this->children.size();
-        auto param_check = [&](int target) {
+        auto param_count_check = [&](int target) {
             if (param_count != target)
                 throw std::runtime_error("Operation argument error.");
         };
 
         // 三元運算子
         if (opr == '?') {
-            if (param_count < 3) throw std::runtime_error("Operation argument error.");
-            param_check(3);
+            param_count_check(3);
             auto first = this->children[0]->traverse();
             ss << "(" << this->children[1]->traverse()
                << " if (" << first
@@ -77,18 +76,18 @@ std::string ASTNode::traverse() {
         auto first = this->children[0]->traverse();
 
         if (opr == '!') {
-            param_check(1);
+            param_count_check(1);
             return "(not(" + first + " if type(" + first + ") == bool else error_()))";
 
         } else if (opr == 'b') {
-            param_check(1);
+            param_count_check(1);
             pre_def = ast::pre_ss.str();
             ast::pre_ss.str("");
             return pre_def + "print('#t' if (" + first +
                    " if type(" + first + ") == bool else error_()) else '#f')\n";
 
         } else if (opr == 'n') {
-            param_check(1);
+            param_count_check(1);
             pre_def = ast::pre_ss.str();
             ast::pre_ss.str("");
             return pre_def + "print(" + first + " if type(" + first + ") == int else error_())\n";
@@ -100,7 +99,7 @@ std::string ASTNode::traverse() {
         auto second = this->children[1]->traverse();
 
         if (opr == '-' || opr == '/' || opr == '%' || opr == '>' || opr == '<') {
-            param_check(2);
+            param_count_check(2);
             std::string py_opr;
             switch (opr) {
                 case '-':
