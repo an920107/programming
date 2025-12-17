@@ -63,8 +63,7 @@ std::string ASTNode::traverse() {
             param_count_check(3);
             auto first = this->children[0]->traverse();
             ss << "(" << this->children[1]->traverse()
-               << " if (" << first
-               << " if type(" << first << ") == bool else error_())"
+               << " if " << first
                << " else " << this->children[2]->traverse()
                << ")";
             return ss.str();
@@ -77,20 +76,13 @@ std::string ASTNode::traverse() {
 
         if (opr == '!') {
             param_count_check(1);
-            return "(not(" + first + " if type(" + first + ") == bool else error_()))";
+            return "(not(" + first + "))";
 
-        } else if (opr == 'b') {
+        } else if (opr == 'b' || opr == 'n') {
             param_count_check(1);
             pre_def = ast::pre_ss.str();
             ast::pre_ss.str("");
-            return pre_def + "print('#t' if (" + first +
-                   " if type(" + first + ") == bool else error_()) else '#f')\n";
-
-        } else if (opr == 'n') {
-            param_count_check(1);
-            pre_def = ast::pre_ss.str();
-            ast::pre_ss.str("");
-            return pre_def + "print(" + first + " if type(" + first + ") == int else error_())\n";
+            return pre_def + "print(" + first + ")\n";
         }
 
         // 二元運算子
@@ -112,9 +104,7 @@ std::string ASTNode::traverse() {
                     py_opr = "//";
                     break;
             }
-            ss << "(" << first << " " << py_opr << " " << second
-               << " if type(" << first << ") == type(" << second
-               << ") == int else error_())";
+            ss << "(" << first << " " << py_opr << " " << second << ")";
             return ss.str();
         }
 
@@ -138,18 +128,11 @@ std::string ASTNode::traverse() {
             }
             std::stringstream type_ss;
             ss << "(" << first << " " << py_opr << " " << second;
-            type_ss << " if type(" << first << ") == type(" << second << ")";
             for (int i = 2; i < param_count; i++) {
                 auto param = this->children[i]->traverse();
                 ss << " " << py_opr << " " << param;
-                type_ss << " == type(" << param << ")";
             }
-            if (opr == '+' || opr == '*')
-                type_ss << " == int";
-            else if (opr == '&' || opr == '|')
-                type_ss << " == bool";
-            type_ss << " else error_())";
-            ss << type_ss.str();
+            ss << ")";
             return ss.str();
         }
 
@@ -195,10 +178,10 @@ std::string ASTNode::traverse() {
         return ss.str();
 
     } else if (this->type == NodeType::BOOLEAN_VAL) {
-        return *(bool*)this->data ? "True" : "False";
+        return *(bool*)this->data ? "Bool(True)" : "Bool(False)";
 
     } else if (this->type == NodeType::NUMBER_VAL) {
-        return std::to_string(*(int*)this->data);
+        return "Int(" + std::to_string(*(int*)this->data) + ")";
 
     } else if (this->type == NodeType::CALL) {
         auto data = (ASTNode*)this->data;

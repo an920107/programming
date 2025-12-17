@@ -1,6 +1,6 @@
 try:
 	from type import *
-	print(0 if type(0) == int else error_())
-	print(-123 if type(-123) == int else error_())
-	print(456 if type(456) == int else error_())
+	print(Int(0))
+	print(Int(-123))
+	print(Int(456))
 except Exception as e: print(e)

@@ -1,8 +1,8 @@
 try:
 	from type import *
-	x = 0
-	def f_0x55d020ee5960(x, y, z):
-		return (x + (y * z if type(y) == type(z) == int else error_()) if type(x) == type((y * z if type(y) == type(z) == int else error_())) == int else error_())
-	print(f_0x55d020ee5960(10, 20, 30) if type(f_0x55d020ee5960(10, 20, 30)) == int else error_())
-	print(x if type(x) == int else error_())
+	x = Int(0)
+	def f_0x1011a8860(x, y, z):
+		return (x + (y * z))
+	print(f_0x1011a8860(Int(10), Int(20), Int(30)))
+	print(x)
 except Exception as e: print(e)

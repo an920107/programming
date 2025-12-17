@@ -1,5 +1,5 @@
 try:
 	from type import *
-	print((1 if (True if type(True) == bool else error_()) else 2) if type((1 if (True if type(True) == bool else error_()) else 2)) == int else error_())
-	print((1 if (False if type(False) == bool else error_()) else 2) if type((1 if (False if type(False) == bool else error_()) else 2)) == int else error_())
+	print((Int(1) if Bool(True) else Int(2)))
+	print((Int(1) if Bool(False) else Int(2)))
 except Exception as e: print(e)

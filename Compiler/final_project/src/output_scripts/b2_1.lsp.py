@@ -1,4 +1,4 @@
 try:
 	from type import *
-	(1 + 2 + 3 + (True or False if type(True) == type(False) == bool else error_()) if type(1) == type(2) == type(3) == type((True or False if type(True) == type(False) == bool else error_())) == int else error_())
+	(Int(1) + Int(2) + Int(3) + (Bool(True) or Bool(False)))
 except Exception as e: print(e)

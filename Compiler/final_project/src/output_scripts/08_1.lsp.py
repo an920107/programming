@@ -1,7 +1,7 @@
 try:
 	from type import *
-	def f_0x55d954a36d90(a, b, c):
-		return (a + b + (b * c if type(b) == type(c) == int else error_()) if type(a) == type(b) == type((b * c if type(b) == type(c) == int else error_())) == int else error_())
-	foo = f_0x55d954a36d90
-	print(foo(10, 9, 8) if type(foo(10, 9, 8)) == int else error_())
+	def f_0x102987790(a, b, c):
+		return (a + b + (b * c))
+	foo = f_0x102987790
+	print(foo(Int(10), Int(9), Int(8)))
 except Exception as e: print(e)

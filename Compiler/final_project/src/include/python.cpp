@@ -38,7 +38,7 @@ std::string Python::exec() {
         system("mkdir -p output_scripts");
         system(("cp " + py_filename + " output_scripts/" + this->filename + ".py").c_str());
     }
-    system(("rm " + py_filename + " " + out_filename).c_str());
+    // system(("rm " + py_filename + " " + out_filename).c_str());
 
     return result;
 }

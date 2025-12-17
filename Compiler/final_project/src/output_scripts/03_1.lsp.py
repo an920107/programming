@@ -1,9 +1,9 @@
 try:
 	from type import *
-	(1 + 2 + 3 if type(1) == type(2) == type(3) == int else error_())
-	(4 * 5 * 6 if type(4) == type(5) == type(6) == int else error_())
-	print((1 + (2 + 3 + 4 if type(2) == type(3) == type(4) == int else error_()) + (4 * 5 * 6 if type(4) == type(5) == type(6) == int else error_()) + (8 // 3 if type(8) == type(3) == int else error_()) + (10 % 3 if type(10) == type(3) == int else error_()) if type(1) == type((2 + 3 + 4 if type(2) == type(3) == type(4) == int else error_())) == type((4 * 5 * 6 if type(4) == type(5) == type(6) == int else error_())) == type((8 // 3 if type(8) == type(3) == int else error_())) == type((10 % 3 if type(10) == type(3) == int else error_())) == int else error_()) if type((1 + (2 + 3 + 4 if type(2) == type(3) == type(4) == int else error_()) + (4 * 5 * 6 if type(4) == type(5) == type(6) == int else error_()) + (8 // 3 if type(8) == type(3) == int else error_()) + (10 % 3 if type(10) == type(3) == int else error_()) if type(1) == type((2 + 3 + 4 if type(2) == type(3) == type(4) == int else error_())) == type((4 * 5 * 6 if type(4) == type(5) == type(6) == int else error_())) == type((8 // 3 if type(8) == type(3) == int else error_())) == type((10 % 3 if type(10) == type(3) == int else error_())) == int else error_())) == int else error_())
-	print((10 % 4 if type(10) == type(4) == int else error_()) if type((10 % 4 if type(10) == type(4) == int else error_())) == int else error_())
-	print(((1 + 2 if type(1) == type(2) == int else error_()) - 4 if type((1 + 2 if type(1) == type(2) == int else error_())) == type(4) == int else error_()) if type(((1 + 2 if type(1) == type(2) == int else error_()) - 4 if type((1 + 2 if type(1) == type(2) == int else error_())) == type(4) == int else error_())) == int else error_())
-	print(-256 if type(-256) == int else error_())
+	(Int(1) + Int(2) + Int(3))
+	(Int(4) * Int(5) * Int(6))
+	print((Int(1) + (Int(2) + Int(3) + Int(4)) + (Int(4) * Int(5) * Int(6)) + (Int(8) // Int(3)) + (Int(10) % Int(3))))
+	print((Int(10) % Int(4)))
+	print(((Int(1) + Int(2)) - Int(4)))
+	print(Int(-256))
 except Exception as e: print(e)
