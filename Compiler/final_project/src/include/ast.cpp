@@ -194,7 +194,7 @@ std::string ASTNode::traverse() {
         ss << "f_" << this;
         return ss.str();
 
-    } else if (this->type == NodeType::BOOL_VAL) {
+    } else if (this->type == NodeType::BOOLEAN_VAL) {
         return *(bool*)this->data ? "True" : "False";
 
     } else if (this->type == NodeType::NUMBER_VAL) {
@@ -244,7 +244,7 @@ std::string ASTNode::to_string() {
             for (auto node : *(std::vector<ASTNode*>*)this->data)
                 ss << *(std::string*)node->data << " ";
             break;
-        case NodeType::BOOL_VAL:
+        case NodeType::BOOLEAN_VAL:
             ss << "BOOL_VAL "
                << *(bool*)this->data;
             break;

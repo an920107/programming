@@ -1,14 +1,4 @@
 %{
-#include "main.tab.h"
-
-extern int yylex(void);
-extern void yyerror(const char*);
-
-vector<ASTNode*> nodes;
-Python py;
-%}
-
-%code requires {
 #include <string>
 #include <iostream>
 #include <cstdlib>
@@ -30,7 +20,14 @@ const bool is_debug = false;
 #endif
 #endif
 
-}
+#include "main.tab.h"
+
+extern int yylex(void);
+extern void yyerror(const char*);
+
+vector<ASTNode*> nodes;
+Python py;
+%}
 
 %union {
     int num_val;
@@ -92,7 +89,7 @@ variable: ID {
 }
 
 exp: BOOL_VAL {
-    $$ = new ASTNode(NodeType::BOOL_VAL, new bool($1));
+    $$ = new ASTNode(NodeType::BOOLEAN_VAL, new bool($1));
 } | NUM_VAL {
     $$ = new ASTNode(NodeType::NUMBER_VAL, new int($1));
 } | variable | operation | fun_exp | fun_call

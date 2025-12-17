@@ -11,7 +11,7 @@ enum class NodeType {
     OPERATOR,    // symbol: char, [params]
     VARIABLE,    // name: str, -
     FUNCTION,    // [params]: list, [[defines], return]
-    BOOL_VAL,    // val: bool, -
+    BOOLEAN_VAL,    // val: bool, -
     NUMBER_VAL,  // val: int, -
     CALL,        // addr, [params]
 };

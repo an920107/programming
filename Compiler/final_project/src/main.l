@@ -1,4 +1,22 @@
 %{
+#include <string>
+#include <iostream>
+#include <cstdlib>
+#include <stdexcept>
+#include <vector>
+#include "include/python.hpp"
+#include "include/ast.hpp"
+using namespace std;
+
+#ifndef _YACC_DECLARE_
+#define _YACC_DECLARE_
+#ifdef _DEBUG_
+const bool is_debug = true;
+#else
+const bool is_debug = false;
+#endif
+#endif
+
 #include "main.tab.h"
 %}
 
